@@ -97,13 +97,18 @@ const ShopContextProvider = (props) => {
   // -------------------- PRODUCT & USER DATA --------------------
   const getProductsData = async () => {
     try {
+      console.log("Fetching products from:", backendUrl + "/api/product/list");
       const response = await axios.get(backendUrl + "/api/product/list");
+      console.log("Products response:", response.data);
       if (response.data.success) {
         setProducts(response.data.products);
+        console.log("Products set:", response.data.products.length, "items");
       } else {
         toast.error(response.data.message);
+        console.error("API returned success: false");
       }
     } catch (error) {
+      console.error("Error fetching products:", error);
       toast.error(error.message);
     }
   };

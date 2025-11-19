@@ -18,6 +18,12 @@ const port = process.env.PORT || 5000;
 app.use(express.json());
 app.use(cors());
 
+// Request logging
+app.use((req, res, next) => {
+  console.log(`${new Date().toLocaleTimeString()} - ${req.method} ${req.path}`);
+  next();
+});
+
 // API Endpoints
 
 // Product Routes
