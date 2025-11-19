@@ -1,0 +1,75 @@
+╔════════════════════════════════════════════════════════════╗
+║                                                            ║
+║        🛍️  E-COMMERCE DEMO - QUICK START GUIDE  🛍️        ║
+║                                                            ║
+╚════════════════════════════════════════════════════════════╝
+
+📦 WHAT YOU GET:
+   ✅ 20 Pre-loaded dummy products
+   ✅ NO database setup needed
+   ✅ NO API keys required
+   ✅ Works completely offline
+   ✅ Full admin panel
+   ✅ Shopping cart & checkout
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🚀 SUPER EASY START (2 STEPS):
+
+   STEP 1: Double-click "install-all.bat"
+           (This installs all dependencies - takes 2-3 minutes)
+
+   STEP 2: Double-click "start-demo.bat"
+           (This starts all 3 servers)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔑 LOGIN CREDENTIALS:
+
+   Admin Panel:
+   📧 Email: admin@demo.com
+   🔒 Password: admin123
+
+   User Account:
+   👤 Create your own by clicking "Sign Up" on the website
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🌐 URLS (after starting):
+
+   🛒 Customer Website: http://localhost:5173
+   👨‍💼 Admin Panel: http://localhost:5174
+   🔌 Backend API: http://localhost:5000
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📝 MANUAL START (if batch files don't work):
+
+   Open 3 separate terminals:
+
+   Terminal 1:
+   cd E-commerce-website/server
+   npm run demo
+
+   Terminal 2:
+   cd E-commerce-website/client
+   npm run dev
+
+   Terminal 3:
+   cd E-commerce-website/admin
+   npm run dev
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+💡 TIPS:
+
+   • Products are stored in: server/data/products.json
+   • To reset products: Delete products.json and restart server
+   • Add more products through the Admin Panel
+   • All data resets when you restart the server
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📚 For detailed instructions, see: DEMO-SETUP.md
+
+Happy Shopping! 🎉
