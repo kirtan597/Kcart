@@ -1,4 +1,4 @@
-# 🛍️ Vanté & Co - Perfect Store with Luxury
+# 🛍️ Kcart - Perfect Store with Luxury
 
 A fully featured **MERN Stack E-commerce Web Application** designed to deliver a luxury shopping experience. It includes both **user-facing** and **admin** functionalities like secure login, product management, smart filtering, and multiple payment options including **Razorpay**, **Stripe**, and **Cash on Delivery**.
 
@@ -7,32 +7,6 @@ A fully featured **MERN Stack E-commerce Web Application** designed to deliver a
 ## 🌐 Live Demo
 > https://e-commerce-website-4w6a.vercel.app
 ## PORT 5000
-
----
-
-## 📸 Screenshots
-
-### 🏠 Admin Homepage desktop demo
-### 🔐 Admin Panel log in page
-![login_page](./ss/login.png)
-
-### 🔐 Admin Panel Item Add Page
-![Add_item](./ss/desktop_add.png)
-
-### 🔐 Admin Panel Item list 
-![item list](./ss/desktop_list.png)
-
-### 🔐 Admin Panel Order Received Page
-![item list](./ss/desktop_order.png)
-
-
-### Mobile View of 🔐 Admin Panel
-<div align="center">
-  <img src="./ss/ph_view1.png" width="22%" />
-  <img src="./ss/ph_view2.png" width="22%" />
-  <img src="./ss/ph_view3.png" width="22%" />
-  <img src="./ss/ph_view4.png" width="22%" />
-</div>
 
 ---
 
@@ -102,8 +76,8 @@ A fully featured **MERN Stack E-commerce Web Application** designed to deliver a
 ### 🖥️ Clone the repo
 
 ```bash
-git clone https://github.com/yourusername/vante-co-ecommerce.git
-cd vante-co-ecommerce
+git clone https://github.com/kirtan597/Kcart.git
+cd Kcart
 ````
 
 ### 🚀 Backend Setup
@@ -164,6 +138,6 @@ This project is licensed under the MIT License.
 
 ## 🤝 Credits
 
-Developed by [Sahil](https://github.com/sahilmd01)
-**Project:** *Vanté & Co – Perfect Store with Luxury*
+Developed by [Kirtan](https://github.com/kirtan597)
+**Project:** *Kcart – Perfect Store with Luxury*
 

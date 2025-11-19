@@ -100,45 +100,48 @@ const Product = () => {
         </div>
 
         <div className="flex-1 lg:max-w-md xl:max-w-lg">
-          <div className="sticky top-24">
-            <div className="flex justify-between items-center">
-              <h1 className="text-3xl font-bold text-gray-900">{name}</h1>
-              <span className="text-xs font-medium px-2.5 py-0.5 bg-orange-100 text-orange-800 rounded">{category}</span>
+          <div className="sticky top-24 bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+            <div className="flex justify-between items-start gap-4">
+              <h1 className="text-3xl font-bold text-gray-900 heading-font leading-tight">{name}</h1>
+              <span className="text-xs font-medium px-3 py-1.5 bg-gradient-to-r from-gray-100 to-gray-200 text-gray-700 rounded-full whitespace-nowrap">{category}</span>
             </div>
-            <div className="flex items-center mt-3">
+            <div className="flex items-center mt-4">
               <div className="flex text-yellow-400">
                 {[...Array(4)].map((_, i) => <svg key={i} className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>)}
                 <svg className="w-5 h-5 text-gray-300" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c..." /></svg>
               </div>
-              <span className="ml-2 text-sm text-gray-500">(122 reviews)</span>
+              <span className="ml-2 text-sm text-gray-600 font-medium">(122 reviews)</span>
             </div>
-            <p className="mt-6 text-3xl font-bold text-gray-900">{currency}{price.toLocaleString()}</p>
-            <p className="mt-4 text-gray-600">{description}</p>
+            <div className="mt-6 p-4 bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg border border-gray-200">
+              <p className="text-4xl font-bold text-gray-900 price-text">{currency}{price.toLocaleString()}</p>
+              <p className="text-sm text-gray-500 mt-1">Inclusive of all taxes</p>
+            </div>
+            <p className="mt-6 text-gray-700 leading-relaxed text-base">{description}</p>
 
             <div className="mt-8">
-              <div className="flex justify-between text-sm font-medium">
-                <span>Select Size</span>
-                {sizeError && <span className="text-red-500">Please select a size</span>}
+              <div className="flex justify-between text-sm font-semibold mb-3">
+                <span className="text-gray-800">Select Size</span>
+                {sizeError && <span className="text-red-500 animate-pulse">Please select a size</span>}
               </div>
-              <div className="mt-3 flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-3">
                 {sizes.map((s, i) => (
-                  <button key={i} onClick={() => { setSize(s); setSizeError(false); }} className={`px-4 py-2 rounded-md border text-sm font-medium ${s === size ? "bg-orange-500 text-white border-orange-500" : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"}`}>
+                  <button key={i} onClick={() => { setSize(s); setSizeError(false); }} className={`px-5 py-2.5 rounded-lg border-2 text-sm font-semibold transition-all duration-200 ${s === size ? "bg-gray-900 text-white border-gray-900 shadow-md scale-105" : "bg-white text-gray-700 border-gray-300 hover:border-gray-400 hover:bg-gray-50"}`}>
                     {s}
                   </button>
                 ))}
               </div>
             </div>
 
-            <button onClick={handleAddToCart} className="mt-8 w-full py-3 px-6 bg-gray-900 hover:bg-gray-800 text-white rounded-md flex items-center justify-center transition">
+            <button onClick={handleAddToCart} className="mt-8 w-full py-4 px-6 bg-gradient-to-r from-gray-800 to-gray-900 hover:from-gray-900 hover:to-black text-white rounded-lg flex items-center justify-center transition-all duration-300 shadow-lg hover:shadow-xl font-semibold text-base">
               <svg ref={cartIconRef} className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="..." /></svg>
               ADD TO CART
             </button>
 
-            <div className="mt-8 pt-6 border-t border-gray-200 space-y-4 text-sm text-gray-500">
+            <div className="mt-8 pt-6 border-t border-gray-200 space-y-4">
               {["100% Original Products", "Cash On Delivery available", "Easy 7-day returns & exchanges"].map((text, i) => (
-                <div key={i} className="flex items-start">
-                  <svg className="w-5 h-5 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" /></svg>
-                  <p className="ml-3">{text}</p>
+                <div key={i} className="flex items-start bg-gray-50 p-3 rounded-lg">
+                  <svg className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" /></svg>
+                  <p className="ml-3 text-gray-700 font-medium text-sm">{text}</p>
                 </div>
               ))}
             </div>
@@ -146,19 +149,19 @@ const Product = () => {
         </div>
       </div>
 
-      <div className="mt-16">
-        <nav className="border-b border-gray-200 -mb-px flex">
+      <div className="mt-16 bg-white rounded-xl p-8 shadow-sm border border-gray-100">
+        <nav className="border-b border-gray-200 -mb-px flex gap-2">
           {["description", "reviews"].map(tab => (
-            <button key={tab} onClick={() => setActiveTab(tab)} className={`py-4 px-6 border-b-2 font-medium text-sm ${activeTab === tab ? "border-orange-500 text-orange-600" : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"}`}>
+            <button key={tab} onClick={() => setActiveTab(tab)} className={`py-4 px-8 border-b-2 font-semibold text-sm transition-all ${activeTab === tab ? "border-gray-900 text-gray-900" : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"}`}>
               {tab === "reviews" ? "Reviews (122)" : "Description"}
             </button>
           ))}
         </nav>
         <div className="py-8">
           {activeTab === "description" ? (
-            <div className="prose prose-sm text-gray-500">
-              <p>An e-commerce website is an online platform that facilitates the buying and selling of products or services over the internet...</p>
-              <p className="mt-4">E-commerce websites typically display products or services along with detailed descriptions, images, prices...</p>
+            <div className="prose prose-sm max-w-none">
+              <p className="text-gray-700 leading-relaxed text-base">An e-commerce website is an online platform that facilitates the buying and selling of products or services over the internet...</p>
+              <p className="mt-4 text-gray-700 leading-relaxed text-base">E-commerce websites typically display products or services along with detailed descriptions, images, prices...</p>
             </div>
           ) : (
             <div className="text-center py-12 text-gray-500">
@@ -179,7 +182,7 @@ const Product = () => {
       </div>
 
       <div className="mt-16">
-        <h2 className="text-2xl font-bold text-gray-900 mb-8">You may also like</h2>
+        <h2 className="text-3xl font-bold text-gray-900 mb-8 heading-font">You may also like</h2>
         <RelatedProducts category={category} subCategory={subCategory} />
       </div>
     </div>

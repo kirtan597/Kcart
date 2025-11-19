@@ -1,9 +1,10 @@
 import { assets } from "../assets/assets";
 import {
-  FaFacebook,
-  FaTwitter,
   FaInstagram,
-  FaPinterest,
+  FaGithub,
+  FaLinkedin,
+  FaEnvelope,
+  FaPhone,
   FaMoneyBillWave,
 } from "react-icons/fa";
 import {
@@ -19,42 +20,74 @@ const Footer = () => {
   const linkClass = "text-gray-300 hover:text-white transition-colors duration-300";
 
   return (
-    <footer className="bg-[#0f172a] text-gray-100 relative overflow-hidden">
+    <footer className="bg-gradient-to-r from-gray-800 via-gray-700 to-gray-800 text-gray-100 relative overflow-hidden">
       {/* Subtle gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 to-purple-900/10 pointer-events-none"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-900/20 to-gray-600/10 pointer-events-none"></div>
       
       <div className="relative container mx-auto px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
           {/* Brand Info */}
           <div className="lg:col-span-2">
-            {/* White background logo container */}
-            <div className="bg-white p-3 inline-block rounded-lg shadow-md">
-              <img
-                src={assets.logo}
-                className="w-40 h-auto"
-                alt="Vante & Co Logo"
-              />
+            {/* Brand Name */}
+            <div className="mb-4">
+              <h2 className="text-4xl font-bold text-white">Kcart</h2>
             </div>
             <p className="text-gray-300 mb-6 leading-relaxed text-sm mt-4">
-              Vante & Co — curating excellence in every product. We're here to
+              Kcart — curating excellence in every product. We're here to
               elevate your lifestyle with exceptional quality and care.
             </p>
-            <div className="flex space-x-4">
-              {[
-                { icon: <FaFacebook className="w-5 h-5" />, label: "Facebook" },
-                { icon: <FaTwitter className="w-5 h-5" />, label: "Twitter" },
-                { icon: <FaInstagram className="w-5 h-5" />, label: "Instagram" },
-                { icon: <FaPinterest className="w-5 h-5" />, label: "Pinterest" }
-              ].map((social, index) => (
+            
+            {/* Social Media Links */}
+            <div className="mb-6">
+              <h4 className="text-sm font-semibold text-white mb-3">Connect With Us</h4>
+              <div className="flex space-x-4">
                 <a 
-                  key={index} 
-                  href="#" 
-                  className={`${linkClass} bg-white/10 p-2 rounded-lg hover:bg-white/20 transition-all duration-300`}
-                  aria-label={social.label}
+                  href="https://www.instagram.com/kirtannn_18/" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`${linkClass} bg-white/10 p-2 rounded-lg hover:bg-gradient-to-r hover:from-purple-500 hover:to-pink-500 transition-all duration-300`}
+                  aria-label="Instagram"
                 >
-                  {social.icon}
+                  <FaInstagram className="w-5 h-5" />
                 </a>
-              ))}
+                <a 
+                  href="https://github.com/kirtan597" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`${linkClass} bg-white/10 p-2 rounded-lg hover:bg-gray-700 transition-all duration-300`}
+                  aria-label="GitHub"
+                >
+                  <FaGithub className="w-5 h-5" />
+                </a>
+                <a 
+                  href="https://www.linkedin.com/in/kirtan-panchal-309760320/" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`${linkClass} bg-white/10 p-2 rounded-lg hover:bg-blue-600 transition-all duration-300`}
+                  aria-label="LinkedIn"
+                >
+                  <FaLinkedin className="w-5 h-5" />
+                </a>
+              </div>
+            </div>
+
+            {/* Contact Information */}
+            <div className="space-y-2">
+              <h4 className="text-sm font-semibold text-white mb-3">Contact</h4>
+              <a 
+                href="mailto:kirtan.2082006@gmail.com" 
+                className="flex items-center gap-2 text-gray-300 hover:text-white transition-colors text-sm"
+              >
+                <FaEnvelope className="w-4 h-4" />
+                <span>kirtan.2082006@gmail.com</span>
+              </a>
+              <a 
+                href="tel:+918780092234" 
+                className="flex items-center gap-2 text-gray-300 hover:text-white transition-colors text-sm"
+              >
+                <FaPhone className="w-4 h-4" />
+                <span>+91 8780092234</span>
+              </a>
             </div>
           </div>
 
@@ -151,7 +184,7 @@ const Footer = () => {
         {/* Footer Bottom */}
         <div className="mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6">
           <p className="text-xs text-gray-300">
-            &copy; {currentYear} Vante & Co. All rights reserved.
+            &copy; {currentYear} Kcart. All rights reserved.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             {["Privacy Policy", "Terms of Service", "Cookie Policy"].map((item) => (
@@ -185,12 +218,12 @@ const Footer = () => {
           <p className="text-xs text-white/50">
             Developed by{" "}
             <a
-              href="https://www.linkedin.com/in/codewithkinu"
+              href="https://www.linkedin.com/in/kirtan-panchal-309760320/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-white font-medium hover:text-purple-300 transition-colors duration-300 underline underline-offset-4"
             >
-              Sahil
+              Kirtan Panchal
             </a>
           </p>
         </div>

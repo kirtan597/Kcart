@@ -1,4 +1,6 @@
 import { Route, Routes } from "react-router-dom";
+import { useEffect } from "react";
+import Lenis from "lenis";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Collection from "./pages/Collection";
@@ -20,6 +22,32 @@ import { ForgotPassword } from "./pages/ForgotPassword";
 import SearchResults from "./pages/SearchResults";
 
 const App = () => {
+  // Initialize Lenis smooth scrolling
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: "vertical",
+      gestureOrientation: "vertical",
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      smoothTouch: false,
+      touchMultiplier: 2,
+      infinite: false,
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
+
   return (
     <div className="px-2 sm:px-4 md:px-6 max-w-[100vw] mx-auto overflow-x-hidden">
       {/* Notifications */}

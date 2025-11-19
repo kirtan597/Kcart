@@ -68,10 +68,10 @@ const Navbar = () => {
   return (
     <>
       {/* Navbar */}
-      <nav className="flex items-center justify-between py-4 px-4 md:px-8 bg-white shadow-md sticky top-0 z-50 border-b border-gray-100">
+      <nav className="flex items-center justify-between py-4 px-4 md:px-8 bg-white shadow-sm sticky top-0 z-50 border-b border-gray-200">
         {/* Logo */}
         <Link to="/" className="flex items-center">
-          <img src={assets.logo} alt="Logo" className="w-36 hover:opacity-90 transition-opacity" />
+          <h1 className="text-2xl font-bold text-gray-800 hover:text-gray-600 transition-colors">Kcart</h1>
         </Link>
 
         {/* Desktop Menu */}
@@ -81,8 +81,8 @@ const Navbar = () => {
               key={path}
               to={path}
               className={({ isActive }) =>
-                `transition-colors py-2 px-1 hover:text-indigo-600 ${
-                  isActive ? "text-indigo-600 font-semibold" : ""
+                `transition-colors py-2 px-1 hover:text-gray-900 ${
+                  isActive ? "text-gray-900 font-semibold border-b-2 border-gray-900" : ""
                 }`
               }
             >
@@ -98,7 +98,7 @@ const Navbar = () => {
             onClick={() => setShowSearchBar(!showSearchBar)}
             className="p-2 rounded-full hover:bg-gray-100 transition"
           >
-            <img src={assets.search_icon} alt="Search" className="w-5 opacity-80 hover:opacity-100" />
+            <img src={assets.search_icon} alt="Search" className="w-5 opacity-90 hover:opacity-100" />
           </button>
 
           {/* Profile */}
@@ -110,7 +110,7 @@ const Navbar = () => {
               }}
               className="p-2 rounded-full hover:bg-gray-100 transition"
             >
-              <img src={assets.profile_icon} alt="Profile" className="w-5 opacity-80 hover:opacity-100" />
+              <img src={assets.profile_icon} alt="Profile" className="w-5 opacity-90 hover:opacity-100" />
             </button>
 
             {token && profileOpen && (
@@ -145,7 +145,7 @@ const Navbar = () => {
 
           {/* Cart */}
           <Link to="/cart" className="relative p-2 rounded-full hover:bg-gray-100 transition">
-            <img src={assets.cart_icon} alt="Cart" className="w-5 opacity-80 hover:opacity-100" />
+            <img src={assets.cart_icon} alt="Cart" className="w-5 opacity-90 hover:opacity-100" />
             {getCartCount() > 0 && (
               <span className="absolute -top-1.5 -right-1.5 text-[10px] font-semibold bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center">
                 {getCartCount()}
@@ -158,7 +158,7 @@ const Navbar = () => {
             onClick={() => setMenuOpen(true)}
             className="sm:hidden p-2 rounded-full hover:bg-gray-100 transition"
           >
-            <img src={assets.menu_icon} alt="Menu" className="w-5 opacity-80 hover:opacity-100" />
+            <img src={assets.menu_icon} alt="Menu" className="w-5 opacity-90 hover:opacity-100" />
           </button>
         </div>
       </nav>
@@ -196,7 +196,7 @@ const Navbar = () => {
         >
           {/* Header */}
           <div className="flex items-center justify-between px-5 py-4 border-b">
-            <img src={assets.logo} alt="Logo" className="w-32" />
+            <h1 className="text-2xl font-bold text-indigo-600">Kcart</h1>
             <button onClick={() => setMenuOpen(false)} className="p-2 hover:bg-gray-100 rounded-full">
               <img src={assets.dropdown_icon} className="w-4 rotate-180" alt="Close" />
             </button>

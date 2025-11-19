@@ -207,7 +207,7 @@ const Collection = () => {
           <div className="lg:col-span-3">
             {currentItems.length > 0 ? (
               <>
-                <div className="grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-4 gap-y-4 sm:gap-y-8">
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3">
                   {currentItems.map((item) => (
                     <ProductsItem
                       key={item._id}
@@ -215,6 +215,7 @@ const Collection = () => {
                       name={item.name}
                       image={item.image}
                       price={item.price}
+                      bestseller={item.bestseller}
                     />
                   ))}
                 </div>

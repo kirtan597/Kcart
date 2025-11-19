@@ -1,9 +1,5 @@
 import p_img1 from './p_img1.png'
 
-
-
-import logo from './logo.png'
-
 import banner_1 from './banner_1.png'
 import banner_2 from './banner_2.png'
 import banner_3 from './banner_3.png'
@@ -38,8 +34,6 @@ import stripe_logo from './stripe_logo.png'
 import cross_icon from './cross_icon.png'
 
 export const assets = {
-    logo,
-   
     cart_icon,
     dropdown_icon,
     exchange_icon,

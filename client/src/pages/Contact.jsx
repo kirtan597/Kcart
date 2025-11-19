@@ -6,15 +6,15 @@ const Contact = () => {
   return (
     <div className="bg-gray-50">
       {/* Hero Section */}
-      <div className="relative bg-gradient-to-r from-indigo-900 to-purple-800 py-20 overflow-hidden">
-        <div className="absolute inset-0 opacity-20">
+      <div className="relative bg-gradient-to-r from-gray-800 via-gray-700 to-gray-800 py-20 overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0 bg-[url('https://tailwindui.com/img/beams-pricing.png')] bg-[length:800px] bg-top"></div>
         </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">
-            Get In <span className="text-indigo-300">Touch</span>
+          <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 heading-font">
+            Get In <span className="text-gray-300">Touch</span>
           </h1>
-          <p className="text-xl text-indigo-100 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-200 max-w-3xl mx-auto">
             We'd love to hear from you! Reach out for any questions or feedback.
           </p>
         </div>
@@ -43,9 +43,10 @@ const Contact = () => {
                 <div>
                   <h3 className="font-semibold text-gray-900">Our Store</h3>
                   <p className="text-gray-600">
-                    Vante & co.<br />
-                    BTM, Bengaluru - 560029<br />
-                    Karnataka, India
+                    Kcart<br />
+                    SH-144 Rai University<br />
+                    Saroda, Ahmedabad - 382260<br />
+                    Gujarat, India
                   </p>
                 </div>
               </div>
@@ -59,9 +60,9 @@ const Contact = () => {
                 <div>
                   <h3 className="font-semibold text-gray-900">Contact Info</h3>
                   <p className="text-gray-600">
-                    Tel: +91 9315145594<br />
-                    Email: vante@example.com<br />
-                    Support: support@vante.com
+                    Tel: +91 8780092234<br />
+                    Email: kirtan.2082006@gmail.com<br />
+                    Support: support@kcart.com
                   </p>
                 </div>
               </div>
@@ -90,7 +91,7 @@ const Contact = () => {
               </h3>
               <p className="text-gray-600 mb-4">
                 We're always looking for talented individuals to join our growing team.
-                Check out our current openings and become part of the Vante & co. family.
+                Check out our current openings and become part of the Kcart family.
               </p>
               <button className="border border-indigo-600 text-indigo-600 px-6 py-3 rounded-lg hover:bg-indigo-600 hover:text-white transition-all duration-300 font-medium">
                 Explore Job Opportunities
@@ -177,13 +178,13 @@ const Contact = () => {
         {/* Map Section */}
         <div className="mt-16 bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.005874254489!2d77.61097031482193!3d12.972380990856596!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae17003b6f0fa1%3A0x7bb5e5b7b4230249!2sBTM%20Layout%2C%20Bengaluru%2C%20Karnataka%20560029!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3671.0234567890123!2d72.6234567!3d23.0234567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395c2b0123456789%3A0xabcdef1234567890!2sRai%20University%2C%20SH-144%2C%20Saroda%2C%20Ahmedabad%2C%20Gujarat%20382260!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
             width="100%"
             height="450"
             style={{ border: 0 }}
             allowFullScreen=""
             loading="lazy"
-            title="Vante & co. Location"
+            title="Kcart Location - Rai University, Saroda, Ahmedabad"
           ></iframe>
         </div>
       </div>

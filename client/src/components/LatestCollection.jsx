@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { ShopContext } from "../context/ShopContext";
 import Title from "./Title";
 import ProductsItem from "./ProductsItem";
+import { Container, Grid, Box, Typography, Button, CircularProgress } from '@mui/material';
+import { ArrowForward } from '@mui/icons-material';
 
 const LatestCollection = () => {
   const { products } = useContext(ShopContext);

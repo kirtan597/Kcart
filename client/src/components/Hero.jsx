@@ -10,6 +10,7 @@ const Hero = () => {
   const heroRef = useRef(null);
   const [inView, setInView] = useState(true);
   const [transitioning, setTransitioning] = useState(true);
+  const [progress, setProgress] = useState(0);
 
   const banners = {
     mobile: [
@@ -49,10 +50,30 @@ const Hero = () => {
   }, []);
 
   useEffect(() => {
-    if (hovered) return;
-    const i = setInterval(() => setIndex(prev => prev + 1), 5000);
-    return () => clearInterval(i);
-  }, [hovered]);
+    if (hovered || !inView) {
+      setProgress(0);
+      return;
+    }
+    
+    // Auto-advance every 2 seconds
+    const autoPlayInterval = setInterval(() => {
+      setIndex(prev => prev + 1);
+      setProgress(0);
+    }, 2000);
+    
+    // Progress bar animation - optimized for smooth performance
+    const progressInterval = setInterval(() => {
+      setProgress(prev => {
+        if (prev >= 100) return 0;
+        return prev + 5; // 20 steps in 2 seconds (100ms each) - smooth and lag-free
+      });
+    }, 100);
+    
+    return () => {
+      clearInterval(autoPlayInterval);
+      clearInterval(progressInterval);
+    };
+  }, [hovered, inView]);
 
   useEffect(() => {
     if (mobile && scrollRef.current && inView) {
@@ -76,19 +97,17 @@ const Hero = () => {
 
   const Slide = ({ item, i }) => (
     <a href={item.link} key={i} className="h-full flex-shrink-0 relative" style={{ width: `${100 / items.length}%` }}>
-      <img src={item.image} alt={`Banner ${i}`} className="w-full h-full object-cover object-center" />
-      <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent" />
+      <img src={item.image} alt={`Banner ${i}`} className="w-full h-full object-cover" />
     </a>
   );
 
   return (
-    <div ref={heroRef} className="relative w-full h-[50vh] min-h-[400px] md:min-h-[500px] overflow-hidden bg-black">
+    <div ref={heroRef} className="relative w-full h-[45vh] sm:h-[50vh] md:h-[55vh] max-h-[500px] overflow-hidden bg-gray-100">
       {mobile ? (
         <div className="flex overflow-x-auto snap-x snap-mandatory h-full" ref={scrollRef} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
           {items.map((item, i) => (
             <a href={item.link} key={i} className="flex-shrink-0 w-full h-full snap-center relative">
-              <img src={item.image} alt={`Mobile banner ${i}`} className="w-full h-full object-cover object-center" />
-              <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent" />
+              <img src={item.image} alt={`Mobile banner ${i}`} className="w-full h-full object-cover" />
             </a>
           ))}
         </div>
@@ -98,33 +117,40 @@ const Hero = () => {
         </div>
       )}
 
-      <div className="absolute bottom-8 left-4 md:left-8 z-10 text-white">
-        <div className="flex items-center gap-2 mb-3">
-          <div className="w-6 h-px bg-white" />
-          <p className="uppercase tracking-widest text-xs font-medium text-white/80">New Arrivals</p>
-        </div>
-        <h1 className="text-2xl md:text-4xl lg:text-5xl font-light mb-4 prata-regular">Timeless Elegance</h1>
-        <a href="/collection" className="inline-block px-6 py-2 bg-white text-black uppercase tracking-wider text-xs font-medium hover:bg-opacity-90 transition duration-300">Shop Now</a>
-      </div>
 
-      <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-1 z-10">
-        {banners.desktop.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => setIndex(i + 1)}
-            className={`w-2 h-2 rounded-full ${((index - 1 + banners.desktop.length) % banners.desktop.length === i) ? "bg-white w-3" : "bg-white/40"} transition-all duration-300`}
-            aria-label={`Go to slide ${i + 1}`}
-          />
-        ))}
+
+      <div className="absolute bottom-4 sm:bottom-6 left-0 right-0 flex justify-center gap-1.5 z-10">
+        {banners.desktop.map((_, i) => {
+          const isActive = ((index - 1 + banners.desktop.length) % banners.desktop.length === i);
+          return (
+            <button
+              key={i}
+              onClick={() => {
+                setIndex(i + 1);
+                setProgress(0);
+              }}
+              className={`h-2 rounded-full transition-all duration-300 relative overflow-hidden ${isActive ? "w-8" : "w-2 hover:bg-white/70"}`}
+              aria-label={`Go to slide ${i + 1}`}
+            >
+              <div className={`absolute inset-0 bg-white/50 ${!isActive && 'opacity-100'}`} />
+              {isActive && (
+                <>
+                  <div className="absolute inset-0 bg-white" style={{ width: `${progress}%`, transition: 'width 0.1s linear' }} />
+                  <div className="absolute inset-0 bg-white/50" />
+                </>
+              )}
+            </button>
+          );
+        })}
       </div>
 
       {!mobile && (
         <>
-          <button onClick={() => setIndex(prev => prev - 1)} className="absolute left-3 top-1/2 -translate-y-1/2 z-10 p-2 bg-black/40 hover:bg-black/60 rounded-full" aria-label="Previous Slide">
-            <ChevronLeft className="text-white w-5 h-5" />
+          <button onClick={() => setIndex(prev => prev - 1)} className="absolute left-4 md:left-6 top-1/2 -translate-y-1/2 z-10 p-2.5 md:p-3 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full transition-all duration-300 border border-white/20" aria-label="Previous Slide">
+            <ChevronLeft className="text-white w-5 h-5 md:w-6 md:h-6" />
           </button>
-          <button onClick={() => setIndex(prev => prev + 1)} className="absolute right-3 top-1/2 -translate-y-1/2 z-10 p-2 bg-black/40 hover:bg-black/60 rounded-full" aria-label="Next Slide">
-            <ChevronRight className="text-white w-5 h-5" />
+          <button onClick={() => setIndex(prev => prev + 1)} className="absolute right-4 md:right-6 top-1/2 -translate-y-1/2 z-10 p-2.5 md:p-3 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full transition-all duration-300 border border-white/20" aria-label="Next Slide">
+            <ChevronRight className="text-white w-5 h-5 md:w-6 md:h-6" />
           </button>
         </>
       )}

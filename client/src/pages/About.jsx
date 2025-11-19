@@ -6,15 +6,15 @@ const About = () => {
   return (
     <div className="bg-gray-50">
       {/* Hero Section */}
-      <div className="relative bg-gradient-to-r from-indigo-900 to-purple-800 py-20 overflow-hidden">
-        <div className="absolute inset-0 opacity-20">
+      <div className="relative bg-gradient-to-r from-gray-800 via-gray-700 to-gray-800 py-20 overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0 bg-[url('https://tailwindui.com/img/beams-pricing.png')] bg-[length:800px] bg-top"></div>
         </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">
-            Our <span className="text-indigo-300">Story</span>
+          <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 heading-font">
+            Our <span className="text-gray-300">Story</span>
           </h1>
-          <p className="text-xl text-indigo-100 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-200 max-w-3xl mx-auto">
             Crafting exceptional experiences since day one
           </p>
         </div>
@@ -39,7 +39,7 @@ const About = () => {
             </div>
             
             <p className="text-gray-600 leading-relaxed">
-              Vante & co. was born out of a passion for innovation and a desire to
+              Kcart was born out of a passion for innovation and a desire to
               revolutionize the way people shop online. Our journey began with a
               simple idea: to provide a platform where customers can easily
               discover, explore, and purchase a wide range of products from the
@@ -57,7 +57,7 @@ const About = () => {
             <div className="bg-indigo-50 p-6 rounded-xl border border-indigo-100">
               <h3 className="text-lg font-semibold text-indigo-800 mb-3">Our Mission</h3>
               <p className="text-gray-700">
-                Our mission at Vante & co. is to empower customers with choice,
+                Our mission at Kcart is to empower customers with choice,
                 convenience, and confidence. We're dedicated to providing a seamless
                 shopping experience that exceeds expectations, from browsing and
                 ordering to delivery and beyond.
@@ -70,7 +70,7 @@ const About = () => {
         <div className="mt-24 text-center">
           <span className="text-indigo-600 font-semibold">WHY CHOOSE US</span>
           <h2 className="text-3xl font-bold text-gray-900 mt-2">
-            The Vante & co. Difference
+            The Kcart Difference
           </h2>
           
           <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
