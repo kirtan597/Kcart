@@ -22,15 +22,14 @@ const Hero = () => {
       assets.phone_6,
       assets.phone_7
     ]
-      .map(img => ({ image: img, link: "#autumn" })),
+      .map(img => ({ image: img, link: "#collection" })),
     desktop: [
-      { image: assets.banner_1, link: "#winter" },
-      { image: assets.banner_2, link: "#spring" },
-      { image: assets.banner_3, link: "#autumn" },
-      { image: assets.banner_4, link: "#sale" },
-      { image: assets.banner_5, link: "#new" },
-      { image: assets.banner_6, link: "#bestsellers" },
-      { image: assets.banner_7, link: "#summer" }
+      { image: assets.banner_2, link: "#collection" },
+      { image: assets.banner_3, link: "#collection" },
+      { image: assets.banner_4, link: "#collection" },
+      { image: assets.banner_5, link: "#collection" },
+      { image: assets.banner_6, link: "#collection" },
+      { image: assets.banner_7, link: "#collection" }
     ]
   };
 
@@ -97,17 +96,17 @@ const Hero = () => {
 
   const Slide = ({ item, i }) => (
     <a href={item.link} key={i} className="h-full flex-shrink-0 relative" style={{ width: `${100 / items.length}%` }}>
-      <img src={item.image} alt={`Banner ${i}`} className="w-full h-full object-cover" />
+      <img src={item.image} alt={`Banner ${i}`} className="w-full h-full object-cover object-center" />
     </a>
   );
 
   return (
-    <div ref={heroRef} className="relative w-full h-[45vh] sm:h-[50vh] md:h-[55vh] max-h-[500px] overflow-hidden bg-gray-100">
+    <div ref={heroRef} className={`relative w-full overflow-hidden bg-gray-100 ${mobile ? 'h-[70vh] max-h-[700px]' : 'aspect-[1.85/1] max-h-[550px]'}`}>
       {mobile ? (
         <div className="flex overflow-x-auto snap-x snap-mandatory h-full" ref={scrollRef} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
           {items.map((item, i) => (
             <a href={item.link} key={i} className="flex-shrink-0 w-full h-full snap-center relative">
-              <img src={item.image} alt={`Mobile banner ${i}`} className="w-full h-full object-cover" />
+              <img src={item.image} alt={`Mobile banner ${i}`} className="w-full h-full object-cover object-center" />
             </a>
           ))}
         </div>

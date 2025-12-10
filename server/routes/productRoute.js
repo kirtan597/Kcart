@@ -4,7 +4,7 @@ import {
   listProduct,
   removeProduct,
   singleProduct,
-} from "../controllers/productController.js";
+} from "../controllers/productControllerSimple.js"; // Using simple controller for demo mode
 import upload from "../middleware/multer.js";
 import adminAuth from "../middleware/adminAuth.js";
 

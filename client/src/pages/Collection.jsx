@@ -110,9 +110,9 @@ const Collection = () => {
                 value={cat}
                 checked={category.includes(cat)}
                 onChange={toggleCategory}
-                className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                className="h-4 w-4 rounded border-gray-300 text-gray-900 focus:ring-gray-500"
               />
-              <span className="text-sm text-gray-700">{cat}</span>
+              <span className="text-sm text-gray-800 font-medium">{cat}</span>
             </label>
           ))}
         </div>
@@ -128,9 +128,9 @@ const Collection = () => {
                 value={sub}
                 checked={subCategory.includes(sub)}
                 onChange={toggleSubCategory}
-                className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                className="h-4 w-4 rounded border-gray-300 text-gray-900 focus:ring-gray-500"
               />
-              <span className="text-sm text-gray-700">{sub}</span>
+              <span className="text-sm text-gray-800 font-medium">{sub}</span>
             </label>
           ))}
         </div>
@@ -139,7 +139,7 @@ const Collection = () => {
       {(category.length > 0 || subCategory.length > 0) && (
         <button
           onClick={clearFilters}
-          className="text-sm text-indigo-600 hover:text-indigo-500 mt-4"
+          className="text-sm text-gray-900 hover:text-gray-700 mt-4 font-medium underline"
         >
           Clear all filters
         </button>
@@ -183,7 +183,7 @@ const Collection = () => {
 
             <div className="relative">
               <select
-                className="appearance-none bg-white border border-gray-300 rounded-md pl-2 pr-8 py-1 sm:pl-3 sm:pr-10 sm:py-2 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                className="appearance-none bg-white border-2 border-gray-300 rounded-lg pl-2 pr-8 py-1 sm:pl-3 sm:pr-10 sm:py-2 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 font-medium text-gray-900"
                 value={sortType}
                 onChange={(e) => setSortType(e.target.value)}
                 aria-label="Sort by"
@@ -227,10 +227,10 @@ const Collection = () => {
                         <button
                           key={num}
                           onClick={() => setCurrentPage(num)}
-                          className={`px-2 py-1 sm:px-3 sm:py-1 rounded-md text-xs sm:text-sm font-medium ${
+                          className={`px-2 py-1 sm:px-3 sm:py-1 rounded-lg text-xs sm:text-sm font-semibold border-2 ${
                             num === currentPage
-                              ? "bg-indigo-600 text-white"
-                              : "text-gray-700 hover:bg-gray-100"
+                              ? "bg-gray-900 text-white border-gray-900"
+                              : "text-gray-700 hover:bg-gray-100 border-gray-300"
                           }`}
                           aria-label={`Go to page ${num}`}
                         >
@@ -249,7 +249,7 @@ const Collection = () => {
                 </p>
                 <button
                   onClick={clearFilters}
-                  className="mt-3 sm:mt-4 px-3 py-1 sm:px-4 sm:py-2 bg-indigo-600 text-white text-xs sm:text-sm rounded-md hover:bg-indigo-700"
+                  className="mt-3 sm:mt-4 px-3 py-1 sm:px-4 sm:py-2 bg-gray-900 text-white text-xs sm:text-sm rounded-lg hover:bg-gray-800 font-medium"
                   aria-label="Clear all filters"
                 >
                   Clear all filters

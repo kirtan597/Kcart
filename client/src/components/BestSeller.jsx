@@ -18,10 +18,10 @@ const BestSeller = () => {
   const currentProducts = bestSellers.slice(start, start + productsPerPage);
 
   return (
-    <div className="max-w-7xl mx-auto px-0">
+    <div className="max-w-7xl mx-auto px-0 bg-white py-12 rounded-xl">
       <div className="text-center mb-12">
         <Title text1="BEST" text2="SELLERS" />
-        <p className="mt-4 max-w-2xl mx-auto text-sm md:text-base text-gray-500 font-light tracking-wide">
+        <p className="mt-4 max-w-2xl mx-auto text-sm md:text-base text-gray-600 font-light tracking-wide">
           Exquisite selections adored by our most discerning clientele. Each piece embodies unparalleled craftsmanship.
         </p>
       </div>
@@ -47,10 +47,10 @@ const BestSeller = () => {
               <button
                 key={page}
                 onClick={() => setCurrentPage(page)}
-                className={`px-4 py-2 text-sm border rounded transition-all duration-200 ${
+                className={`px-4 py-2 text-sm border-2 rounded-lg transition-all duration-200 font-medium ${
                   currentPage === page
-                    ? "bg-black text-white"
-                    : "text-gray-700 hover:bg-gray-200"
+                    ? "bg-gray-900 text-white border-gray-900"
+                    : "text-gray-700 border-gray-300 hover:bg-gray-100 hover:border-gray-400"
                 }`}
               >
                 {page}

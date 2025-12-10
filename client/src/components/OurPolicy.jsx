@@ -42,11 +42,11 @@ const OurPolicy = () => {
   ];
 
   return (
-    <div className="bg-white py-16 sm:py-24 border-t border-gray-100">
+    <div className="bg-white py-16 sm:py-24">
       <div className="max-w-7xl mx-auto px-0">
         <div className="text-center mb-16">
-          <h2 className="text-2xl sm:text-3xl font-light tracking-wider mb-4">OUR COMMITMENT TO YOU</h2>
-          <p className="text-gray-500 max-w-2xl mx-auto text-sm sm:text-base">
+          <h2 className="text-2xl sm:text-3xl font-semibold tracking-wider mb-4 heading-font text-gray-900">OUR COMMITMENT TO YOU</h2>
+          <p className="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base">
             We stand behind every product we sell with policies designed for your complete satisfaction and peace of mind.
           </p>
         </div>
@@ -55,34 +55,34 @@ const OurPolicy = () => {
           {policies.map((policy, index) => (
             <div
               key={index}
-              className="group p-6 sm:p-8 text-center border border-gray-100 rounded-lg hover:shadow-sm transition-all duration-300"
+              className="group p-6 sm:p-8 text-center bg-white border border-gray-200 rounded-xl hover:shadow-lg hover:border-gray-300 transition-all duration-300"
             >
               <div className="mb-6 flex justify-center">
-                <div className="p-4 bg-gray-50 rounded-full group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors duration-300">
+                <div className="p-4 bg-gray-100 rounded-full group-hover:bg-gray-900 group-hover:text-white transition-colors duration-300 text-gray-700">
                   {policy.icon}
                 </div>
               </div>
-              <h3 className="text-sm font-medium tracking-widest uppercase mb-3">{policy.title}</h3>
+              <h3 className="text-sm font-semibold tracking-widest uppercase mb-3 text-gray-900">{policy.title}</h3>
               <p className="text-gray-600 mb-3 text-sm sm:text-base leading-relaxed">
                 {policy.description}
               </p>
-              <p className="text-xs text-gray-400 mt-3">
+              <p className="text-xs text-gray-500 mt-3">
                 {policy.extra}
               </p>
             </div>
           ))}
         </div>
 
-        <div className="mt-16 text-center border-t border-gray-100 pt-16">
-          <h3 className="text-sm font-medium tracking-widest uppercase mb-4">NEED HELP?</h3>
-          <p className="text-gray-500 max-w-2xl mx-auto text-sm sm:text-base mb-6">
+        <div className="mt-16 text-center border-t border-gray-200 pt-16">
+          <h3 className="text-sm font-semibold tracking-widest uppercase mb-4 text-gray-900">NEED HELP?</h3>
+          <p className="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base mb-6">
             Our customer care team is ready to assist with any questions about our policies or your order.
           </p>
           <a
             href="/contact"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block px-6 py-3 border border-black text-sm font-medium hover:bg-black hover:text-white transition-colors duration-300"
+            className="inline-block px-6 py-3 border-2 border-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition-colors duration-300 rounded-lg text-gray-900"
           >
             Contact Support
           </a>

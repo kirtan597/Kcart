@@ -1,77 +1,140 @@
+import validator from "validator";
+import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
 
-const JWT_SECRET = "demo-secret-key-12345";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const usersFilePath = path.join(__dirname, "../data/users.json");
 
-// Dummy users storage (in-memory for demo)
-const users = new Map();
-let userIdCounter = 1;
+// Initialize users file
+const initializeUsers = () => {
+  try {
+    if (!fs.existsSync(usersFilePath)) {
+      fs.writeFileSync(usersFilePath, JSON.stringify([], null, 2));
+      console.log("✅ Created users.json file");
+    }
+  } catch (error) {
+    console.error("Error initializing users file:", error);
+  }
+};
 
-// Admin credentials
-const ADMIN_EMAIL = "admin@demo.com";
-const ADMIN_PASSWORD = "admin123";
+// Read users from file
+const readUsers = () => {
+  try {
+    const data = fs.readFileSync(usersFilePath, "utf8");
+    return JSON.parse(data);
+  } catch (error) {
+    return [];
+  }
+};
 
-// User login
+// Write users to file
+const writeUsers = (users) => {
+  fs.writeFileSync(usersFilePath, JSON.stringify(users, null, 2));
+};
+
+const createToken = (id) => {
+  return jwt.sign({ id }, process.env.JWT_SECRET);
+};
+
+// Route for user login
 const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    // Find user
-    let user = null;
-    for (let [id, u] of users.entries()) {
-      if (u.email === email && u.password === password) {
-        user = { _id: id, ...u };
-        break;
-      }
-    }
+    const users = readUsers();
+    const user = users.find((u) => u.email === email);
 
     if (!user) {
-      return res.json({ success: false, message: "Invalid credentials" });
+      return res.json({ success: false, message: "User not found" });
     }
 
-    const token = jwt.sign({ id: user._id }, JWT_SECRET);
-    res.json({ success: true, token });
+    const isMatched = await bcrypt.compare(password, user.password);
+    if (!isMatched) {
+      return res.json({
+        success: false,
+        message: "Invalid credentials",
+      });
+    }
+
+    const token = createToken(user._id);
+    res.json({ success: true, message: "User credentials are correct", token });
   } catch (error) {
     console.log(error);
     res.json({ success: false, message: error.message });
   }
 };
 
-// User register
+// Route for user registration - Direct registration without OTP
 const registerUser = async (req, res) => {
   try {
     const { name, email, password } = req.body;
 
-    // Check if user exists
-    for (let u of users.values()) {
-      if (u.email === email) {
-        return res.json({ success: false, message: "User already exists" });
-      }
+    const users = readUsers();
+    const exists = users.find((u) => u.email === email);
+
+    if (exists) {
+      return res.json({ success: false, message: "User already exists" });
     }
 
-    const userId = String(userIdCounter++);
-    users.set(userId, {
+    if (!validator.isEmail(email)) {
+      return res.json({
+        success: false,
+        message: "Please Enter a valid Email",
+      });
+    }
+
+    if (password.length < 8) {
+      return res.json({
+        success: false,
+        message:
+          "Password Length must be greater than or equal to 8 characters",
+      });
+    }
+
+    // Hash password
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    // Create user directly
+    const newUser = {
+      _id: String(Date.now()),
       name,
       email,
-      password,
+      password: hashedPassword,
       cartData: {},
-    });
+    };
 
-    const token = jwt.sign({ id: userId }, JWT_SECRET);
-    res.json({ success: true, token });
+    users.push(newUser);
+    writeUsers(users);
+
+    // Generate token
+    const token = createToken(newUser._id);
+
+    res.json({
+      success: true,
+      message: "User registered successfully",
+      token,
+    });
   } catch (error) {
     console.log(error);
     res.json({ success: false, message: error.message });
   }
 };
 
-// Admin login
+// Route for admin login
 const adminLogin = async (req, res) => {
   try {
     const { email, password } = req.body;
-
-    if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
-      const token = jwt.sign({ email, role: "admin" }, JWT_SECRET);
-      res.json({ success: true, token });
+    if (
+      email === process.env.ADMIN_EMAIL &&
+      password === process.env.ADMIN_PASSWORD
+    ) {
+      const token = jwt.sign(email + password, process.env.JWT_SECRET);
+      res.json({ success: true, token: token });
     } else {
       res.json({ success: false, message: "Invalid credentials" });
     }
@@ -81,4 +144,51 @@ const adminLogin = async (req, res) => {
   }
 };
 
-export { loginUser, registerUser, adminLogin, users, JWT_SECRET };
+// Route for password change
+const changePassword = async (req, res) => {
+  try {
+    const { email, password, reenterpassword } = req.body;
+
+    const users = readUsers();
+    const userIndex = users.findIndex((u) => u.email === email);
+
+    if (userIndex === -1) {
+      return res.json({ success: false, message: "User not found" });
+    }
+
+    const user = users[userIndex];
+    const isMatched = await bcrypt.compare(password, user.password);
+
+    if (password !== reenterpassword) {
+      return res.json({
+        success: false,
+        message: "Two Password must be same.",
+      });
+    }
+
+    if (isMatched) {
+      return res.json({
+        success: false,
+        message: "New password should not be same as current password.",
+      });
+    }
+
+    // Hashing User Password
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(reenterpassword, salt);
+
+    // Updating user password
+    users[userIndex].password = hashedPassword;
+    writeUsers(users);
+
+    res.json({ success: true, message: "Password changed successfully" });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
+
+// Initialize on module load
+initializeUsers();
+
+export { loginUser, registerUser, adminLogin, changePassword };

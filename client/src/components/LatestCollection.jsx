@@ -26,14 +26,14 @@ const LatestCollection = () => {
   }
 
   return (
-    <section className="bg-white py-20">
+    <section className="bg-gradient-to-b from-white to-gray-50 py-20">
       <div className="max-w-7xl mx-auto px-0">
         {/* Header */}
         <div className="text-center mb-16">
           <div className="mb-6">
             <Title text1="LATEST" text2="COLLECTIONS" />
           </div>
-          <p className="max-w-2xl mx-auto text-sm font-light tracking-wide text-gray-500 leading-relaxed">
+          <p className="max-w-2xl mx-auto text-sm font-light tracking-wide text-gray-600 leading-relaxed">
             Discover our exclusive curation of premium pieces that redefine modern elegance.
             Each item is meticulously selected to embody timeless sophistication.
           </p>
@@ -59,7 +59,7 @@ const LatestCollection = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <button className="border border-black bg-transparent hover:bg-black hover:text-white transition-all duration-300 px-8 py-3 text-sm tracking-widest font-light">
+            <button className="border-2 border-gray-900 bg-transparent hover:bg-gray-900 hover:text-white transition-all duration-300 px-8 py-3 text-sm tracking-widest font-medium text-gray-900 rounded-lg shadow-sm hover:shadow-md">
               VIEW FULL COLLECTION
             </button>
           </a>

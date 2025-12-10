@@ -1,0 +1,16 @@
+[
+  {
+    "_id": "1763806817372",
+    "name": "Kirtan Panchal",
+    "email": "kirtan.2082006@gmail.com",
+    "password": "$2b$10$xxUNJ.H7KqA/MpYyoSvUzu9glbmDSSRGIaFBvOS5AVyZUZymKvHkS",
+    "cartData": {}
+  },
+  {
+    "_id": "1765350188921",
+    "name": "Hency Buchiya",
+    "email": "hencybuchiya3539@gmail.com",
+    "password": "$2b$10$OqVl76cXPxsSsIfoyouInex3wiRwQxZlpV24NRu.LBaiiTmvb4WUG",
+    "cartData": {}
+  }
+]

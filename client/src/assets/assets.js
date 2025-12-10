@@ -1,6 +1,6 @@
 import p_img1 from './p_img1.png'
 
-import banner_1 from './banner_1.png'
+// banner_1.png was removed - using banner_2 through banner_7
 import banner_2 from './banner_2.png'
 import banner_3 from './banner_3.png'
 import banner_4 from './banner_4.png'
@@ -50,7 +50,6 @@ export const assets = {
     razorpay_logo,
     stripe_logo,
     cross_icon,
-    banner_1,
     banner_2,
     banner_3,
     banner_4,

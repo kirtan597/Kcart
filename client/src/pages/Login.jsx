@@ -1,23 +1,32 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ShopContext } from "../context/ShopContext";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { FiEye, FiEyeOff, FiUser, FiMail, FiLock, FiArrowRight } from "react-icons/fi";
+import { FiEye, FiEyeOff } from "react-icons/fi";
 
 const Login = () => {
   const { token, setToken, navigate, backendUrl } = useContext(ShopContext);
-  const [currentState, setCurrentState] = useState("Login");
+  const [isSignUp, setIsSignUp] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
+  const [agreeTerms, setAgreeTerms] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
+    
+    if (isSignUp && !agreeTerms) {
+      toast.error("Please agree to Terms & Conditions");
+      return;
+    }
+
     setIsLoading(true);
     try {
-      if (currentState === "Sign Up") {
+      if (isSignUp) {
+        // Register user
         const response = await axios.post(backendUrl + "/api/user/register", {
           name,
           email,
@@ -26,19 +35,22 @@ const Login = () => {
         if (response.data.success) {
           setToken(response.data.token);
           localStorage.setItem("token", response.data.token);
-          toast.success("Account created successfully!");
+          toast.success("Account created successfully! Welcome to Kcart!");
         } else {
           toast.error(response.data.message);
         }
       } else {
+        // Login user
         const response = await axios.post(backendUrl + "/api/user/login", {
           email,
           password,
         });
         if (response.data.success) {
           setToken(response.data.token);
-          localStorage.setItem("token", response.data.token);
-          toast.success("Logged in successfully!");
+          if (rememberMe) {
+            localStorage.setItem("token", response.data.token);
+          }
+          toast.success("Welcome back!");
         } else {
           toast.error(response.data.message);
         }
@@ -58,135 +70,170 @@ const Login = () => {
   }, [token]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-lg shadow-md">
-        <div className="text-center">
-          <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
-            {currentState === "Login" ? "Welcome back" : "Create an account"}
-          </h2>
-          <p className="mt-2 text-sm text-gray-600">
-            {currentState === "Login" 
-              ? "Sign in to your account" 
-              : "Get started with your shopping journey"}
-          </p>
+    <div className="min-h-screen flex items-center justify-center bg-white py-12 px-4">
+      <div className="w-full max-w-md">
+        {/* Logo/Brand */}
+        <div className="text-center mb-8">
+          <h1 className="text-4xl font-bold text-black heading-font mb-2">Kcart</h1>
+          <div className="w-16 h-1 bg-black mx-auto rounded-full"></div>
         </div>
 
-        <form className="mt-8 space-y-6" onSubmit={onSubmitHandler}>
-          <div className="rounded-md shadow-sm space-y-4">
-            {currentState === "Sign Up" && (
-              <div className="relative">
-                <label htmlFor="name" className="sr-only">Name</label>
-                <div className="relative">
-                  <FiUser className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-                  <input
-                    id="name"
-                    name="name"
-                    type="text"
-                    autoComplete="name"
-                    required
-                    className="appearance-none block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-md placeholder-gray-500 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                    placeholder="Full Name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                  />
-                </div>
+        {/* Main Card */}
+        <div className="bg-white rounded-2xl shadow-xl border-2 border-gray-200 p-8">
+          {/* Header */}
+          <div className="mb-6">
+            <h2 className="text-3xl font-bold text-black mb-2">
+              {isSignUp ? "Create an account" : "Sign in"}
+            </h2>
+            <p className="text-gray-600">
+              {isSignUp 
+                ? "Join Kcart and start shopping today" 
+                : "Welcome back! Please enter your details"}
+            </p>
+          </div>
+
+          {/* Form */}
+          <form onSubmit={onSubmitHandler} className="space-y-4">
+            {/* Name Field (Sign Up only) */}
+            {isSignUp && (
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Full Name
+                </label>
+                <input
+                  type="text"
+                  placeholder="Enter your full name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:border-black transition-colors"
+                />
               </div>
             )}
 
-            <div className="relative">
-              <label htmlFor="email" className="sr-only">Email address</label>
-              <div className="relative">
-                <FiMail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  required
-                  className="appearance-none block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-md placeholder-gray-500 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                  placeholder="Email Address"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </div>
+            {/* Email Field */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Email
+              </label>
+              <input
+                type="email"
+                placeholder={isSignUp ? "Enter your email" : "Enter your email"}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:border-black transition-colors"
+              />
             </div>
 
-            <div className="relative">
-              <label htmlFor="password" className="sr-only">Password</label>
+            {/* Password Field */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Password
+              </label>
               <div className="relative">
-                <FiLock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
                 <input
-                  id="password"
-                  name="password"
                   type={showPassword ? "text" : "password"}
-                  autoComplete={currentState === "Login" ? "current-password" : "new-password"}
-                  required
-                  className="appearance-none block w-full pl-10 pr-10 py-3 border border-gray-300 rounded-md placeholder-gray-500 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                  placeholder="Password"
+                  placeholder={isSignUp ? "Create a password (min 8 characters)" : "Enter your password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  required
+                  minLength="8"
+                  className="w-full px-4 py-3 pr-12 border-2 border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:border-black transition-colors"
                 />
                 <button
                   type="button"
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-500"
                   onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
                 >
-                  {showPassword ? <FiEyeOff /> : <FiEye />}
+                  {showPassword ? <FiEyeOff size={20} /> : <FiEye size={20} />}
                 </button>
               </div>
             </div>
-          </div>
 
-          <div className="flex items-center justify-between">
-            {currentState === "Login" ? (
-              <>
+            {/* Terms Checkbox (Sign Up only) */}
+            {isSignUp && (
+              <div className="flex items-start">
+                <input
+                  type="checkbox"
+                  id="terms"
+                  checked={agreeTerms}
+                  onChange={(e) => setAgreeTerms(e.target.checked)}
+                  className="mt-1 w-4 h-4 text-black border-gray-300 rounded focus:ring-black"
+                />
+                <label htmlFor="terms" className="ml-2 text-sm text-gray-600">
+                  I agree to Kcart's{" "}
+                  <a href="#" className="text-black hover:text-gray-700 font-medium underline">
+                    Terms & Conditions
+                  </a>{" "}
+                  and{" "}
+                  <a href="#" className="text-black hover:text-gray-700 font-medium underline">
+                    Privacy Policy
+                  </a>
+                </label>
+              </div>
+            )}
+
+            {/* Remember Me & Forgot Password (Sign In only) */}
+            {!isSignUp && (
+              <div className="flex items-center justify-between">
+                <div className="flex items-center">
+                  <input
+                    type="checkbox"
+                    id="remember"
+                    checked={rememberMe}
+                    onChange={(e) => setRememberMe(e.target.checked)}
+                    className="w-4 h-4 text-black border-gray-300 rounded focus:ring-black"
+                  />
+                  <label htmlFor="remember" className="ml-2 text-sm text-gray-600">
+                    Remember me
+                  </label>
+                </div>
                 <button
                   type="button"
                   onClick={() => navigate("/forgot-password")}
-                  className="text-sm text-indigo-600 hover:text-indigo-500"
+                  className="text-sm text-black hover:text-gray-700 font-medium underline"
                 >
-                  Forgot password?
+                  Forgot Password
                 </button>
-                <button
-                  type="button"
-                  onClick={() => setCurrentState("Sign Up")}
-                  className="text-sm text-indigo-600 hover:text-indigo-500"
-                >
-                  Create account
-                </button>
-              </>
-            ) : (
-              <button
-                type="button"
-                onClick={() => setCurrentState("Login")}
-                className="text-sm text-indigo-600 hover:text-indigo-500 ml-auto"
-              >
-                Already have an account? Sign in
-              </button>
+              </div>
             )}
-          </div>
 
-          <div>
+            {/* Submit Button */}
             <button
               type="submit"
               disabled={isLoading}
-              className={`group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors ${
-                isLoading ? "opacity-70 cursor-not-allowed" : ""
-              }`}
+              className="w-full py-4 bg-black text-white font-bold rounded-xl hover:bg-gray-800 transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-[1.02]"
             >
-              <span className="absolute left-0 inset-y-0 flex items-center pl-3">
-                <FiArrowRight className={`h-5 w-5 text-indigo-300 group-hover:text-indigo-200 ${
-                  isLoading ? "animate-pulse" : ""
-                }`} />
-              </span>
-              {isLoading
-                ? "Processing..."
-                : currentState === "Login"
-                ? "Sign in"
-                : "Sign up"}
+              {isLoading 
+                ? "Processing..." 
+                : isSignUp 
+                ? "Create Account" 
+                : "Log In"}
             </button>
+          </form>
+
+          {/* Toggle Sign In/Sign Up */}
+          <div className="mt-6 text-center">
+            <p className="text-gray-600">
+              {isSignUp ? "Already have an account? " : "Don't have an account? "}
+              <button
+                onClick={() => {
+                  setIsSignUp(!isSignUp);
+                  setAgreeTerms(false);
+                }}
+                className="text-black hover:text-gray-700 font-semibold underline"
+              >
+                {isSignUp ? "Log In" : "Create a Free Account"}
+              </button>
+            </p>
           </div>
-        </form>
+        </div>
+
+        {/* Footer */}
+        <p className="text-center text-sm text-gray-500 mt-6">
+          © 2024 Kcart. All rights reserved.
+        </p>
       </div>
     </div>
   );
