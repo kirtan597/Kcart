@@ -1,18 +1,30 @@
 {
-  "name": "backend",
+  "name": "kcart-backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "Kcart E-commerce Backend API",
   "main": "server.js",
   "type": "module",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
   "scripts": {
     "start": "node server.js",
-    "server": "nodemon server.js",
+    "dev": "nodemon server.js",
     "demo": "nodemon serverSimple.js",
     "seed": "node data/productSeeder.js seed",
-    "seed-products": "node scripts/seedDatabase.js"
+    "seed-products": "node scripts/seedDatabase.js",
+    "build": "echo 'No build step required for Node.js'"
   },
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "ecommerce",
+    "api",
+    "nodejs",
+    "express",
+    "mongodb"
+  ],
+  "author": "Kirtan Panchal",
+  "license": "MIT",
   "dependencies": {
     "bcrypt": "^6.0.0",
     "cloudinary": "^2.7.0",
@@ -23,9 +35,11 @@
     "mongoose": "^8.16.1",
     "multer": "^2.0.1",
     "nodemailer": "^7.0.10",
-    "nodemon": "^3.1.10",
     "razorpay": "^2.9.6",
     "stripe": "^18.2.1",
     "validator": "^13.15.15"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
   }
 }

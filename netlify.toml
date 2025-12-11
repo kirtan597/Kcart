@@ -2,17 +2,34 @@
   base = "client"
   command = "npm install && npm run build"
   publish = "dist"
+  functions = "../netlify/functions"
 
 [build.environment]
   NODE_VERSION = "20"
   NPM_VERSION = "10"
 
+# API Routes - Redirect to Netlify Functions
 [[redirects]]
-  from = "/api/*"
-  to = "https://your-backend-url.vercel.app/api/:splat"
+  from = "/api/product/list"
+  to = "/.netlify/functions/products"
   status = 200
-  force = true
 
+[[redirects]]
+  from = "/api/product/*"
+  to = "/.netlify/functions/products"
+  status = 200
+
+[[redirects]]
+  from = "/api/cart/*"
+  to = "/.netlify/functions/cart"
+  status = 200
+
+[[redirects]]
+  from = "/api/user/*"
+  to = "/.netlify/functions/user"
+  status = 200
+
+# SPA Fallback
 [[redirects]]
   from = "/*"
   to = "/index.html"

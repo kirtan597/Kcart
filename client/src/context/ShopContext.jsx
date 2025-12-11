@@ -9,7 +9,8 @@ export const ShopContext = createContext();
 const ShopContextProvider = (props) => {
   const currency = "₹";
   const delivery_fee = 50;
-  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+  // Use environment variable or fallback to current domain for Netlify Functions
+  const backendUrl = import.meta.env.VITE_BACKEND_URL || window.location.origin;
 
   const [products, setProducts] = useState([]);
   const [cartItems, setCartItems] = useState({});

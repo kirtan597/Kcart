@@ -1,0 +1,8 @@
+{
+  "name": "kcart-netlify-functions",
+  "version": "1.0.0",
+  "description": "Netlify Functions for Kcart E-commerce API",
+  "type": "module",
+  "dependencies": {},
+  "devDependencies": {}
+}
