@@ -11,16 +11,19 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     sourcemap: false,
-    minify: 'terser',
+    minify: 'terser', // Using terser for better compression
+    target: 'es2015', // Better browser compatibility
     rollupOptions: {
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom'],
           router: ['react-router-dom'],
-          ui: ['@mui/material', '@emotion/react', '@emotion/styled']
+          ui: ['@mui/material', '@emotion/react', '@emotion/styled'],
+          utils: ['axios', 'lenis']
         }
       }
-    }
+    },
+    chunkSizeWarningLimit: 1000
   },
   server: {
     port: 5173,
