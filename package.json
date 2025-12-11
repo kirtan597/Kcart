@@ -1,0 +1,29 @@
+{
+  "name": "kcart-ecommerce",
+  "version": "1.0.0",
+  "description": "Modern E-Commerce Platform with React and Material-UI",
+  "main": "index.js",
+  "scripts": {
+    "build": "cd client && npm install && npm run build",
+    "start": "cd client && npm run preview",
+    "dev": "cd client && npm run dev",
+    "install-all": "cd client && npm install && cd ../server && npm install && cd ../admin && npm install",
+    "build:client": "cd client && npm run build",
+    "build:server": "cd server && npm install",
+    "deploy": "npm run build:client"
+  },
+  "keywords": [
+    "ecommerce",
+    "react",
+    "material-ui",
+    "vite",
+    "nodejs",
+    "mongodb"
+  ],
+  "author": "Kirtan Panchal",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kirtan597/Kcart.git"
+  }
+}
