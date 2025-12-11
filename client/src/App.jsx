@@ -17,23 +17,36 @@ import Footer from "./components/Footer";
 import SearchBar from "./components/SearchBar";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "./styles/smoothScroll.css";
 import { Verify } from "./pages/Verify";
 import { ForgotPassword } from "./pages/ForgotPassword";
 import SearchResults from "./pages/SearchResults";
+import ScrollToTop from "./components/ScrollToTop";
 
 const App = () => {
-  // Initialize Lenis smooth scrolling
+  // Initialize Lenis smooth scrolling with optimized settings
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      orientation: "vertical",
-      gestureOrientation: "vertical",
-      smoothWheel: true,
-      wheelMultiplier: 1,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Custom easing function
+      direction: 'vertical', // Updated property name
+      gestureDirection: 'vertical', // Updated property name
+      smooth: true,
+      mouseMultiplier: 1,
       smoothTouch: false,
       touchMultiplier: 2,
       infinite: false,
+      autoResize: true, // Automatically resize on window resize
+      syncTouch: false, // Disable sync touch for better mobile performance
+    });
+
+    // Make Lenis globally accessible for utility functions
+    window.lenis = lenis;
+
+    // Optional: Listen to scroll events for custom animations
+    lenis.on('scroll', (e) => {
+      // You can add custom scroll-based animations here
+      // console.log('Scroll position:', e.scroll);
     });
 
     function raf(time) {
@@ -43,8 +56,10 @@ const App = () => {
 
     requestAnimationFrame(raf);
 
+    // Cleanup function
     return () => {
       lenis.destroy();
+      window.lenis = null;
     };
   }, []);
 
@@ -77,6 +92,9 @@ const App = () => {
 
       {/* Footer */}
       <Footer />
+      
+      {/* Scroll to Top Button */}
+      <ScrollToTop />
     </div>
   );
 };

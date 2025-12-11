@@ -7,7 +7,9 @@
   "scripts": {
     "start": "node server.js",
     "server": "nodemon server.js",
-    "demo": "nodemon serverSimple.js"
+    "demo": "nodemon serverSimple.js",
+    "seed": "node data/productSeeder.js seed",
+    "seed-products": "node scripts/seedDatabase.js"
   },
   "author": "",
   "license": "ISC",

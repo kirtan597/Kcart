@@ -53,10 +53,141 @@ const addProduct = async (req, res) => {
   }
 };
 
-// Function for list product
+// Function for list product with filtering and pagination
 const listProduct = async (req, res) => {
   try {
-    const products = await productModel.find({});
+    const { 
+      page = 1, 
+      limit = 20, 
+      category, 
+      subCategory, 
+      type, 
+      brand, 
+      minPrice, 
+      maxPrice, 
+      sortBy = 'date', 
+      sortOrder = 'desc',
+      search,
+      isNew,
+      bestseller
+    } = req.query;
+
+    // Build filter object
+    const filter = { status: 'active' };
+    
+    if (category) filter.category = new RegExp(category, 'i');
+    if (subCategory) filter.subCategory = new RegExp(subCategory, 'i');
+    if (type) filter.type = new RegExp(type, 'i');
+    if (brand) filter.brand = new RegExp(brand, 'i');
+    if (isNew !== undefined) filter.isNew = isNew === 'true';
+    if (bestseller !== undefined) filter.bestseller = bestseller === 'true';
+    
+    if (minPrice || maxPrice) {
+      filter.price = {};
+      if (minPrice) filter.price.$gte = Number(minPrice);
+      if (maxPrice) filter.price.$lte = Number(maxPrice);
+    }
+    
+    if (search) {
+      filter.$or = [
+        { name: new RegExp(search, 'i') },
+        { title: new RegExp(search, 'i') },
+        { description: new RegExp(search, 'i') },
+        { brand: new RegExp(search, 'i') },
+        { tags: { $in: [new RegExp(search, 'i')] } }
+      ];
+    }
+
+    // Build sort object
+    const sort = {};
+    sort[sortBy] = sortOrder === 'asc' ? 1 : -1;
+
+    // Calculate pagination
+    const skip = (page - 1) * limit;
+    
+    // Get products with pagination
+    const products = await productModel
+      .find(filter)
+      .sort(sort)
+      .skip(skip)
+      .limit(Number(limit));
+    
+    // Get total count for pagination
+    const totalProducts = await productModel.countDocuments(filter);
+    const totalPages = Math.ceil(totalProducts / limit);
+
+    res.json({ 
+      success: true, 
+      products,
+      pagination: {
+        currentPage: Number(page),
+        totalPages,
+        totalProducts,
+        perPage: Number(limit),
+        hasNext: page < totalPages,
+        hasPrev: page > 1
+      }
+    });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
+
+// Function to get products by category
+const getProductsByCategory = async (req, res) => {
+  try {
+    const { category } = req.params;
+    const products = await productModel.find({ 
+      category: new RegExp(category, 'i'),
+      status: 'active'
+    }).sort({ date: -1 });
+    
+    res.json({ success: true, products, category });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
+
+// Function to get featured products
+const getFeaturedProducts = async (req, res) => {
+  try {
+    const products = await productModel.find({ 
+      featured: true,
+      status: 'active'
+    }).sort({ date: -1 }).limit(10);
+    
+    res.json({ success: true, products });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
+
+// Function to get bestsellers
+const getBestsellers = async (req, res) => {
+  try {
+    const products = await productModel.find({ 
+      bestseller: true,
+      status: 'active'
+    }).sort({ rating: -1, date: -1 }).limit(10);
+    
+    res.json({ success: true, products });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
+
+// Function to get new arrivals
+const getNewArrivals = async (req, res) => {
+  try {
+    const products = await productModel.find({ 
+      isNew: true,
+      status: 'active'
+    }).sort({ date: -1 }).limit(10);
+    
     res.json({ success: true, products });
   } catch (error) {
     console.log(error);
@@ -87,4 +218,13 @@ const singleProduct = async (req, res) => {
   }
 };
 
-export { addProduct, listProduct, removeProduct, singleProduct };
+export { 
+  addProduct, 
+  listProduct, 
+  removeProduct, 
+  singleProduct,
+  getProductsByCategory,
+  getFeaturedProducts,
+  getBestsellers,
+  getNewArrivals
+};
