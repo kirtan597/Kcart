@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
 import userTrackingService from "../services/userTrackingService";
+import { fallbackProducts } from "../data/fallbackProducts";
 
 export const ShopContext = createContext();
 
@@ -13,12 +14,13 @@ const ShopContextProvider = (props) => {
   // Use environment variable or fallback to Netlify Functions
   const backendUrl = import.meta.env.VITE_BACKEND_URL || `${window.location.origin}/.netlify/functions`;
 
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState(fallbackProducts); // Start with fallback products
   const [cartItems, setCartItems] = useState({});
   const [token, setToken] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [showSearchBar, setShowSearchBar] = useState(false);
+  const [isLoadingProducts, setIsLoadingProducts] = useState(false);
 
   const navigate = useNavigate();
 
@@ -46,7 +48,8 @@ const ShopContextProvider = (props) => {
           { headers: { token } }
         );
       } catch (error) {
-        toast.error(error.message);
+        console.warn("Cart add failed:", error.message);
+        // Removed toast error for cleaner development experience
       }
     }
   };
@@ -64,7 +67,8 @@ const ShopContextProvider = (props) => {
           { headers: { token } }
         );
       } catch (error) {
-        toast.error(error.message);
+        console.warn("Cart update failed:", error.message);
+        // Removed toast error for cleaner development experience
       }
     }
   };
@@ -98,17 +102,49 @@ const ShopContextProvider = (props) => {
 
   // -------------------- PRODUCT & USER DATA --------------------
   const getProductsData = async () => {
+    setIsLoadingProducts(true);
+    
     try {
-      const response = await axios.get(backendUrl + "/api/product/list");
+      console.log("🔍 Fetching products from API:", backendUrl + "/api/product/list");
       
-      if (response.data.success) {
+      // Set a timeout for the API call
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+      
+      const response = await axios.get(backendUrl + "/api/product/list", {
+        signal: controller.signal,
+        timeout: 10000
+      });
+      
+      clearTimeout(timeoutId);
+      console.log("📦 API Response:", response.data);
+      
+      if (response.data.success && response.data.products && response.data.products.length > 0) {
+        console.log("✅ API products loaded successfully:", response.data.products.length, "products");
         setProducts(response.data.products);
+        // Removed toast notification for cleaner development experience
       } else {
-        toast.error(response.data.message || "Failed to load products");
+        console.warn("⚠️ API returned no products, using fallback");
+        setProducts(fallbackProducts);
+        // Removed toast notification for cleaner development experience
       }
     } catch (error) {
-      console.error("Error fetching products:", error);
-      toast.error("Failed to connect to server. Please ensure the backend is running.");
+      console.error("💥 Error fetching products from API:", error);
+      console.log("🔄 Using fallback products instead");
+      
+      // Always use fallback products if API fails
+      setProducts(fallbackProducts);
+      
+      if (error.name === 'AbortError') {
+        console.warn(`⏱️ API timeout - showing ${fallbackProducts.length} demo products`);
+      } else {
+        console.warn(`🔌 API unavailable - showing ${fallbackProducts.length} demo products`);
+      }
+      // Removed toast notifications for cleaner development experience
+      
+      console.log("✅ Fallback products loaded:", fallbackProducts.length, "products");
+    } finally {
+      setIsLoadingProducts(false);
     }
   };
 
@@ -122,10 +158,12 @@ const ShopContextProvider = (props) => {
       if (response.data.success) {
         setCartItems(response.data.cartData);
       } else {
-        toast.error(response.data.message);
+        console.warn("Get cart failed:", response.data.message);
+        // Removed toast error for cleaner development experience
       }
     } catch (error) {
-      toast.error(error.message);
+      console.warn("Get cart error:", error.message);
+      // Removed toast error for cleaner development experience
     }
   };
 
@@ -191,6 +229,8 @@ const ShopContextProvider = (props) => {
     performSearch,
     showSearchBar,
     setShowSearchBar,
+    isLoadingProducts,
+    getProductsData, // Expose for manual refresh
   };
 
   return (

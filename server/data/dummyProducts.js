@@ -1,4 +1,4 @@
-// Sample products for development - Prices in Indian Rupees (₹)
+// Simple dummy products collection - Reverted from p_img integration
 export const dummyProducts = [
   {
     _id: "1",
@@ -38,18 +38,6 @@ export const dummyProducts = [
   },
   {
     _id: "4",
-    name: "Men Round Neck Pure Cotton T-shirt",
-    description: "Classic cotton t-shirt with comfortable fit and breathable fabric.",
-    price: 549,
-    image: ["https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=500"],
-    category: "Men",
-    subCategory: "Topwear",
-    sizes: ["S", "M", "L", "XL"],
-    date: 1716621345448,
-    bestseller: false
-  },
-  {
-    _id: "5",
     name: "Women Zip-Front Relaxed Fit Jacket",
     description: "Stylish and comfortable jacket for women with zip-front closure.",
     price: 1599,
@@ -61,19 +49,7 @@ export const dummyProducts = [
     bestseller: false
   },
   {
-    _id: "6",
-    name: "Girls Round Neck Cotton Top",
-    description: "Soft and comfortable cotton top perfect for everyday wear.",
-    price: 449,
-    image: ["https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=500"],
-    category: "Kids",
-    subCategory: "Topwear",
-    sizes: ["S", "M", "L"],
-    date: 1716623423448,
-    bestseller: false
-  },
-  {
-    _id: "7",
+    _id: "5",
     name: "Men Tapered Fit Flat-Front Trousers",
     description: "Professional looking trousers with tapered fit and flat-front design.",
     price: 1299,
@@ -85,91 +61,7 @@ export const dummyProducts = [
     bestseller: false
   },
   {
-    _id: "8",
-    name: "Men Round Neck Pure Cotton T-shirt",
-    description: "Premium quality cotton t-shirt with round neck design.",
-    price: 599,
-    image: ["https://images.unsplash.com/photo-1622445275463-afa2ab738c34?w=500"],
-    category: "Men",
-    subCategory: "Topwear",
-    sizes: ["S", "M", "L", "XL"],
-    date: 1716622345448,
-    bestseller: true
-  },
-  {
-    _id: "9",
-    name: "Girls Round Neck Cotton Top",
-    description: "Cute and comfortable top for girls with quality cotton fabric.",
-    price: 349,
-    image: ["https://images.unsplash.com/photo-1619994121345-b61cd610c5a6?w=500"],
-    category: "Kids",
-    subCategory: "Topwear",
-    sizes: ["S", "M", "L"],
-    date: 1716621235448,
-    bestseller: false
-  },
-  {
-    _id: "10",
-    name: "Men Tapered Fit Flat-Front Trousers",
-    description: "Comfortable trousers with modern tapered fit.",
-    price: 1199,
-    image: ["https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=500"],
-    category: "Men",
-    subCategory: "Bottomwear",
-    sizes: ["S", "M", "L", "XL"],
-    date: 1716622235448,
-    bestseller: false
-  },
-  {
-    _id: "11",
-    name: "Men Round Neck Pure Cotton T-shirt",
-    description: "Essential cotton t-shirt for everyday comfort.",
-    price: 479,
-    image: ["https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=500"],
-    category: "Men",
-    subCategory: "Topwear",
-    sizes: ["S", "M", "L", "XL"],
-    date: 1716623345448,
-    bestseller: false
-  },
-  {
-    _id: "12",
-    name: "Men Slim Fit Relaxed Denim Jacket",
-    description: "Classic denim jacket with slim fit design.",
-    price: 1799,
-    image: ["https://images.unsplash.com/photo-1495105787522-5334e3ffa0ef?w=500"],
-    category: "Men",
-    subCategory: "Winterwear",
-    sizes: ["S", "M", "L", "XL"],
-    date: 1716624445448,
-    bestseller: true
-  },
-  {
-    _id: "13",
-    name: "Boy Round Neck Pure Cotton T-shirt",
-    description: "Comfortable cotton t-shirt for boys.",
-    price: 399,
-    image: ["https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?w=500"],
-    category: "Kids",
-    subCategory: "Topwear",
-    sizes: ["S", "M", "L"],
-    date: 1716625545448,
-    bestseller: false
-  },
-  {
-    _id: "14",
-    name: "Men Slim Fit Relaxed Denim Jacket",
-    description: "Versatile denim jacket for all seasons.",
-    price: 1699,
-    image: ["https://images.unsplash.com/photo-1523205771623-e0faa4d2813d?w=500"],
-    category: "Men",
-    subCategory: "Winterwear",
-    sizes: ["S", "M", "L", "XL"],
-    date: 1716626645448,
-    bestseller: false
-  },
-  {
-    _id: "15",
+    _id: "6",
     name: "Women Palazzo Pants with Waist Belt",
     description: "Elegant palazzo pants with stylish waist belt.",
     price: 999,
@@ -181,63 +73,27 @@ export const dummyProducts = [
     bestseller: false
   },
   {
-    _id: "16",
-    name: "Women Zip-Front Relaxed Fit Jacket",
-    description: "Comfortable relaxed fit jacket with zip closure.",
-    price: 1499,
-    image: ["https://images.unsplash.com/photo-1539533018447-63fcce2678e3?w=500"],
-    category: "Women",
-    subCategory: "Winterwear",
+    _id: "7",
+    name: "Boy Round Neck Pure Cotton T-shirt",
+    description: "Comfortable cotton t-shirt for boys.",
+    price: 399,
+    image: ["https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?w=500"],
+    category: "Kids",
+    subCategory: "Topwear",
+    sizes: ["S", "M", "L"],
+    date: 1716625545448,
+    bestseller: false
+  },
+  {
+    _id: "8",
+    name: "Men Premium Cotton T-shirt",
+    description: "Premium quality cotton t-shirt with round neck design.",
+    price: 599,
+    image: ["https://images.unsplash.com/photo-1622445275463-afa2ab738c34?w=500"],
+    category: "Men",
+    subCategory: "Topwear",
     sizes: ["S", "M", "L", "XL"],
-    date: 1716628845448,
-    bestseller: false
-  },
-  {
-    _id: "17",
-    name: "Boy Round Neck Pure Cotton T-shirt",
-    description: "Quality cotton t-shirt for active boys.",
-    price: 449,
-    image: ["https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=500"],
-    category: "Kids",
-    subCategory: "Topwear",
-    sizes: ["S", "M", "L"],
-    date: 1716629945448,
-    bestseller: false
-  },
-  {
-    _id: "18",
-    name: "Boy Round Neck Pure Cotton T-shirt",
-    description: "Durable and comfortable t-shirt for boys.",
-    price: 499,
-    image: ["https://images.unsplash.com/photo-1516826957135-700dedea698c?w=500"],
-    category: "Kids",
-    subCategory: "Topwear",
-    sizes: ["S", "M", "L"],
-    date: 1716631045448,
+    date: 1716622345448,
     bestseller: true
-  },
-  {
-    _id: "19",
-    name: "Women Palazzo Pants with Waist Belt",
-    description: "Trendy palazzo pants with comfortable fit.",
-    price: 1099,
-    image: ["https://images.unsplash.com/photo-1506629082955-511b1aa562c8?w=500"],
-    category: "Women",
-    subCategory: "Bottomwear",
-    sizes: ["S", "M", "L", "XL"],
-    date: 1716632145448,
-    bestseller: false
-  },
-  {
-    _id: "20",
-    name: "Women Zip-Front Relaxed Fit Jacket",
-    description: "Stylish jacket perfect for layering.",
-    price: 1699,
-    image: ["https://images.unsplash.com/photo-1525450824786-227cbef70703?w=500"],
-    category: "Women",
-    subCategory: "Winterwear",
-    sizes: ["S", "M", "L", "XL"],
-    date: 1716633245448,
-    bestseller: false
   }
 ];

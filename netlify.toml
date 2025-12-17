@@ -1,12 +1,17 @@
 [build]
   command = "cd client && npm install && npm run build"
   publish = "client/dist"
-  functions = "client/netlify/functions"
+  functions = "netlify/functions"
 
 [build.environment]
   NODE_VERSION = "20"
 
 # API Routes - Redirect to Netlify Functions
+[[redirects]]
+  from = "/api/product/simple"
+  to = "/.netlify/functions/simple-products"
+  status = 200
+
 [[redirects]]
   from = "/api/product/*"
   to = "/.netlify/functions/products"

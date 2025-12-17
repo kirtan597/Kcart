@@ -15,12 +15,16 @@ const LatestCollection = () => {
     }
   }, [products]);
 
+  // Always show products - fallback products are loaded by default
   if (!products || products.length === 0) {
     return (
       <section className="min-h-[50vh] flex items-center justify-center">
-        <p className="text-xl font-light tracking-widest text-gray-500">
-          LOADING PRODUCTS...
-        </p>
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900 mx-auto mb-4"></div>
+          <p className="text-xl font-light tracking-widest text-gray-500">
+            LOADING PRODUCTS...
+          </p>
+        </div>
       </section>
     );
   }
