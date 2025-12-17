@@ -17,6 +17,9 @@ const Home = () => {
         <BestSeller />
       </div>
       <div className="bg-white">
+        <BrandCarousel />
+      </div>
+      <div className="bg-white">
         <OurPolicy />
       </div>
       <div className="bg-white">

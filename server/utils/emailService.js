@@ -2,9 +2,8 @@ import nodemailer from 'nodemailer';
 
 // Create transporter
 const createTransporter = () => {
-  // For demo mode, we'll use a test account if no credentials provided
-  if (!process.env.EMAIL_USER || process.env.EMAIL_USER === 'your_email@gmail.com') {
-    console.log('⚠️  Email service running in DEMO MODE - OTPs will be logged to console');
+  if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+    console.log('⚠️  Email credentials not configured');
     return null;
   }
 
@@ -26,10 +25,10 @@ export const generateOTP = () => {
 export const sendOTPEmail = async (email, otp, name) => {
   const transporter = createTransporter();
 
-  // Demo mode - just log the OTP
+  // If no transporter, log OTP to console as fallback
   if (!transporter) {
     console.log(`\n📧 OTP for ${email}: ${otp}\n`);
-    return { success: true, message: 'OTP logged to console (Demo Mode)' };
+    return { success: true, message: 'OTP logged to console (Email service not configured)' };
   }
 
   const mailOptions = {

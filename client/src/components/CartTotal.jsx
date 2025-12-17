@@ -23,7 +23,7 @@ const CartTotal = ({ onCheckout }) => {
           <p className="text-gray-500 mb-6">Please add some items to your cart</p>
           <Link 
             to="/collection" 
-            className="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg transition-colors duration-300 cursor-pointer"
+            className="px-6 py-3 bg-black text-white font-bold rounded-xl hover:bg-gray-800 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-[1.02] cursor-pointer"
           >
             Continue Shopping
           </Link>

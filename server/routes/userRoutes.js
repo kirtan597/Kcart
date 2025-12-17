@@ -4,7 +4,7 @@ import {
   registerUser,
   adminLogin,
   changePassword,
-} from "../controllers/userControllerSimple.js"; // Using simple controller for demo mode
+} from "../controllers/userController.js";
 
 const userRouter = express.Router();
 

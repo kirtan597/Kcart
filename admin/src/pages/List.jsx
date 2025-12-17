@@ -14,7 +14,7 @@ const List = ({ token }) => {
   const fetchList = async () => {
     setLoading(true);
     try {
-      const response = await axios.get(backEndURL + "/api/product/list");
+      const response = await axios.get(backEndURL + "/products");
       if (response.data.success) {
         const sorted = response.data.products.sort(
           (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
@@ -34,7 +34,7 @@ const List = ({ token }) => {
   const removeProduct = async (id) => {
     try {
       const response = await axios.post(
-        backEndURL + "/api/product/remove",
+        backEndURL + "/products",
         { id },
         { headers: { token } }
       );

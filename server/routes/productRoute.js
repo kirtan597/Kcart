@@ -3,8 +3,12 @@ import {
   addProduct,
   listProduct,
   removeProduct,
-  singleProduct
-} from "../controllers/productControllerDemo.js";
+  singleProduct,
+  getProductsByCategory,
+  getFeaturedProducts,
+  getBestsellers,
+  getNewArrivals
+} from "../controllers/productController.js";
 import upload from "../middleware/multer.js";
 import adminAuth from "../middleware/adminAuth.js";
 
@@ -27,6 +31,10 @@ productRouter.post("/remove", adminAuth, removeProduct);
 // Public routes
 productRouter.post("/single", singleProduct);
 productRouter.get("/list", listProduct);
+productRouter.get("/category/:category", getProductsByCategory);
+productRouter.get("/featured", getFeaturedProducts);
+productRouter.get("/bestsellers", getBestsellers);
+productRouter.get("/new-arrivals", getNewArrivals);
 
 
 

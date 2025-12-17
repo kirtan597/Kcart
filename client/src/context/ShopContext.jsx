@@ -3,14 +3,15 @@ import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
+import userTrackingService from "../services/userTrackingService";
 
 export const ShopContext = createContext();
 
 const ShopContextProvider = (props) => {
   const currency = "₹";
   const delivery_fee = 50;
-  // Use environment variable or fallback to current domain for Netlify Functions
-  const backendUrl = import.meta.env.VITE_BACKEND_URL || window.location.origin;
+  // Use environment variable or fallback to Netlify Functions
+  const backendUrl = import.meta.env.VITE_BACKEND_URL || `${window.location.origin}/.netlify/functions`;
 
   const [products, setProducts] = useState([]);
   const [cartItems, setCartItems] = useState({});
@@ -98,19 +99,16 @@ const ShopContextProvider = (props) => {
   // -------------------- PRODUCT & USER DATA --------------------
   const getProductsData = async () => {
     try {
-      console.log("Fetching products from:", backendUrl + "/api/product/list");
       const response = await axios.get(backendUrl + "/api/product/list");
-      console.log("Products response:", response.data);
+      
       if (response.data.success) {
         setProducts(response.data.products);
-        console.log("Products set:", response.data.products.length, "items");
       } else {
-        toast.error(response.data.message);
-        console.error("API returned success: false");
+        toast.error(response.data.message || "Failed to load products");
       }
     } catch (error) {
       console.error("Error fetching products:", error);
-      toast.error(error.message);
+      toast.error("Failed to connect to server. Please ensure the backend is running.");
     }
   };
 
@@ -155,6 +153,22 @@ const ShopContextProvider = (props) => {
     setSearchResults(results);
   };
 
+  // -------------------- LOGOUT HANDLER --------------------
+  const logout = () => {
+    // Record logout in tracking service
+    userTrackingService.recordLogout();
+    
+    // Clear authentication state
+    setToken("");
+    localStorage.removeItem("token");
+    setCartItems({});
+    
+    // Navigate to login page
+    navigate("/login");
+    
+    toast.success("Logged out successfully");
+  };
+
   // -------------------- CONTEXT VALUE --------------------
   const value = {
     products,
@@ -169,6 +183,7 @@ const ShopContextProvider = (props) => {
     setCartItems,
     token,
     setToken,
+    logout,
     navigate,
     searchQuery,
     setSearchQuery,

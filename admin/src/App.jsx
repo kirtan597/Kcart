@@ -10,7 +10,7 @@ import Footer from "./components/Footer";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export const backEndURL = import.meta.env.VITE_BACKEND_URL;
+export const backEndURL = import.meta.env.VITE_BACKEND_URL || `${window.location.origin}/.netlify/functions`;
 export const currency = "$";
 
 const App = () => {

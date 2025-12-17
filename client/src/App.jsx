@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import { useEffect } from "react";
 import Lenis from "lenis";
+import { initializeDemoData } from "./utils/demoDataInitializer";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Collection from "./pages/Collection";
@@ -12,6 +13,7 @@ import Product from "./pages/Product";
 import PlaceOrder from "./pages/PlaceOrder";
 import NotFound from "./pages/NotFound";
 import MyProfile from "./pages/MyProfile";
+import Dashboard from "./pages/Dashboard";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import SearchBar from "./components/SearchBar";
@@ -24,6 +26,11 @@ import SearchResults from "./pages/SearchResults";
 import ScrollToTop from "./components/ScrollToTop";
 
 const App = () => {
+  // Initialize demo data for dashboard
+  useEffect(() => {
+    initializeDemoData(true); // Force refresh with new Indian names
+  }, []);
+
   // Initialize Lenis smooth scrolling with optimized settings
   useEffect(() => {
     const lenis = new Lenis({
@@ -44,7 +51,7 @@ const App = () => {
     window.lenis = lenis;
 
     // Optional: Listen to scroll events for custom animations
-    lenis.on('scroll', (e) => {
+    lenis.on('scroll', () => {
       // You can add custom scroll-based animations here
       // console.log('Scroll position:', e.scroll);
     });
@@ -81,6 +88,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/orders" element={<Orders />} />
         <Route path="/profile" element={<MyProfile />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/product/:productId" element={<Product />} />
         <Route path="/place-order" element={<PlaceOrder />} />
         <Route path="/about" element={<About />} />

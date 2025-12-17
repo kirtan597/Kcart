@@ -12,18 +12,9 @@ import orderRouter from "./routes/orderRoute.js";
 const app = express();
 const port = process.env.PORT || 5000;
 
-// Only connect to DB and Cloudinary if credentials are provided
-if (process.env.MONGODB_URI && process.env.MONGODB_URI !== 'your_mongodb_connection_string') {
-  connectDB();
-} else {
-  console.log("⚠️  Running in DEMO MODE without MongoDB");
-}
-
-if (process.env.CLOUDINARY_NAME && process.env.CLOUDINARY_NAME !== 'your_cloudinary_name') {
-  connectCloudinary();
-} else {
-  console.log("⚠️  Running in DEMO MODE without Cloudinary");
-}
+// Connect to database and services
+connectDB();
+connectCloudinary();
 
 // Middleware configuration
 app.use(express.json());

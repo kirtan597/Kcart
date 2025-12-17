@@ -28,7 +28,7 @@ export const ForgotPassword = () => {
 
     setIsLoading(true);
     try {
-      const response = await axios.post(backendUrl + "/api/user/forgot", {
+      const response = await axios.post(backendUrl + "/api/user/change-password", {
         email,
         password,
         reenterpassword: reenterPassword,

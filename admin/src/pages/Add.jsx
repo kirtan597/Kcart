@@ -53,7 +53,7 @@ const Add = ({ token }) => {
       });
 
       const response = await axios.post(
-        `${backEndURL}/api/product/add`,
+        `${backEndURL}/products`,
         formData,
         { headers: { token } }
       );

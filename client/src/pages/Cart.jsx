@@ -114,7 +114,7 @@ const Cart = () => {
           <CartTotal />
           <div className="w-full text-end">
             <button
-              className="w-full mt-6 py-3 bg-gray-900 hover:bg-gray-800 text-white font-semibold rounded-lg transition-colors duration-300 cursor-pointer shadow-md hover:shadow-lg"
+              className="w-full mt-6 py-4 bg-black text-white font-bold rounded-xl hover:bg-gray-800 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-[1.02] cursor-pointer"
               onClick={() =>
                 !proceedToPayment
                   ? toast.error("Add Items to cart")

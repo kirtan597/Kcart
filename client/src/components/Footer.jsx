@@ -20,8 +20,13 @@ const Footer = () => {
   const linkClass = "text-gray-400 hover:text-white transition-colors duration-300 underline";
 
   return (
-    <footer className="bg-black text-white relative">
-      <div className="container mx-auto px-6 py-12">
+    <footer 
+      className="bg-black text-white relative min-h-[400px] w-full bg-cover bg-center bg-no-repeat"
+      style={{
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)), url(${assets.footer_bg})`,
+      }}
+    >
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 max-w-7xl relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
           {/* Brand Info */}
           <div className="lg:col-span-2">

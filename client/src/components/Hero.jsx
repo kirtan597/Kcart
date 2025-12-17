@@ -1,160 +1,370 @@
-import { assets } from "../assets/assets";
-import { useState, useEffect, useMemo, useRef } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useContext, useEffect, useRef, useState } from 'react';
+import { motion } from 'framer-motion';
+import { ShopContext } from '../context/ShopContext';
 
-const Hero = () => {
-  const [index, setIndex] = useState(1);
-  const [hovered, setHovered] = useState(false);
-  const [mobile, setMobile] = useState(typeof window !== "undefined" && window.innerWidth < 768);
-  const scrollRef = useRef(null);
-  const heroRef = useRef(null);
-  const [inView, setInView] = useState(true);
-  const [transitioning, setTransitioning] = useState(true);
-  const [progress, setProgress] = useState(0);
+import img1 from '../figma/asset/ef54ab635a7dd1c08c0d38a179451ed4ffe3714f.png';
+import img2 from '../figma/asset/0839a34ab951697bd1015f5499ef3bf4a6fcccfa.png';
+import img3 from '../figma/asset/07ddd87dc71067004d5978ad7da5e10a8f5aaee1.png';
+import img4 from '../figma/asset/72597d182cdfd3d1af058f81e790ce94c8f224cb.png';
 
-  const banners = {
-    mobile: [
-      assets.phone_1,
-      assets.phone_2,
-      assets.phone_3,
-      assets.phone_4,
-      assets.phone_5,
-      assets.phone_6,
-      assets.phone_7
-    ]
-      .map(img => ({ image: img, link: "#collection" })),
-    desktop: [
-      { image: assets.banner_2, link: "#collection" },
-      { image: assets.banner_3, link: "#collection" },
-      { image: assets.banner_4, link: "#collection" },
-      { image: assets.banner_5, link: "#collection" },
-      { image: assets.banner_6, link: "#collection" },
-      { image: assets.banner_7, link: "#collection" }
-    ]
+export default function Hero() {
+  const [isPaused, setIsPaused] = useState(false);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
+  const { navigate } = useContext(ShopContext);
+
+  const handleExploreClick = () => {
+    navigate('/dashboard');
   };
 
-  const desktopSlides = [banners.desktop.at(-1), ...banners.desktop, banners.desktop[0]];
-  const items = useMemo(() => (mobile ? banners.mobile : desktopSlides), [mobile]);
+  // Product images - duplicated for infinite loop
+  const images = [
+    img1,
+    img2,
+    img3,
+    img4,
+  ];
 
-  useEffect(() => {
-    const obs = new IntersectionObserver(([e]) => setInView(e.isIntersecting), { threshold: 0.1 });
-    heroRef.current && obs.observe(heroRef.current);
-    return () => heroRef.current && obs.unobserve(heroRef.current);
-  }, []);
-
-  useEffect(() => {
-    const resize = () => setMobile(window.innerWidth < 768);
-    window.addEventListener("resize", resize);
-    return () => window.removeEventListener("resize", resize);
-  }, []);
-
-  useEffect(() => {
-    if (hovered || !inView) {
-      setProgress(0);
-      return;
-    }
-    
-    // Auto-advance every 2 seconds
-    const autoPlayInterval = setInterval(() => {
-      setIndex(prev => prev + 1);
-      setProgress(0);
-    }, 2000);
-    
-    // Progress bar animation - optimized for smooth performance
-    const progressInterval = setInterval(() => {
-      setProgress(prev => {
-        if (prev >= 100) return 0;
-        return prev + 5; // 20 steps in 2 seconds (100ms each) - smooth and lag-free
-      });
-    }, 100);
-    
-    return () => {
-      clearInterval(autoPlayInterval);
-      clearInterval(progressInterval);
-    };
-  }, [hovered, inView]);
-
-  useEffect(() => {
-    if (mobile && scrollRef.current && inView) {
-      scrollRef.current.children[index]?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
-    }
-  }, [index, mobile, inView]);
-
-  useEffect(() => {
-    if (!mobile) {
-      if (index === desktopSlides.length - 1) {
-        const t = setTimeout(() => { setTransitioning(false); setIndex(1); }, 1000);
-        return () => clearTimeout(t);
-      }
-      if (index === 0) {
-        const t = setTimeout(() => { setTransitioning(false); setIndex(desktopSlides.length - 2); }, 1000);
-        return () => clearTimeout(t);
-      }
-      setTransitioning(true);
-    }
-  }, [index, mobile]);
-
-  const Slide = ({ item, i }) => (
-    <a href={item.link} key={i} className="h-full flex-shrink-0 relative" style={{ width: `${100 / items.length}%` }}>
-      <img src={item.image} alt={`Banner ${i}`} className="w-full h-full object-cover object-center" />
-    </a>
-  );
+  // Duplicate images 3 times for seamless infinite loop
+  const infiniteImages = [...images, ...images, ...images];
 
   return (
-    <div ref={heroRef} className={`relative w-full overflow-hidden bg-gray-100 ${mobile ? 'h-[70vh] max-h-[700px]' : 'aspect-[1.85/1] max-h-[550px]'}`}>
-      {mobile ? (
-        <div className="flex overflow-x-auto snap-x snap-mandatory h-full" ref={scrollRef} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
-          {items.map((item, i) => (
-            <a href={item.link} key={i} className="flex-shrink-0 w-full h-full snap-center relative">
-              <img src={item.image} alt={`Mobile banner ${i}`} className="w-full h-full object-cover object-center" />
-            </a>
-          ))}
-        </div>
-      ) : (
-        <div className="flex h-full w-full" style={{ transform: `translateX(-${index * (100 / items.length)}%)`, transition: transitioning ? "transform 1s ease-in-out" : "none", width: `${items.length * 100}%` }} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
-          {items.map((item, i) => <Slide key={i} item={item} i={i} />)}
-        </div>
-      )}
+    <div className="relative w-full h-screen overflow-hidden bg-black">
+      {/* Infinite Scrolling Background Slider */}
+      <InfiniteSlider
+        images={infiniteImages}
+        isPaused={isPaused}
+        setIsPaused={setIsPaused}
+        hoveredIndex={hoveredIndex}
+        setHoveredIndex={setHoveredIndex}
+      />
 
+      {/* Gradient Overlay for Text Visibility */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60 pointer-events-none z-10" />
+      
+      {/* Vignette Effect */}
+      <div className="absolute inset-0 pointer-events-none z-10" 
+        style={{
+          boxShadow: 'inset 0 0 200px rgba(0,0,0,0.8)'
+        }}
+      />
 
+      {/* Content Overlay */}
+      <div className="relative z-20 h-full flex flex-col">
+        {/* Logo */}
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.3 }}
+          className="absolute top-8 left-8 md:top-12 md:left-16"
+        >
+          <h1 
+            className="text-white tracking-widest"
+            style={{ 
+              fontFamily: "'Playfair Display', serif",
+              fontSize: 'clamp(48px, 5vw, 72px)',
+              fontWeight: 300,
+              textShadow: '0 0 1px rgba(255,255,255,0.5)'
+            }}
+          >
+            Kcart
+          </h1>
+        </motion.div>
 
-      <div className="absolute bottom-4 sm:bottom-6 left-0 right-0 flex justify-center gap-1.5 z-10">
-        {banners.desktop.map((_, i) => {
-          const isActive = ((index - 1 + banners.desktop.length) % banners.desktop.length === i);
-          return (
-            <button
-              key={i}
-              onClick={() => {
-                setIndex(i + 1);
-                setProgress(0);
+        {/* Center Content */}
+        <div className="flex-1 flex flex-col items-center justify-center px-4 md:px-8">
+          {/* Floating Animation Container */}
+          <motion.div
+            animate={{
+              y: [0, -8, 0],
+            }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+            className="text-center"
+          >
+            {/* Main Headline with Typewriter Effect */}
+            <TypewriterText 
+              text="Timeless Elegance Awaits"
+              className="text-white mb-6 tracking-wide"
+              style={{
+                fontFamily: "'Helvetica Neue', 'Arial', sans-serif",
+                fontSize: 'clamp(32px, 4vw, 48px)',
+                fontWeight: 200,
+                letterSpacing: '0.05em'
               }}
-              className={`h-2 rounded-full transition-all duration-300 relative overflow-hidden ${isActive ? "w-8" : "w-2 hover:bg-white/70"}`}
-              aria-label={`Go to slide ${i + 1}`}
-            >
-              <div className={`absolute inset-0 bg-white/50 ${!isActive && 'opacity-100'}`} />
-              {isActive && (
-                <>
-                  <div className="absolute inset-0 bg-white" style={{ width: `${progress}%`, transition: 'width 0.1s linear' }} />
-                  <div className="absolute inset-0 bg-white/50" />
-                </>
-              )}
-            </button>
-          );
-        })}
-      </div>
+            />
 
-      {!mobile && (
-        <>
-          <button onClick={() => setIndex(prev => prev - 1)} className="absolute left-4 md:left-6 top-1/2 -translate-y-1/2 z-10 p-2.5 md:p-3 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full transition-all duration-300 border border-white/20" aria-label="Previous Slide">
-            <ChevronLeft className="text-white w-5 h-5 md:w-6 md:h-6" />
-          </button>
-          <button onClick={() => setIndex(prev => prev + 1)} className="absolute right-4 md:right-6 top-1/2 -translate-y-1/2 z-10 p-2.5 md:p-3 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full transition-all duration-300 border border-white/20" aria-label="Next Slide">
-            <ChevronRight className="text-white w-5 h-5 md:w-6 md:h-6" />
-          </button>
-        </>
-      )}
+            {/* Subheadline with Line Draw Animation */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1, delay: 2 }}
+              className="relative mb-12"
+            >
+              <motion.div
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ duration: 1.2, delay: 2.2, ease: "easeInOut" }}
+                className="absolute -top-4 left-1/2 -translate-x-1/2 w-24 h-px bg-white/60"
+                style={{ transformOrigin: 'center' }}
+              />
+              <p 
+                className="text-gray-300 tracking-wider"
+                style={{
+                  fontSize: 'clamp(18px, 2vw, 24px)',
+                  fontWeight: 300
+                }}
+              >
+                Curated Collections for Discerning Tastes
+              </p>
+            </motion.div>
+
+            {/* CTA Button */}
+            <motion.button
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 3 }}
+              whileHover={{ 
+                scale: 1.05,
+                backgroundColor: 'rgba(255,255,255,1)',
+                color: '#000000'
+              }}
+              whileTap={{ scale: 0.98 }}
+              onClick={handleExploreClick}
+              className="relative px-12 py-4 bg-transparent border border-white text-white tracking-widest transition-all duration-300 overflow-hidden group cursor-pointer"
+              style={{
+                fontFamily: "'Helvetica Neue', sans-serif",
+                fontSize: '14px',
+                fontWeight: 300,
+                letterSpacing: '0.2em'
+              }}
+            >
+              {/* Pulsing Inner Glow */}
+              <motion.div
+                animate={{
+                  opacity: [0.3, 0.6, 0.3],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+                className="absolute inset-0 bg-white/10 pointer-events-none"
+              />
+              <span className="relative z-10">EXPLORE NOW</span>
+            </motion.button>
+          </motion.div>
+        </div>
+
+        {/* Progress Bar */}
+        <ProgressBar isPaused={isPaused} />
+      </div>
     </div>
   );
-};
+}
 
-export default Hero;
+// Infinite Slider Component
+function InfiniteSlider({ 
+  images, 
+  isPaused, 
+  setIsPaused, 
+  hoveredIndex, 
+  setHoveredIndex 
+}) {
+  const [offset, setOffset] = useState(0);
+  const animationRef = useRef();
+
+  useEffect(() => {
+    let lastTime = Date.now();
+    const speed = 50; // pixels per second - increased from 20 to 50
+
+    const animate = () => {
+      if (!isPaused) {
+        const now = Date.now();
+        const delta = (now - lastTime) / 1000;
+        lastTime = now;
+
+        setOffset((prev) => {
+          const newOffset = prev + speed * delta;
+          // Reset when we've scrolled through one full set of 4 images
+          const resetPoint = (images.length / 3) * 500; // 4 images * 500px width
+          return newOffset >= resetPoint ? newOffset - resetPoint : newOffset;
+        });
+      } else {
+        lastTime = Date.now();
+      }
+      animationRef.current = requestAnimationFrame(animate);
+    };
+
+    animationRef.current = requestAnimationFrame(animate);
+
+    return () => {
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+    };
+  }, [isPaused, images.length]);
+
+  return (
+    <div className="absolute inset-0">
+      {/* Background Layer - slower parallax */}
+      <motion.div
+        className="absolute inset-0 flex"
+        style={{
+          transform: `translateX(-${offset * 0.5}px)`,
+        }}
+      >
+        {images.map((image, index) => (
+          <div
+            key={`bg-${index}`}
+            className="relative flex-shrink-0"
+            style={{ width: '500px', height: '100%' }}
+          >
+            <motion.img
+              src={image}
+              alt={`Luxury product ${(index % 4) + 1}`}
+              className="w-full h-full object-contain"
+              initial={{ filter: 'grayscale(0%) contrast(100%)' }}
+              animate={{ 
+                filter: 'grayscale(100%) contrast(120%)',
+              }}
+              transition={{ duration: 0.3, delay: index * 0.05 }}
+              style={{
+                transformOrigin: 'center'
+              }}
+            />
+          </div>
+        ))}
+      </motion.div>
+
+      {/* Foreground Layer - faster parallax with hover effects */}
+      <motion.div
+        className="absolute inset-0 flex"
+        style={{
+          transform: `translateX(-${offset}px)`,
+        }}
+      >
+        {images.map((image, index) => (
+          <motion.div
+            key={`fg-${index}`}
+            className="relative flex-shrink-0 cursor-pointer"
+            style={{ width: '500px', height: '100%' }}
+            onMouseEnter={() => {
+              setIsPaused(true);
+              setHoveredIndex(index);
+            }}
+            onMouseLeave={() => {
+              setIsPaused(false);
+              setHoveredIndex(null);
+            }}
+            animate={{
+              scale: hoveredIndex === index ? 1.05 : 1.0,
+            }}
+            transition={{
+              duration: 0.4,
+              ease: [0.4, 0, 0.2, 1]
+            }}
+          >
+            <motion.img
+              src={image}
+              alt={`Luxury product ${(index % 4) + 1}`}
+              className="w-full h-full object-contain"
+              initial={{ filter: 'grayscale(0%) contrast(100%)' }}
+              animate={{ 
+                filter: hoveredIndex === index 
+                  ? 'grayscale(100%) contrast(150%)' 
+                  : 'grayscale(100%) contrast(120%)',
+              }}
+              transition={{ duration: 0.3 }}
+              style={{
+                transformOrigin: 'center',
+                mixBlendMode: 'normal'
+              }}
+            />
+            
+            {/* Duotone Overlay Shift */}
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-br from-black/40 to-gray-900/40 pointer-events-none"
+              animate={{
+                opacity: hoveredIndex === index ? 0.6 : 0.3,
+              }}
+              transition={{ duration: 0.4 }}
+            />
+          </motion.div>
+        ))}
+      </motion.div>
+    </div>
+  );
+}
+
+// Typewriter Effect Component
+function TypewriterText({ 
+  text, 
+  className, 
+  style 
+}) {
+  const [displayText, setDisplayText] = useState('');
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    if (currentIndex < text.length) {
+      const timeout = setTimeout(() => {
+        setDisplayText((prev) => prev + text[currentIndex]);
+        setCurrentIndex((prev) => prev + 1);
+      }, 80);
+
+      return () => clearTimeout(timeout);
+    }
+  }, [currentIndex, text]);
+
+  return (
+    <motion.h2
+      className={className}
+      style={style}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5, delay: 0.8 }}
+    >
+      {displayText}
+      <motion.span
+        animate={{ opacity: [1, 0, 1] }}
+        transition={{ duration: 0.8, repeat: Infinity }}
+      >
+        |
+      </motion.span>
+    </motion.h2>
+  );
+}
+
+// Progress Bar Component
+function ProgressBar({ isPaused }) {
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (!isPaused) {
+        setProgress((prev) => {
+          const newProgress = prev + 0.5;
+          return newProgress >= 100 ? 0 : newProgress;
+        });
+      }
+    }, 50);
+
+    return () => clearInterval(interval);
+  }, [isPaused]);
+
+  return (
+    <div className="absolute bottom-0 left-0 w-full h-1 bg-white/10">
+      <motion.div
+        className="h-full bg-white"
+        style={{
+          width: `${progress}%`,
+          transformOrigin: 'left'
+        }}
+        transition={{ duration: 0.1 }}
+      />
+    </div>
+  );
+}

@@ -14,7 +14,7 @@ const Orders = ({ token }) => {
     setLoading(true);
     try {
       const response = await axios.post(
-        `${backEndURL}/api/order/list`,
+        `${backEndURL}/orders`,
         {},
         { headers: { token } }
       );
@@ -38,7 +38,7 @@ const Orders = ({ token }) => {
   const statusHandler = async (e, orderId) => {
     try {
       const response = await axios.post(
-        `${backEndURL}/api/order/status`,
+        `${backEndURL}/orders`,
         { orderId, status: e.target.value },
         { headers: { token } }
       );

@@ -1,4 +1,4 @@
-// Dummy products for demo purposes - Prices in Indian Rupees (₹)
+// Sample products for development - Prices in Indian Rupees (₹)
 export const dummyProducts = [
   {
     _id: "1",

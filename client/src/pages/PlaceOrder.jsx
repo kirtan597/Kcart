@@ -1,14 +1,13 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Title from "../components/Title";
 import CartTotal from "../components/CartTotal";
 import { assets } from "../assets/assets";
 import { ShopContext } from "../context/ShopContext";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { redirect } from "react-router-dom";
 
 const PlaceOrder = () => {
-  const [method, setMethod] = useState("cod");
+  const [method, setMethod] = useState("googlepay");
   const [validated, setValidated] = useState(false);
   const [loading, setLoading] = useState(false);
   const {
@@ -46,39 +45,7 @@ const PlaceOrder = () => {
     }));
   };
 
-  const initPay = (order) => {
-    const options = {
-      key: import.meta.env.VITE_RAZORPAY_KEY_ID,
-      amount: order.amount,
-      currency: order.currency,
-      name: "Order Payment",
-      description: "Order Payment",
-      order_id: order.id,
-      receipt: order.receipt,
-      handler: async (response) => {
-        try {
-          const { data } = await axios.post(
-            backendUrl + "/api/order/verifyRazorpay",
-            response,
-            { headers: { token } }
-          );
-          if (data.success) {
-            setCartItems({});
-            navigate("/orders");
-            toast.success("Payment Successful!");
-          } else {
-            navigate("/cart");
-            toast.error("Payment Failed Please try again");
-          }
-        } catch (error) {
-          console.log(error);
-          toast.error(error.message);
-        }
-      },
-    };
-    const rzp = new window.Razorpay(options);
-    rzp.open();
-  };
+
 
   const onSubmitHandler = async (event) => {
     event.preventDefault();
@@ -115,7 +82,46 @@ const PlaceOrder = () => {
         amount: getCartAmount() + delivery_fee,
       };
       switch (method) {
-        // Api call for COD
+        // Google Pay (using UPI)
+        case "googlepay":
+          if (validated) {
+            // Simulate Google Pay payment
+            toast.info("Redirecting to Google Pay...");
+            setTimeout(() => {
+              toast.success("Payment successful via Google Pay!");
+              setCartItems("");
+              navigate("/orders");
+            }, 2000);
+          }
+          break;
+        
+        // Paytm
+        case "paytm":
+          if (validated) {
+            // Simulate Paytm payment
+            toast.info("Redirecting to Paytm...");
+            setTimeout(() => {
+              toast.success("Payment successful via Paytm!");
+              setCartItems("");
+              navigate("/orders");
+            }, 2000);
+          }
+          break;
+        
+        // PhonePe
+        case "phonepe":
+          if (validated) {
+            // Simulate PhonePe payment
+            toast.info("Redirecting to PhonePe...");
+            setTimeout(() => {
+              toast.success("Payment successful via PhonePe!");
+              setCartItems("");
+              navigate("/orders");
+            }, 2000);
+          }
+          break;
+        
+        // Cash on Delivery
         case "cod":
           if (validated) {
             const response = await axios.post(
@@ -132,37 +138,7 @@ const PlaceOrder = () => {
             }
           }
           break;
-        case "stripe":
-          if (validated) {
-            const responseStripe = await axios.post(
-              backendUrl + "/api/order/stripe",
-              orderData,
-              {
-                headers: { token },
-              }
-            );
-            if (responseStripe.data.success) {
-              const { session_url } = responseStripe.data;
-              window.location.replace(session_url);
-            } else {
-              toast.error(responseStripe.data.message);
-            }
-          }
-          break;
-        case "razorpay":
-          if (validated) {
-            const responseRazorpay = await axios.post(
-              backendUrl + "/api/order/razorpay",
-              orderData,
-              {
-                headers: { token },
-              }
-            );
-            if (responseRazorpay.data.success) {
-              initPay(responseRazorpay.data.order);
-            }
-          }
-          break;
+        
         default:
           break;
       }
@@ -266,56 +242,188 @@ const PlaceOrder = () => {
         </div>
         <div className="mt-12">
           <Title text1={"PAYMENT"} text2={"METHOD"} />
+          
           {/* Payment Method Selection */}
-          <div className="flex gap-3 flex-col lg:flex-row">
+          <div className="mt-8 space-y-4">
+            {/* Google Pay */}
             <div
-              onClick={() => setMethod("stripe")}
-              className={`flex items-center gap-3 border p-2 px-3 cursor-pointer ${
-                method === "stripe" ? "border-green-400" : ""
+              onClick={() => setMethod("googlepay")}
+              className={`flex items-center gap-4 border-2 p-4 rounded-xl cursor-pointer transition-all duration-300 hover:shadow-lg ${
+                method === "googlepay" 
+                  ? "border-black bg-gray-50 shadow-md" 
+                  : "border-gray-200 hover:border-gray-300"
               }`}
             >
-              <p
-                className={`min-w-3.5 h-3.5 border rounded-full ${
-                  method === "stripe" ? "bg-green-400" : ""
+              <div
+                className={`w-5 h-5 border-2 rounded-full flex items-center justify-center transition-all duration-200 ${
+                  method === "googlepay" 
+                    ? "bg-black border-black" 
+                    : "border-gray-300"
                 }`}
-              ></p>
-              <img src={assets.stripe_logo} className="h-5 mx-4" alt="" />
+              >
+                {method === "googlepay" && <div className="w-2 h-2 bg-white rounded-full"></div>}
+              </div>
+              <img 
+                src={assets.googlepay_logo} 
+                alt="Google Pay" 
+                className="h-8 w-auto object-contain"
+              />
+              <div className="flex-1">
+                <p className="font-medium text-gray-800">Google Pay</p>
+                <p className="text-xs text-gray-500">UPI, Cards & Wallet</p>
+              </div>
+              {method === "googlepay" && (
+                <div className="text-green-600 text-sm font-medium">Selected</div>
+              )}
             </div>
+
+            {/* Paytm */}
             <div
-              onClick={() => setMethod("razorpay")}
-              className={`flex items-center gap-3 border p-2 px-3 cursor-pointer ${
-                method === "razorpay" ? "border-green-400" : ""
+              onClick={() => setMethod("paytm")}
+              className={`flex items-center gap-4 border-2 p-4 rounded-xl cursor-pointer transition-all duration-300 hover:shadow-lg ${
+                method === "paytm" 
+                  ? "border-black bg-gray-50 shadow-md" 
+                  : "border-gray-200 hover:border-gray-300"
               }`}
             >
-              <p
-                className={`min-w-3.5 h-3.5 border rounded-full ${
-                  method === "razorpay" ? "bg-green-400" : ""
+              <div
+                className={`w-5 h-5 border-2 rounded-full flex items-center justify-center transition-all duration-200 ${
+                  method === "paytm" 
+                    ? "bg-black border-black" 
+                    : "border-gray-300"
                 }`}
-              ></p>
-              <img src={assets.razorpay_logo} className="h-5 mx-4" alt="" />
+              >
+                {method === "paytm" && <div className="w-2 h-2 bg-white rounded-full"></div>}
+              </div>
+              <img 
+                src={assets.paytm_logo} 
+                alt="Paytm" 
+                className="h-8 w-auto object-contain"
+              />
+              <div className="flex-1">
+                <p className="font-medium text-gray-800">Paytm</p>
+                <p className="text-xs text-gray-500">Wallet & UPI</p>
+              </div>
+              {method === "paytm" && (
+                <div className="text-green-600 text-sm font-medium">Selected</div>
+              )}
             </div>
+
+            {/* PhonePe */}
+            <div
+              onClick={() => setMethod("phonepe")}
+              className={`flex items-center gap-4 border-2 p-4 rounded-xl cursor-pointer transition-all duration-300 hover:shadow-lg ${
+                method === "phonepe" 
+                  ? "border-black bg-gray-50 shadow-md" 
+                  : "border-gray-200 hover:border-gray-300"
+              }`}
+            >
+              <div
+                className={`w-5 h-5 border-2 rounded-full flex items-center justify-center transition-all duration-200 ${
+                  method === "phonepe" 
+                    ? "bg-black border-black" 
+                    : "border-gray-300"
+                }`}
+              >
+                {method === "phonepe" && <div className="w-2 h-2 bg-white rounded-full"></div>}
+              </div>
+              <img 
+                src={assets.phonepe_logo} 
+                alt="PhonePe" 
+                className="h-8 w-auto object-contain"
+              />
+              <div className="flex-1">
+                <p className="font-medium text-gray-800">PhonePe</p>
+                <p className="text-xs text-gray-500">UPI Payments</p>
+              </div>
+              {method === "phonepe" && (
+                <div className="text-green-600 text-sm font-medium">Selected</div>
+              )}
+            </div>
+
+            {/* Cash on Delivery */}
             <div
               onClick={() => setMethod("cod")}
-              className={`flex items-center gap-3 border p-2 px-3 cursor-pointer ${
-                method === "cod" ? "border-green-400" : ""
+              className={`flex items-center gap-4 border-2 p-4 rounded-xl cursor-pointer transition-all duration-300 hover:shadow-lg ${
+                method === "cod" 
+                  ? "border-black bg-gray-50 shadow-md" 
+                  : "border-gray-200 hover:border-gray-300"
               }`}
             >
-              <p
-                className={`min-w-3.5 h-3.5 border rounded-full ${
-                  method === "cod" ? "bg-green-400" : ""
+              <div
+                className={`w-5 h-5 border-2 rounded-full flex items-center justify-center transition-all duration-200 ${
+                  method === "cod" 
+                    ? "bg-black border-black" 
+                    : "border-gray-300"
                 }`}
-              ></p>
-              <p className="text-gray-500 text-sm font-medium mx-4">
-                CASH ON DELIVERY
-              </p>
+              >
+                {method === "cod" && <div className="w-2 h-2 bg-white rounded-full"></div>}
+              </div>
+              <div className="w-12 h-8 bg-green-700 rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-lg">₹</span>
+              </div>
+              <div className="flex-1">
+                <p className="font-medium text-gray-800">Cash on Delivery</p>
+                <p className="text-xs text-gray-500">Pay when delivered</p>
+              </div>
+              {method === "cod" && (
+                <div className="text-green-600 text-sm font-medium">Selected</div>
+              )}
+            </div>
+
+
+          </div>
+
+          {/* Payment Method Description */}
+          <div className="mt-6 p-4 bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl border border-gray-200">
+            <div className="flex items-center gap-2 mb-3">
+              <div className="w-2 h-2 bg-black rounded-full"></div>
+              <span className="font-semibold text-gray-800">Payment Details</span>
+            </div>
+            <div className="text-sm text-gray-600 leading-relaxed">
+              {method === "googlepay" && (
+                <div>
+                  <p className="font-medium text-gray-800 mb-1">Google Pay - Quick & Secure</p>
+                  <p>Pay instantly using Google Pay with UPI, debit/credit cards, or wallet balance. Trusted by millions worldwide with bank-level security.</p>
+                </div>
+              )}
+              {method === "paytm" && (
+                <div>
+                  <p className="font-medium text-gray-800 mb-1">Paytm - India's Payment Leader</p>
+                  <p>Use your Paytm wallet, UPI, or linked bank accounts. Enjoy cashback offers and instant payment confirmation.</p>
+                </div>
+              )}
+              {method === "phonepe" && (
+                <div>
+                  <p className="font-medium text-gray-800 mb-1">PhonePe - Simple UPI Payments</p>
+                  <p>India's leading digital payment platform. Quick UPI payments directly from your bank account with 24/7 customer support.</p>
+                </div>
+              )}
+              {method === "cod" && (
+                <div>
+                  <p className="font-medium text-gray-800 mb-1">Cash on Delivery - Pay Later</p>
+                  <p>No advance payment required. Pay with cash when your order is delivered to your doorstep. Additional ₹{delivery_fee} delivery charge applies.</p>
+                </div>
+              )}
+
             </div>
           </div>
           <div className="w-full text-end mt-8">
             <button
-              className="bg-black text-white px-16 py-3 text-sm "
+              className="bg-black text-white font-bold px-16 py-4 rounded-lg hover:bg-gray-800 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-[1.02] cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
               onClick={onSubmitHandler}
+              disabled={loading}
             >
-              {loading ? "Placing Order..." : "Place Order"}
+              {loading ? (
+                <div className="flex items-center gap-2">
+                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                  Processing...
+                </div>
+              ) : (
+                method === "cod" 
+                  ? `Pay ₹${(getCartAmount() + delivery_fee).toLocaleString()}` 
+                  : `Pay ₹${getCartAmount().toLocaleString()}`
+              )}
             </button>
           </div>
         </div>

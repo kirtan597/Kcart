@@ -159,7 +159,7 @@ const MyProfile = () => {
         {/* Save Button */}
         <button
           onClick={handleSave}
-          className="mt-6 w-full flex items-center justify-center gap-2 px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
+          className="mt-6 w-full flex items-center justify-center gap-2 px-6 py-3 bg-black text-white font-bold rounded-xl hover:bg-gray-800 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-[1.02]"
         >
           <FiSave className="w-5 h-5" />
           Save Profile

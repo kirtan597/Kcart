@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { ShopContext } from "../context/ShopContext";
 import Title from "../components/Title";
-import { assets } from "../assets/assets"; //use untill no backend connection after that no use
+import { assets } from "../assets/assets";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { FiRefreshCw, FiTruck, FiPackage, FiCheckCircle, FiXCircle } from "react-icons/fi";

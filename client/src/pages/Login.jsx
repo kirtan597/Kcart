@@ -3,6 +3,7 @@ import { ShopContext } from "../context/ShopContext";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { FiEye, FiEyeOff } from "react-icons/fi";
+import userTrackingService from "../services/userTrackingService";
 
 const Login = () => {
   const { token, setToken, navigate, backendUrl } = useContext(ShopContext);
@@ -35,7 +36,21 @@ const Login = () => {
         if (response.data.success) {
           setToken(response.data.token);
           localStorage.setItem("token", response.data.token);
+          
+          // Record user registration and login
+          const userInfo = { name, email };
+          userTrackingService.recordLogin(userInfo, response.data.token);
+          
           toast.success("Account created successfully! Welcome to Kcart!");
+          
+          // Check if user should be redirected to dashboard
+          const redirectPath = localStorage.getItem('redirectAfterLogin');
+          if (redirectPath) {
+            localStorage.removeItem('redirectAfterLogin');
+            navigate(redirectPath);
+          } else {
+            navigate('/');
+          }
         } else {
           toast.error(response.data.message);
         }
@@ -50,7 +65,27 @@ const Login = () => {
           if (rememberMe) {
             localStorage.setItem("token", response.data.token);
           }
-          toast.success("Welcome back!");
+          
+          // Record user login
+          const userInfo = { email, name: response.data.name || 'User' };
+          userTrackingService.recordLogin(userInfo, response.data.token);
+          
+          // Check if this user has logged in before
+          const hasLoggedInBefore = userTrackingService.hasUserLoggedInBefore(email);
+          if (hasLoggedInBefore) {
+            toast.success("Welcome back!");
+          } else {
+            toast.success("Welcome to Kcart!");
+          }
+          
+          // Check if user should be redirected to dashboard
+          const redirectPath = localStorage.getItem('redirectAfterLogin');
+          if (redirectPath) {
+            localStorage.removeItem('redirectAfterLogin');
+            navigate(redirectPath);
+          } else {
+            navigate('/');
+          }
         } else {
           toast.error(response.data.message);
         }

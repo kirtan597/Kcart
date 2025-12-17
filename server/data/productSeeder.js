@@ -1,44 +1,30 @@
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 import productModel from '../models/productModel.js';
+import { dummyProducts } from './dummyProducts.js';
 
-const productsData = [
-  {
+// Load environment variables
+dotenv.config();
+
+// Additional products to mark as bestsellers (by ID)
+const additionalBestsellers = ["2", "5", "15"]; // Men Denim Jacket, Women Jacket, Women Palazzo Pants
+
+// Convert dummy products to proper format with required fields
+const productsData = dummyProducts.map(product => {
+  // Check if this product should be a bestseller (original + additional)
+  const isBestseller = product.bestseller || additionalBestsellers.includes(product._id);
+  
+  return {
+    ...product,
     _id: new mongoose.Types.ObjectId(),
-    name: "Long sleeve Jacket",
-    description: "A stylish long sleeve jacket",
-    price: 150,
-    category: "Women",
-    subCategory: "Topwear",
-    sizes: ["S", "M", "L"],
-    bestseller: true,
-    image: ["https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500"],
-    date: Date.now()
-  },
-  {
-    _id: new mongoose.Types.ObjectId(),
-    name: "Casual T-shirt",
-    description: "Comfortable cotton t-shirt",
-    price: 25,
-    category: "Men",
-    subCategory: "Topwear",
-    sizes: ["M", "L", "XL"],
-    bestseller: false,
-    image: ["https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=500"],
-    date: Date.now()
-  },
-  {
-    _id: new mongoose.Types.ObjectId(),
-    name: "Blue Jeans",
-    description: "Classic blue denim jeans",
-    price: 80,
-    category: "Women",
-    subCategory: "Bottomwear",
-    sizes: ["28", "30", "32"],
-    bestseller: false,
-    image: ["https://images.unsplash.com/photo-1542272604-787c3835535d?w=500"],
-    date: Date.now()
-  }
-];
+    status: 'active', // Required by the controller
+    bestseller: isBestseller, // Original bestsellers + additional ones
+    featured: isBestseller, // Set featured products based on bestseller status
+    isNew: Math.random() > 0.7, // Randomly mark some as new arrivals
+    rating: Math.floor(Math.random() * 3) + 3, // Random rating 3-5 (better ratings)
+    tags: [product.category, product.subCategory], // Add tags for better search
+  };
+});
 
 const seedProducts = async () => {
   try {

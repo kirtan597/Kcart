@@ -13,8 +13,7 @@ const Navbar = () => {
     getCartCount,
     navigate,
     token,
-    setToken,
-    setCartItems,
+    logout,
     performSearch,
     searchQuery,
     setSearchQuery,
@@ -22,11 +21,8 @@ const Navbar = () => {
     setShowSearchBar,
   } = useContext(ShopContext);
 
-  const logout = () => {
-    setToken("");
-    localStorage.removeItem("token");
-    navigate("/login");
-    setCartItems({});
+  const handleLogout = () => {
+    logout();
     setProfileOpen(false);
   };
 
@@ -63,6 +59,7 @@ const Navbar = () => {
     { label: "Collection", path: "/collection" },
     { label: "About", path: "/about" },
     { label: "Contact", path: "/contact" },
+    ...(token ? [{ label: "Dashboard", path: "/dashboard" }] : []),
   ];
 
   return (
@@ -134,7 +131,7 @@ const Navbar = () => {
                   Orders
                 </button>
                 <button
-                  onClick={logout}
+                  onClick={handleLogout}
                   className="block w-full px-4 py-2 text-left text-sm text-red-500 hover:bg-gray-50"
                 >
                   Logout
@@ -241,7 +238,7 @@ const Navbar = () => {
             <div className="p-5 border-t">
               <button
                 onClick={() => {
-                  logout();
+                  handleLogout();
                   setMenuOpen(false);
                 }}
                 className="w-full py-3 bg-red-50 text-red-600 font-medium rounded-lg hover:bg-red-100"
