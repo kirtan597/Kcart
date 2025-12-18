@@ -25,12 +25,21 @@ const Login = () => {
     }
 
     setIsLoading(true);
+    
+    // Always try fallback authentication first to avoid 404 errors
+    console.log('Starting authentication process');
+    
+    let response;
+    let authSuccess = false;
+    
+    // Demo users for fallback authentication
+    const demoUsers = [
+      { email: 'user@gmail.com', password: '12345678', name: 'Demo User' },
+      { email: 'admin@kcart.com', password: 'admin123', name: 'Admin User', isAdmin: true }
+    ];
+    
     try {
-      // Try multiple endpoints for better reliability
-      let response;
-      let apiWorked = false;
-      
-      // List of endpoints to try
+      // First, try API endpoints (but don't fail if they don't work)
       const endpoints = [
         backendUrl + "/user",
         "/.netlify/functions/user",
@@ -39,39 +48,33 @@ const Login = () => {
       
       for (const endpoint of endpoints) {
         try {
-          console.log(`Trying endpoint: ${endpoint}`);
-          response = await axios.post(endpoint, {
+          console.log(`Trying API endpoint: ${endpoint}`);
+          const apiResponse = await axios.post(endpoint, {
             name: isSignUp ? name : undefined,
             email,
             password,
           }, {
-            timeout: 5000 // 5 second timeout per endpoint
+            timeout: 3000 // Shorter timeout to fail faster
           });
           
-          if (response.data.success) {
-            apiWorked = true;
-            console.log(`Success with endpoint: ${endpoint}`);
+          if (apiResponse.data && apiResponse.data.success) {
+            console.log(`API success with endpoint: ${endpoint}`);
+            response = apiResponse;
+            authSuccess = true;
             break;
           }
         } catch (endpointError) {
-          console.log(`Endpoint ${endpoint} failed:`, endpointError.message);
-          // Don't throw error here, just continue to next endpoint
-          continue;
+          console.log(`API endpoint ${endpoint} failed:`, endpointError.message);
+          // Continue to next endpoint or fallback
         }
       }
       
-      // If no API endpoint worked, use fallback authentication
-      if (!apiWorked) {
-        console.log('All API endpoints failed, using fallback authentication');
-        
-        // Demo users for fallback
-        const demoUsers = [
-          { email: 'user@gmail.com', password: '12345678', name: 'Demo User' },
-          { email: 'admin@kcart.com', password: 'admin123', name: 'Admin User', isAdmin: true }
-        ];
+      // If API didn't work, use fallback authentication
+      if (!authSuccess) {
+        console.log('API endpoints failed or unavailable, using fallback authentication');
         
         if (isSignUp) {
-          // For registration, just create a token
+          // For registration, create a demo token
           const token = `demo_token_${Date.now()}`;
           response = {
             data: {
@@ -81,7 +84,8 @@ const Login = () => {
               message: 'Account created successfully'
             }
           };
-          apiWorked = true; // Mark as successful
+          authSuccess = true;
+          console.log('Fallback registration successful');
         } else {
           // For login, check demo users
           const user = demoUsers.find(u => u.email === email && u.password === password);
@@ -95,14 +99,19 @@ const Login = () => {
                 message: 'Login successful'
               }
             };
-            apiWorked = true; // Mark as successful
+            authSuccess = true;
+            console.log('Fallback login successful for:', user.name);
           } else {
-            throw new Error('Invalid email or password. Please check your credentials and try again.');
+            console.log('Fallback login failed - invalid credentials');
+            authSuccess = false;
           }
         }
       }
 
-      if (response.data.success) {
+      // Handle authentication result
+      if (authSuccess && response && response.data && response.data.success) {
+        console.log('Authentication successful, processing login');
+        
         setToken(response.data.token);
         localStorage.setItem("token", response.data.token);
         
@@ -134,32 +143,15 @@ const Login = () => {
           navigate('/');
         }
       } else {
-        // Show user-friendly error messages
-        const errorMessage = response.data.message || "Something went wrong. Please try again.";
-        toast.error(errorMessage);
+        // Authentication failed
+        console.log('Authentication failed');
+        toast.error("Invalid email or password. Please check your credentials and try again.");
       }
+      
     } catch (error) {
-      // If we reach here, it means fallback authentication also failed
-      console.error('Login error:', error);
-      
-      // Handle different types of errors with user-friendly messages
-      let errorMessage = error.message || "Invalid email or password. Please check your credentials and try again.";
-      
-      // Don't show network errors since we have fallback
-      if (error.response) {
-        const status = error.response.status;
-        const serverMessage = error.response.data?.message;
-        
-        if (status === 401) {
-          errorMessage = "Invalid email or password. Please check your credentials and try again.";
-        } else if (status === 400) {
-          errorMessage = serverMessage || "Please check your information and try again.";
-        } else if (serverMessage) {
-          errorMessage = serverMessage;
-        }
-      }
-      
-      toast.error(errorMessage);
+      // This should rarely happen now since we handle errors above
+      console.error('Unexpected login error:', error);
+      toast.error("Invalid email or password. Please check your credentials and try again.");
     } finally {
       setIsLoading(false);
     }
