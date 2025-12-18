@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Product Images</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .product { margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 8px; }
+        .product img { width: 100px; height: 100px; object-fit: cover; margin: 5px; border-radius: 4px; }
+        .product h3 { margin: 0 0 10px 0; color: #333; }
+        .product p { margin: 5px 0; color: #666; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <h1>Product Images Test</h1>
+    <p>Testing if all product images load correctly...</p>
+    
+    <div id="products-container">
+        <div class="product">
+            <h3>Men Round Neck Pure Cotton T-shirt</h3>
+            <p>Price: ₹499</p>
+            <div>
+                <img src="/assets/p_img1.png" alt="Product 1 - Image 1" onerror="this.style.border='2px solid red'; this.alt='❌ Image not found'">
+                <img src="/assets/p_img2.png" alt="Product 1 - Image 2" onerror="this.style.border='2px solid red'; this.alt='❌ Image not found'">
+            </div>
+        </div>
+
+        <div class="product">
+            <h3>Men Slim Fit Relaxed Denim Jacket</h3>
+            <p>Price: ₹1899</p>
+            <div>
+                <img src="/assets/p_img3.png" alt="Product 2 - Image 1" onerror="this.style.border='2px solid red'; this.alt='❌ Image not found'">
+                <img src="/assets/p_img4.png" alt="Product 2 - Image 2" onerror="this.style.border='2px solid red'; this.alt='❌ Image not found'">
+            </div>
+        </div>
+
+        <div class="product">
+            <h3>Girls Round Neck Cotton Top</h3>
+            <p>Price: ₹399</p>
+            <div>
+                <img src="/assets/p_img5.png" alt="Product 3 - Image 1" onerror="this.style.border='2px solid red'; this.alt='❌ Image not found'">
+                <img src="/assets/p_img6.png" alt="Product 3 - Image 2" onerror="this.style.border='2px solid red'; this.alt='❌ Image not found'">
+            </div>
+        </div>
+
+        <div class="product">
+            <h3>Women Zip-Front Relaxed Fit Jacket</h3>
+            <p>Price: ₹1599</p>
+            <div>
+                <img src="/assets/p_img7.png" alt="Product 4 - Image 1" onerror="this.style.border='2px solid red'; this.alt='❌ Image not found'">
+                <img src="/assets/p_img8.png" alt="Product 4 - Image 2" onerror="this.style.border='2px solid red'; this.alt='❌ Image not found'">
+            </div>
+        </div>
+
+        <div class="product">
+            <h3>Men Tapered Fit Flat-Front Trousers</h3>
+            <p>Price: ₹1299</p>
+            <div>
+                <img src="/assets/p_img9.png" alt="Product 5 - Image 1" onerror="this.style.border='2px solid red'; this.alt='❌ Image not found'">
+                <img src="/assets/p_img10.png" alt="Product 5 - Image 2" onerror="this.style.border='2px solid red'; this.alt='❌ Image not found'">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Test API endpoint
+        fetch('/.netlify/functions/products')
+            .then(response => response.json())
+            .then(data => {
+                console.log('Products API Response:', data);
+                if (data.success && data.products) {
+                    console.log(`✅ API working! Found ${data.products.length} products`);
+                    
+                    // Test first few products' images
+                    data.products.slice(0, 5).forEach((product, index) => {
+                        console.log(`Product ${index + 1}: ${product.name}`);
+                        console.log(`Images: ${product.image.join(', ')}`);
+                    });
+                } else {
+                    console.error('❌ API not working properly');
+                }
+            })
+            .catch(error => {
+                console.error('❌ API Error:', error);
+            });
+    </script>
+</body>
+</html>
