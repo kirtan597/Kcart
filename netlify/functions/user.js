@@ -26,6 +26,8 @@ const demoUsers = [
 ];
 
 export const handler = async (event, context) => {
+  console.log('User API called:', event.httpMethod, event.path);
+  
   // Handle CORS preflight
   if (event.httpMethod === 'OPTIONS') {
     return {
@@ -41,83 +43,131 @@ export const handler = async (event, context) => {
   try {
     // POST /user - Handle user operations based on body content
     if (httpMethod === 'POST') {
-      // Check if it's a login operation (has email and password, no name)
-      if (body.email && body.password && !body.name) {
-      const { email, password } = body;
+      console.log('POST request body:', body);
       
-      const user = demoUsers.find(u => u.email === email && u.password === password);
-      
-      if (!user) {
-        return {
-          statusCode: 401,
-          headers,
-          body: JSON.stringify({
-            success: false,
-            message: 'Invalid credentials'
-          })
-        };
-      }
-
-      // Generate simple token (in production, use JWT)
-      // For admin users, include 'admin' in token for easy identification
-      const tokenPrefix = user.isAdmin ? 'admin_token' : 'demo_token';
-      const token = `${tokenPrefix}_${user._id}_${Date.now()}`;
-
-      return {
-        statusCode: 200,
-        headers,
-        body: JSON.stringify({
-          success: true,
-          token,
-          user: {
-            _id: user._id,
-            name: user.name,
-            email: user.email,
-            isAdmin: user.isAdmin || false
-          }
-        })
-      };
-
-      // Register operation (has name, email, and password)
-      } else if (body.name && body.email && body.password) {
-      const { name, email, password } = body;
-      
-      // Check if user already exists
-      const existingUser = demoUsers.find(u => u.email === email);
-      if (existingUser) {
+      // Validate required fields
+      if (!body.email || !body.password) {
         return {
           statusCode: 400,
           headers,
           body: JSON.stringify({
             success: false,
-            message: 'User already exists'
+            message: 'Email and password are required'
           })
         };
       }
 
-      // Create new user (in production, hash password and save to database)
-      const newUser = {
-        _id: String(demoUsers.length + 1),
-        name,
-        email,
-        password,
-        cartData: {}
-      };
-      
-      demoUsers.push(newUser);
-      
-      // Generate token
-      const token = `demo_token_${newUser._id}_${Date.now()}`;
+      // Check if it's a login operation (has email and password, no name)
+      if (body.email && body.password && !body.name) {
+        console.log('Processing login for:', body.email);
+        const { email, password } = body;
+        
+        const user = demoUsers.find(u => u.email === email && u.password === password);
+        
+        if (!user) {
+          console.log('Login failed - user not found or wrong password');
+          return {
+            statusCode: 401,
+            headers,
+            body: JSON.stringify({
+              success: false,
+              message: 'Invalid email or password. Please check your credentials and try again.'
+            })
+          };
+        }
 
-      return {
-        statusCode: 200,
-        headers,
-        body: JSON.stringify({
-          success: true,
-          token,
-          message: 'User registered successfully'
-        })
-      };
+        // Generate simple token (in production, use JWT)
+        // For admin users, include 'admin' in token for easy identification
+        const tokenPrefix = user.isAdmin ? 'admin_token' : 'demo_token';
+        const token = `${tokenPrefix}_${user._id}_${Date.now()}`;
+
+        console.log('Login successful for:', email);
+        return {
+          statusCode: 200,
+          headers,
+          body: JSON.stringify({
+            success: true,
+            token,
+            user: {
+              _id: user._id,
+              name: user.name,
+              email: user.email,
+              isAdmin: user.isAdmin || false
+            },
+            message: 'Login successful'
+          })
+        };
+
+      // Register operation (has name, email, and password)
+      } else if (body.name && body.email && body.password) {
+        console.log('Processing registration for:', body.email);
+        const { name, email, password } = body;
+        
+        // Basic validation
+        if (password.length < 8) {
+          return {
+            statusCode: 400,
+            headers,
+            body: JSON.stringify({
+              success: false,
+              message: 'Password must be at least 8 characters long'
+            })
+          };
+        }
+        
+        // Check if user already exists
+        const existingUser = demoUsers.find(u => u.email === email);
+        if (existingUser) {
+          console.log('Registration failed - user already exists');
+          return {
+            statusCode: 400,
+            headers,
+            body: JSON.stringify({
+              success: false,
+              message: 'An account with this email already exists. Please try logging in instead.'
+            })
+          };
+        }
+
+        // Create new user (in production, hash password and save to database)
+        const newUser = {
+          _id: String(demoUsers.length + 1),
+          name,
+          email,
+          password,
+          cartData: {}
+        };
+        
+        demoUsers.push(newUser);
+        
+        // Generate token
+        const token = `demo_token_${newUser._id}_${Date.now()}`;
+
+        console.log('Registration successful for:', email);
+        return {
+          statusCode: 200,
+          headers,
+          body: JSON.stringify({
+            success: true,
+            token,
+            user: {
+              _id: newUser._id,
+              name: newUser.name,
+              email: newUser.email,
+              isAdmin: false
+            },
+            message: 'Account created successfully'
+          })
+        };
+      } else {
+        return {
+          statusCode: 400,
+          headers,
+          body: JSON.stringify({
+            success: false,
+            message: 'Invalid request. Please provide the required information.'
+          })
+        };
       }
     }
 

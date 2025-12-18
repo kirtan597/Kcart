@@ -26,50 +26,27 @@ const Login = () => {
 
     setIsLoading(true);
     try {
-      if (isSignUp) {
-        // Register user
-        const response = await axios.post(backendUrl + "/api/user/register", {
-          name,
-          email,
-          password,
-        });
-        if (response.data.success) {
-          setToken(response.data.token);
-          localStorage.setItem("token", response.data.token);
-          
-          // Record user registration and login
-          const userInfo = { name, email };
-          userTrackingService.recordLogin(userInfo, response.data.token);
-          
+      // Use the correct endpoint for both login and register
+      const response = await axios.post(backendUrl + "/user", {
+        name: isSignUp ? name : undefined,
+        email,
+        password,
+      });
+
+      if (response.data.success) {
+        setToken(response.data.token);
+        localStorage.setItem("token", response.data.token);
+        
+        // Record user registration/login
+        const userInfo = { 
+          name: isSignUp ? name : (response.data.user?.name || 'User'), 
+          email 
+        };
+        userTrackingService.recordLogin(userInfo, response.data.token);
+        
+        if (isSignUp) {
           toast.success("Account created successfully! Welcome to Kcart!");
-          
-          // Check if user should be redirected to dashboard
-          const redirectPath = localStorage.getItem('redirectAfterLogin');
-          if (redirectPath) {
-            localStorage.removeItem('redirectAfterLogin');
-            navigate(redirectPath);
-          } else {
-            navigate('/');
-          }
         } else {
-          toast.error(response.data.message);
-        }
-      } else {
-        // Login user
-        const response = await axios.post(backendUrl + "/api/user/login", {
-          email,
-          password,
-        });
-        if (response.data.success) {
-          setToken(response.data.token);
-          if (rememberMe) {
-            localStorage.setItem("token", response.data.token);
-          }
-          
-          // Record user login
-          const userInfo = { email, name: response.data.name || 'User' };
-          userTrackingService.recordLogin(userInfo, response.data.token);
-          
           // Check if this user has logged in before
           const hasLoggedInBefore = userTrackingService.hasUserLoggedInBefore(email);
           if (hasLoggedInBefore) {
@@ -77,22 +54,50 @@ const Login = () => {
           } else {
             toast.success("Welcome to Kcart!");
           }
-          
-          // Check if user should be redirected to dashboard
-          const redirectPath = localStorage.getItem('redirectAfterLogin');
-          if (redirectPath) {
-            localStorage.removeItem('redirectAfterLogin');
-            navigate(redirectPath);
-          } else {
-            navigate('/');
-          }
-        } else {
-          toast.error(response.data.message);
         }
+        
+        // Check if user should be redirected to dashboard
+        const redirectPath = localStorage.getItem('redirectAfterLogin');
+        if (redirectPath) {
+          localStorage.removeItem('redirectAfterLogin');
+          navigate(redirectPath);
+        } else {
+          navigate('/');
+        }
+      } else {
+        // Show user-friendly error messages
+        const errorMessage = response.data.message || "Something went wrong. Please try again.";
+        toast.error(errorMessage);
       }
     } catch (error) {
-      console.log(error);
-      toast.error(error.response?.data?.message || error.message);
+      // Handle different types of errors with user-friendly messages
+      let errorMessage = "Unable to connect to the server. Please check your internet connection and try again.";
+      
+      if (error.response) {
+        // Server responded with error status
+        const status = error.response.status;
+        const serverMessage = error.response.data?.message;
+        
+        if (status === 401) {
+          errorMessage = "Invalid email or password. Please check your credentials and try again.";
+        } else if (status === 400) {
+          errorMessage = serverMessage || "Please check your information and try again.";
+        } else if (status === 404) {
+          errorMessage = "Service temporarily unavailable. Please try again later.";
+        } else if (status >= 500) {
+          errorMessage = "Server error. Please try again in a few moments.";
+        } else if (serverMessage) {
+          errorMessage = serverMessage;
+        }
+      } else if (error.request) {
+        // Network error
+        errorMessage = "Network error. Please check your internet connection and try again.";
+      } else if (error.code === 'ECONNABORTED') {
+        // Timeout error
+        errorMessage = "Request timeout. Please try again.";
+      }
+      
+      toast.error(errorMessage);
     } finally {
       setIsLoading(false);
     }
@@ -248,6 +253,41 @@ const Login = () => {
             </button>
           </form>
 
+          {/* Demo Credentials (Login only) */}
+          {!isSignUp && (
+            <div className="mt-6 p-4 bg-gray-50 rounded-xl border border-gray-200">
+              <h3 className="text-sm font-semibold text-gray-700 mb-2">Demo Credentials:</h3>
+              <div className="space-y-2 text-sm">
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-600">User Account:</span>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setEmail('user@gmail.com');
+                      setPassword('12345678');
+                    }}
+                    className="text-blue-600 hover:text-blue-800 font-medium underline"
+                  >
+                    user@gmail.com / 12345678
+                  </button>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-600">Admin Account:</span>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setEmail('admin@kcart.com');
+                      setPassword('admin123');
+                    }}
+                    className="text-blue-600 hover:text-blue-800 font-medium underline"
+                  >
+                    admin@kcart.com / admin123
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* Toggle Sign In/Sign Up */}
           <div className="mt-6 text-center">
             <p className="text-gray-600">
@@ -256,6 +296,10 @@ const Login = () => {
                 onClick={() => {
                   setIsSignUp(!isSignUp);
                   setAgreeTerms(false);
+                  // Clear form when switching
+                  setName('');
+                  setEmail('');
+                  setPassword('');
                 }}
                 className="text-black hover:text-gray-700 font-semibold underline"
               >
