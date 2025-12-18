@@ -12,7 +12,7 @@
 
 </div>
 
-## 🌐 **Live Deployment Status**
+## 🌐 **Live Deployment**
 
 <div align="center">
 
@@ -25,7 +25,7 @@
 
 **🔗 Live URL**: [`kcartt.netlify.app`](https://kcartt.netlify.app)  
 **🚀 CDN**: Netlify Edge Network  
-**⚡ Functions**: Serverless Backend  
+**⚡ Backend**: Serverless Functions  
 **🗄️ Database**: MongoDB Atlas  
 
 </div>
@@ -58,31 +58,41 @@
 <td align="center" width="25%">
 <img src="https://user-images.githubusercontent.com/74038190/212257454-16e3712e-945a-4ca2-b238-408ad0bf87e6.gif" width="60"><br>
 <strong>🛒 E-commerce</strong><br>
-<sub>20+ Products, Cart, Checkout</sub>
+<sub>Product Catalog & Shopping Cart</sub>
 </td>
 <td align="center" width="25%">
 <img src="https://user-images.githubusercontent.com/74038190/212257460-738ff738-247f-4445-a718-cdd0ca76e2db.gif" width="60"><br>
 <strong>🔐 Authentication</strong><br>
-<sub>JWT, User/Admin Roles</sub>
+<sub>Secure User & Admin Access</sub>
 </td>
 <td align="center" width="25%">
 <img src="https://user-images.githubusercontent.com/74038190/212257467-871d32b7-e401-42e8-a166-fcfd7baa4c6b.gif" width="60"><br>
 <strong>📊 Analytics</strong><br>
-<sub>Real-time Dashboard</sub>
+<sub>Real-time Dashboard Insights</sub>
 </td>
 <td align="center" width="25%">
 <img src="https://user-images.githubusercontent.com/74038190/212257472-08e52665-c503-4bd9-aa20-f5a4dae769b5.gif" width="60"><br>
 <strong>💳 Payments</strong><br>
-<sub>Multiple Gateways</sub>
+<sub>Multiple Payment Gateways</sub>
 </td>
 </tr>
 </table>
 
-[![🛒 Shop Now](https://img.shields.io/badge/🛒%20Shop%20Now-20%20Products-success?style=for-the-badge)](https://kcartt.netlify.app/collection)
-[![📊 Dashboard](https://img.shields.io/badge/📊%20Analytics-Live%20Data-blue?style=for-the-badge)](https://kcartt.netlify.app/dashboard)
-[![🔐 Login](https://img.shields.io/badge/🔐%20Demo%20Login-Try%20Now-orange?style=for-the-badge)](https://kcartt.netlify.app/login)
-
 </div>
+
+### **🎨 User Experience**
+- Minimalist design with smooth animations
+- Responsive layout for all devices
+- Advanced product filtering and search
+- Real-time cart management
+- Seamless checkout process
+
+### **📊 Admin Dashboard**
+- Live sales analytics and charts
+- User session monitoring
+- Order management system
+- Product inventory control
+- AI-powered insights
 
 ---
 
@@ -142,342 +152,6 @@
 
 ---
 
-## 📁 **Project Architecture**
-
-```
-Kcart/
-├── 📱 client/                          # React Frontend
-│   ├── 🎨 src/
-│   │   ├── 📄 pages/                   # Route components
-│   │   │   ├── Home.jsx               # Landing page with hero
-│   │   │   ├── Collection.jsx         # Product catalog
-│   │   │   ├── Dashboard.jsx          # Admin analytics
-│   │   │   ├── PlaceOrder.jsx         # Checkout process
-│   │   │   └── AIChat.jsx             # AI integration
-│   │   ├── 🧩 components/             # Reusable components
-│   │   │   ├── Hero.jsx               # Animated hero section
-│   │   │   ├── Navbar.jsx             # Navigation
-│   │   │   ├── ProductItem.jsx        # Product cards
-│   │   │   └── DashboardComponents/   # Dashboard widgets
-│   │   ├── 🔧 services/               # API services
-│   │   │   ├── bytezService.js        # AI integration
-│   │   │   ├── dashboardService.js    # Analytics
-│   │   │   └── userTrackingService.js # User monitoring
-│   │   ├── 🎯 context/                # State management
-│   │   └── 🎨 assets/                 # Images & icons
-│   ├── 🌐 netlify/functions/          # Serverless functions
-│   └── 📦 public/                     # Static assets
-├── 🖥️ server/                          # Node.js Backend
-│   ├── 📊 controllers/                # Business logic
-│   ├── 🗃️ models/                     # Database schemas
-│   ├── 🛣️ routes/                     # API endpoints
-│   ├── 🔧 middleware/                 # Auth & validation
-│   └── 📈 data/                       # Seed data
-├── 👨‍💼 admin/                          # Admin Panel
-│   ├── 📊 Dashboard                   # Admin interface
-│   ├── 📦 Product Management          # CRUD operations
-│   └── 📋 Order Processing            # Order management
-└── 📚 docs/                           # Documentation
-    ├── SETUP.md                       # Setup guide
-    ├── DASHBOARD_README.md            # Dashboard docs
-    └── AI_INTEGRATION_GUIDE.md        # AI features
-```
-
----
-
-## 🚀 **Quick Start Guide**
-
-### Prerequisites
-```bash
-Node.js >= 18.0.0
-npm >= 9.0.0
-MongoDB (local or cloud)
-```
-
-### 1️⃣ **Clone & Install**
-```bash
-# Clone the repository
-git clone https://github.com/kirtan597/Kcart.git
-cd Kcart/E-commerce-website
-
-# Install client dependencies
-cd client
-npm install
-
-# Install server dependencies
-cd ../server
-npm install
-
-# Install admin dependencies
-cd ../admin
-npm install
-```
-
-### 2️⃣ **Environment Setup**
-```bash
-# Server environment (.env)
-MONGODB_URI=your_mongodb_connection_string
-JWT_SECRET=your_jwt_secret_key
-CLOUDINARY_NAME=your_cloudinary_name
-CLOUDINARY_API_KEY=your_cloudinary_api_key
-CLOUDINARY_API_SECRET=your_cloudinary_api_secret
-ADMIN_EMAIL=admin@kcart.com
-ADMIN_PASSWORD=admin123
-
-# Client environment (.env)
-VITE_BACKEND_URL=https://kcartt.netlify.app/api
-VITE_BYTEZ_API_KEY=your_bytez_api_key
-```
-
-### 3️⃣ **Database Setup**
-```bash
-# Seed the database with sample products
-cd server
-npm run seed
-```
-
-### 4️⃣ **Start Development**
-```bash
-# Terminal 1: Start backend server
-cd server
-npm run dev
-
-# Terminal 2: Start frontend client
-cd client
-npm run dev
-
-# Terminal 3: Start admin panel
-cd admin
-npm run dev
-```
-
-### 5️⃣ **Access Applications**
-
-<div align="center">
-
-| Application | Local Development | Live Production |
-|-------------|-------------------|-----------------|
-| 🌐 **Frontend** | [http://localhost:5173](http://localhost:5173) | [https://kcartt.netlify.app](https://kcartt.netlify.app) |
-| 🔧 **Backend API** | [http://localhost:5000](http://localhost:5000) | [https://kcartt.netlify.app/api](https://kcartt.netlify.app/api) |
-| 👨‍💼 **Admin Panel** | [http://localhost:5174](http://localhost:5174) | [https://kcartt.netlify.app/admin](https://kcartt.netlify.app/admin) |
-
-</div>
-
----
-
-## 🎯 **Demo Credentials**
-
-<div align="center">
-
-### 🚀 **Try Live Demo: [kcartt.netlify.app](https://kcartt.netlify.app)**
-
-<table>
-<tr>
-<th>🎭 Role</th>
-<th>📧 Email</th>
-<th>🔐 Password</th>
-<th>🎯 Access Level</th>
-<th>🔗 Direct Link</th>
-</tr>
-<tr>
-<td><strong>👤 Customer</strong></td>
-<td><code>user@gmail.com</code></td>
-<td><code>12345678</code></td>
-<td>Shopping, Cart, Orders</td>
-<td><a href="https://kcartt.netlify.app/login">Login Now</a></td>
-</tr>
-<tr>
-<td><strong>👨‍💼 Admin</strong></td>
-<td><code>admin@kcart.com</code></td>
-<td><code>admin123</code></td>
-<td>Dashboard, Analytics, Management</td>
-<td><a href="https://kcartt.netlify.app/login">Admin Login</a></td>
-</tr>
-</table>
-
-### 🌟 **Quick Access Links**
-[![Shop Now](https://img.shields.io/badge/🛒%20Shop%20Now-Start%20Shopping-green?style=for-the-badge)](https://kcartt.netlify.app/collection)
-[![View Dashboard](https://img.shields.io/badge/📊%20Dashboard-Admin%20Panel-blue?style=for-the-badge)](https://kcartt.netlify.app/dashboard)
-[![Place Order](https://img.shields.io/badge/💳%20Checkout-Place%20Order-orange?style=for-the-badge)](https://kcartt.netlify.app/place-order)
-
-</div>
-
----
-
-## 📡 **API Documentation**
-
-<div align="center">
-
-<img src="https://user-images.githubusercontent.com/74038190/212257460-738ff738-247f-4445-a718-cdd0ca76e2db.gif" width="100">
-
-### **🌐 Live API**: [`kcartt.netlify.app/api`](https://kcartt.netlify.app/api)
-
-[![API Status](https://img.shields.io/badge/API-Online-success?style=for-the-badge&logo=fastapi)](https://kcartt.netlify.app/api/product/list)
-[![Response Time](https://img.shields.io/badge/Response-<200ms-green?style=for-the-badge)](https://kcartt.netlify.app/api)
-[![Uptime](https://img.shields.io/badge/Uptime-99.9%25-brightgreen?style=for-the-badge)](https://kcartt.netlify.app)
-
-</div>
-
-<details>
-<summary><strong>🔐 Authentication API</strong></summary>
-
-```javascript
-// User Registration
-POST /api/user/register
-{
-  "name": "John Doe",
-  "email": "john@example.com", 
-  "password": "password123"
-}
-
-// User Login
-POST /api/user/login
-{
-  "email": "user@gmail.com",
-  "password": "12345678"
-}
-
-// Admin Login  
-POST /api/user/admin
-{
-  "email": "admin@kcart.com",
-  "password": "admin123"
-}
-```
-</details>
-
-<details>
-<summary><strong>🛍️ Products API</strong></summary>
-
-```javascript
-// Get All Products
-GET /api/product/list
-// Returns: 20 products with images, prices, categories
-
-// Get Single Product
-GET /api/product/single?id=PRODUCT_ID
-
-// Add Product (Admin Only)
-POST /api/product/add
-{
-  "name": "Product Name",
-  "price": 999,
-  "category": "Men",
-  "sizes": ["S", "M", "L"],
-  "image": "product_image.jpg"
-}
-```
-</details>
-
-<details>
-<summary><strong>🛒 Cart & Orders API</strong></summary>
-
-```javascript
-// Add to Cart
-POST /api/cart/add
-{
-  "itemId": "PRODUCT_ID",
-  "size": "M"
-}
-
-// Place Order
-POST /api/order/place
-{
-  "items": [...],
-  "amount": 1999,
-  "address": {...}
-}
-
-// Get User Orders
-GET /api/order/userorders
-```
-</details>
-
-### **🧪 Test Live API**
-```bash
-# Test product listing
-curl https://kcartt.netlify.app/api/product/list
-
-# Test user login
-curl -X POST https://kcartt.netlify.app/api/user/login \
-  -H "Content-Type: application/json" \
-  -d '{"email":"user@gmail.com","password":"12345678"}'
-```
-
----
-
-## 🎨 **UI/UX Features**
-
-### 🌟 **Hero Section**
-- Animated typewriter effect
-- Infinite scrolling product showcase
-- Smooth parallax animations
-- Interactive hover effects
-- Call-to-action button leading to dashboard
-
-### 🎯 **Product Catalog**
-- Grid/list view toggle
-- Advanced filtering system
-- Search with autocomplete
-- Sort by price, popularity, rating
-- Lazy loading for performance
-
-### 📊 **Dashboard Analytics**
-- Real-time sales charts
-- User session tracking
-- Revenue analytics
-- Top products insights
-- Geographic user distribution
-
-### 💳 **Payment Integration**
-- Google Pay
-- Paytm
-- PhonePe
-- Cash on Delivery
-- Secure payment processing
-
----
-
-## 🤖 **AI Integration**
-
-### Bytez.js SDK Features
-```javascript
-// AI-powered product recommendations
-const recommendations = await bytezService.getRecommendations(userId);
-
-// Intelligent search suggestions
-const suggestions = await bytezService.getSearchSuggestions(query);
-
-// Sentiment analysis for reviews
-const sentiment = await bytezService.analyzeSentiment(reviewText);
-
-// Smart categorization
-const category = await bytezService.categorizeProduct(productData);
-```
-
-### AI Dashboard Features
-- Predictive analytics
-- Customer behavior insights
-- Inventory optimization
-- Sales forecasting
-- Automated product tagging
-
----
-
-## 📱 **Mobile Responsiveness**
-
-<div align="center">
-
-| Device | Breakpoint | Features |
-|--------|------------|----------|
-| 📱 Mobile | < 768px | Touch-optimized, Swipe gestures |
-| 📱 Tablet | 768px - 1024px | Adaptive layout, Touch & click |
-| 🖥️ Desktop | > 1024px | Full features, Hover effects |
-
-</div>
-
----
-
 ## 🚀 **Deployment Architecture**
 
 <div align="center">
@@ -509,52 +183,27 @@ graph TB
 
 </div>
 
-### **🔧 Production Configuration**
+---
 
-<details>
-<summary><strong>📋 Environment Variables</strong></summary>
+## 📡 **API Documentation**
 
-```bash
-# Netlify Production Environment
-NODE_ENV=production
-VITE_BACKEND_URL=https://kcartt.netlify.app/api
-MONGODB_URI=mongodb+srv://cluster.mongodb.net/kcart
-JWT_SECRET=production_jwt_secret_key
-CLOUDINARY_NAME=kcart_cloud
-CLOUDINARY_API_KEY=your_api_key
-CLOUDINARY_API_SECRET=your_api_secret
-```
-</details>
+<div align="center">
 
-<details>
-<summary><strong>⚙️ Build Configuration</strong></summary>
+<img src="https://user-images.githubusercontent.com/74038190/212257460-738ff738-247f-4445-a718-cdd0ca76e2db.gif" width="100">
 
-```toml
-# netlify.toml
-[build]
-  command = "cd client && npm install && npm run build"
-  publish = "client/dist"
-  functions = "netlify/functions"
+### **🌐 Live API**: [`kcartt.netlify.app/api`](https://kcartt.netlify.app/api)
 
-[build.environment]
-  NODE_VERSION = "18"
+[![API Status](https://img.shields.io/badge/API-Online-success?style=for-the-badge&logo=fastapi)](https://kcartt.netlify.app/api/product/list)
+[![Response Time](https://img.shields.io/badge/Response-<200ms-green?style=for-the-badge)](https://kcartt.netlify.app/api)
+[![Uptime](https://img.shields.io/badge/Uptime-99.9%25-brightgreen?style=for-the-badge)](https://kcartt.netlify.app)
 
-[[redirects]]
-  from = "/api/*"
-  to = "/.netlify/functions/:splat"
-  status = 200
-```
-</details>
+### **Available Endpoints**
+- 🔐 Authentication (Login, Register, Admin)
+- 🛍️ Products (List, Single, Add, Remove)
+- 🛒 Cart (Add, Update, Get)
+- 📦 Orders (Place, List, Status)
 
-### **🔄 CI/CD Pipeline**
-
-```bash
-# Automatic deployment on push to main
-git add .
-git commit -m "feat: new feature"
-git push origin main
-# ✅ Auto-deploys to https://kcartt.netlify.app
-```
+</div>
 
 ---
 
@@ -582,29 +231,7 @@ git push origin main
 
 ---
 
-## 🔧 **Development Scripts**
-
-```bash
-# Client
-npm run dev          # Start development server
-npm run build        # Build for production
-npm run preview      # Preview production build
-npm run lint         # Run ESLint
-
-# Server
-npm run dev          # Start with nodemon
-npm run start        # Start production server
-npm run seed         # Seed database
-npm run test         # Run tests
-
-# Admin
-npm run dev          # Start admin panel
-npm run build        # Build admin panel
-```
-
----
-
-## 🧪 **Live Testing & Verification**
+## 🧪 **Live Testing**
 
 <div align="center">
 
@@ -628,107 +255,61 @@ npm run build        # Build admin panel
 <tr>
 <td><strong>User Registration</strong></td>
 <td><a href="https://kcartt.netlify.app/login">Test Now</a></td>
-<td>Click "Create Account", fill form</td>
+<td>Create new account</td>
 <td>Account created, auto-login</td>
 </tr>
 <tr>
 <td><strong>User Login</strong></td>
 <td><a href="https://kcartt.netlify.app/login">Test Now</a></td>
-<td>Use: user@gmail.com / 12345678</td>
-<td>Successful login, redirect to home</td>
+<td>Use demo credentials</td>
+<td>Successful login</td>
 </tr>
 <tr>
 <td><strong>Admin Login</strong></td>
 <td><a href="https://kcartt.netlify.app/login">Test Now</a></td>
-<td>Use: admin@kcart.com / admin123</td>
-<td>Admin access, dashboard available</td>
+<td>Use admin credentials</td>
+<td>Admin dashboard access</td>
 </tr>
 <tr>
 <td><strong>Product Browsing</strong></td>
 <td><a href="https://kcartt.netlify.app/collection">Test Now</a></td>
-<td>Browse products, use filters</td>
-<td>20 products displayed, filters work</td>
+<td>Browse and filter products</td>
+<td>20 products displayed</td>
 </tr>
 <tr>
 <td><strong>Add to Cart</strong></td>
 <td><a href="https://kcartt.netlify.app/collection">Test Now</a></td>
-<td>Select product, choose size, add</td>
-<td>Item added, cart count updates</td>
+<td>Select product and size</td>
+<td>Cart updates</td>
 </tr>
 <tr>
-<td><strong>Checkout Process</strong></td>
+<td><strong>Checkout</strong></td>
 <td><a href="https://kcartt.netlify.app/cart">Test Now</a></td>
-<td>Go to cart, proceed to checkout</td>
-<td>Order form, payment options</td>
+<td>Proceed to checkout</td>
+<td>Payment options shown</td>
 </tr>
 <tr>
 <td><strong>Admin Dashboard</strong></td>
 <td><a href="https://kcartt.netlify.app/dashboard">Test Now</a></td>
-<td>Login as admin, view analytics</td>
-<td>Charts, user data, order stats</td>
+<td>View analytics</td>
+<td>Charts and data displayed</td>
 </tr>
 </table>
-
-### 🛠️ **API Testing**
-```bash
-# Test live API endpoints
-curl -X GET "https://kcartt.netlify.app/api/product/list"
-curl -X POST "https://kcartt.netlify.app/api/user/login" \
-  -H "Content-Type: application/json" \
-  -d '{"email":"user@gmail.com","password":"12345678"}'
-```
 
 ---
 
 ## 🤝 **Contributing**
 
-We welcome contributions! Please follow these steps:
-
-1. **Fork** the repository
-2. **Create** a feature branch (`git checkout -b feature/AmazingFeature`)
-3. **Commit** your changes (`git commit -m 'Add some AmazingFeature'`)
-4. **Push** to the branch (`git push origin feature/AmazingFeature`)
-5. **Open** a Pull Request
-
-### Development Guidelines
-- Follow ESLint configuration
-- Write meaningful commit messages
-- Add tests for new features
-- Update documentation
-- Ensure responsive design
+Contributions are welcome! Feel free to:
+- Fork the repository
+- Create a feature branch
+- Submit a pull request
 
 ---
 
 ## 📄 **License**
 
-This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
-
----
-
-## 👨‍💻 **Author**
-
-<div align="center">
-
-**Kirtan Panchal**
-
-[![GitHub](https://img.shields.io/badge/GitHub-kirtan597-black?style=flat-square&logo=github)](https://github.com/kirtan597)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat-square&logo=linkedin)](https://linkedin.com/in/kirtan597)
-[![Email](https://img.shields.io/badge/Email-Contact-red?style=flat-square&logo=gmail)](mailto:kirtan597@gmail.com)
-
-*Full-Stack Developer | E-commerce Specialist | AI Enthusiast*
-
-</div>
-
----
-
-## 🙏 **Acknowledgments**
-
-- **React Team** for the amazing framework
-- **Tailwind CSS** for the utility-first CSS framework
-- **Framer Motion** for smooth animations
-- **Cloudinary** for image management
-- **MongoDB** for the database solution
-- **Netlify** for seamless deployment
+This project is licensed under the **MIT License**.
 
 ---
 
@@ -760,7 +341,7 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 [![GitHub](https://img.shields.io/badge/GitHub-kirtan597-black?style=flat-square&logo=github)](https://github.com/kirtan597)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat-square&logo=linkedin)](https://linkedin.com/in/kirtan597)
-[![Email](https://img.shields.io/badge/Email-Contact-red?style=flat-square&logo=gmail)](mailto:kirtan597@gmail.com)
+[![Email](https://img.shields.io/badge/Email-Contact-red?style=flat-square&logo=gmail)](mailto:kirtan.2082006@gmail.com)
 
 **Full-Stack Developer | E-commerce Specialist | React Expert**
 
