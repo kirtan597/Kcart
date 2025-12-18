@@ -55,7 +55,8 @@ const Login = () => {
           }
         } catch (endpointError) {
           console.log(`Endpoint ${endpoint} failed:`, endpointError.message);
-          continue; // Try next endpoint
+          // Don't throw error here, just continue to next endpoint
+          continue;
         }
       }
       
@@ -80,6 +81,7 @@ const Login = () => {
               message: 'Account created successfully'
             }
           };
+          apiWorked = true; // Mark as successful
         } else {
           // For login, check demo users
           const user = demoUsers.find(u => u.email === email && u.password === password);
@@ -93,6 +95,7 @@ const Login = () => {
                 message: 'Login successful'
               }
             };
+            apiWorked = true; // Mark as successful
           } else {
             throw new Error('Invalid email or password. Please check your credentials and try again.');
           }
@@ -136,11 +139,14 @@ const Login = () => {
         toast.error(errorMessage);
       }
     } catch (error) {
-      // Handle different types of errors with user-friendly messages
-      let errorMessage = error.message || "Unable to connect to the server. Please check your internet connection and try again.";
+      // If we reach here, it means fallback authentication also failed
+      console.error('Login error:', error);
       
+      // Handle different types of errors with user-friendly messages
+      let errorMessage = error.message || "Invalid email or password. Please check your credentials and try again.";
+      
+      // Don't show network errors since we have fallback
       if (error.response) {
-        // Server responded with error status
         const status = error.response.status;
         const serverMessage = error.response.data?.message;
         
@@ -148,22 +154,9 @@ const Login = () => {
           errorMessage = "Invalid email or password. Please check your credentials and try again.";
         } else if (status === 400) {
           errorMessage = serverMessage || "Please check your information and try again.";
-        } else if (status === 404) {
-          errorMessage = "Authentication service is temporarily unavailable. Using demo mode.";
-          // Don't show error for 404, as we have fallback
-          return;
-        } else if (status >= 500) {
-          errorMessage = "Server error. Please try again in a few moments.";
         } else if (serverMessage) {
           errorMessage = serverMessage;
         }
-      } else if (error.request) {
-        // Network error - but we have fallback, so don't show error
-        errorMessage = "Using offline demo mode.";
-        return;
-      } else if (error.code === 'ECONNABORTED') {
-        // Timeout error
-        errorMessage = "Request timeout. Please try again.";
       }
       
       toast.error(errorMessage);
