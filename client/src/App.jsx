@@ -26,9 +26,10 @@ import SearchResults from "./pages/SearchResults";
 import ScrollToTop from "./components/ScrollToTop";
 
 const App = () => {
-  // Initialize demo data for dashboard
+  // Initialize demo data for dashboard (only if needed)
   useEffect(() => {
-    initializeDemoData(true); // Force refresh with new Indian names
+    // Only initialize demo data if no existing data
+    initializeDemoData(false);
   }, []);
 
   // Initialize Lenis smooth scrolling with optimized settings

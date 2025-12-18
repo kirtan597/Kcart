@@ -48,8 +48,7 @@ const ShopContextProvider = (props) => {
           { headers: { token } }
         );
       } catch (error) {
-        console.warn("Cart add failed:", error.message);
-        // Removed toast error for cleaner development experience
+        // Silently handle cart add failure
       }
     }
   };
@@ -67,8 +66,7 @@ const ShopContextProvider = (props) => {
           { headers: { token } }
         );
       } catch (error) {
-        console.warn("Cart update failed:", error.message);
-        // Removed toast error for cleaner development experience
+        // Silently handle cart update failure
       }
     }
   };
@@ -105,8 +103,6 @@ const ShopContextProvider = (props) => {
     setIsLoadingProducts(true);
     
     try {
-      console.log("🔍 Fetching products from API:", backendUrl + "/api/product/list");
-      
       // Set a timeout for the API call
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
@@ -117,32 +113,15 @@ const ShopContextProvider = (props) => {
       });
       
       clearTimeout(timeoutId);
-      console.log("📦 API Response:", response.data);
       
       if (response.data.success && response.data.products && response.data.products.length > 0) {
-        console.log("✅ API products loaded successfully:", response.data.products.length, "products");
         setProducts(response.data.products);
-        // Removed toast notification for cleaner development experience
       } else {
-        console.warn("⚠️ API returned no products, using fallback");
         setProducts(fallbackProducts);
-        // Removed toast notification for cleaner development experience
       }
     } catch (error) {
-      console.error("💥 Error fetching products from API:", error);
-      console.log("🔄 Using fallback products instead");
-      
-      // Always use fallback products if API fails
+      // Silently use fallback products if API fails
       setProducts(fallbackProducts);
-      
-      if (error.name === 'AbortError') {
-        console.warn(`⏱️ API timeout - showing ${fallbackProducts.length} demo products`);
-      } else {
-        console.warn(`🔌 API unavailable - showing ${fallbackProducts.length} demo products`);
-      }
-      // Removed toast notifications for cleaner development experience
-      
-      console.log("✅ Fallback products loaded:", fallbackProducts.length, "products");
     } finally {
       setIsLoadingProducts(false);
     }
@@ -158,12 +137,10 @@ const ShopContextProvider = (props) => {
       if (response.data.success) {
         setCartItems(response.data.cartData);
       } else {
-        console.warn("Get cart failed:", response.data.message);
-        // Removed toast error for cleaner development experience
+        // Silently handle cart get failure
       }
     } catch (error) {
-      console.warn("Get cart error:", error.message);
-      // Removed toast error for cleaner development experience
+      // Silently handle cart get error
     }
   };
 
