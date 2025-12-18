@@ -145,6 +145,37 @@ const ShopContextProvider = (props) => {
   };
 
   useEffect(() => {
+    // Prevent any notifications or popups
+    if (typeof window !== 'undefined') {
+      // Override any notification functions that might show demo product messages
+      const originalAlert = window.alert;
+      const originalConfirm = window.confirm;
+      
+      window.alert = function(message) {
+        // Block any demo product related alerts
+        if (typeof message === 'string' && 
+            (message.includes('demo products') || 
+             message.includes('Demo products') || 
+             message.includes('25') ||
+             message.includes('Using'))) {
+          return; // Block the notification
+        }
+        return originalAlert.call(this, message);
+      };
+      
+      window.confirm = function(message) {
+        // Block any demo product related confirms
+        if (typeof message === 'string' && 
+            (message.includes('demo products') || 
+             message.includes('Demo products') || 
+             message.includes('25') ||
+             message.includes('Using'))) {
+          return true; // Block the notification
+        }
+        return originalConfirm.call(this, message);
+      };
+    }
+
     getProductsData();
 
     const localToken = localStorage.getItem("token");

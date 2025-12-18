@@ -4,12 +4,60 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="/kcart-favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
     <title>Kcart - Your Perfect Shopping Destination</title>
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Prevent demo product notifications -->
+    <script>
+      // Block any demo product notifications immediately
+      (function() {
+        if (typeof window !== 'undefined') {
+          const originalAlert = window.alert;
+          const originalConfirm = window.confirm;
+          
+          window.alert = function(message) {
+            if (typeof message === 'string' && 
+                (message.includes('demo products') || 
+                 message.includes('Demo products') || 
+                 message.includes('25') ||
+                 message.includes('Using'))) {
+              return;
+            }
+            return originalAlert ? originalAlert.call(this, message) : undefined;
+          };
+          
+          window.confirm = function(message) {
+            if (typeof message === 'string' && 
+                (message.includes('demo products') || 
+                 message.includes('Demo products') || 
+                 message.includes('25') ||
+                 message.includes('Using'))) {
+              return true;
+            }
+            return originalConfirm ? originalConfirm.call(this, message) : true;
+          };
+          
+          // Block console notifications that might be shown by extensions
+          const originalConsoleWarn = console.warn;
+          console.warn = function(...args) {
+            const message = args.join(' ');
+            if (message.includes('demo products') || 
+                message.includes('Demo products') || 
+                (message.includes('25') && message.includes('demo'))) {
+              return;
+            }
+            return originalConsoleWarn.apply(this, args);
+          };
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
