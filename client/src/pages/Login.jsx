@@ -297,41 +297,6 @@ const Login = () => {
             </button>
           </form>
 
-          {/* Demo Credentials (Login only) */}
-          {!isSignUp && (
-            <div className="mt-6 p-4 bg-gray-50 rounded-xl border border-gray-200">
-              <h3 className="text-sm font-semibold text-gray-700 mb-2">Demo Credentials:</h3>
-              <div className="space-y-2 text-sm">
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-600">User Account:</span>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setEmail('user@gmail.com');
-                      setPassword('12345678');
-                    }}
-                    className="text-blue-600 hover:text-blue-800 font-medium underline"
-                  >
-                    user@gmail.com / 12345678
-                  </button>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-600">Admin Account:</span>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setEmail('admin@kcart.com');
-                      setPassword('admin123');
-                    }}
-                    className="text-blue-600 hover:text-blue-800 font-medium underline"
-                  >
-                    admin@kcart.com / admin123
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
-
           {/* Toggle Sign In/Sign Up */}
           <div className="mt-6 text-center">
             <p className="text-gray-600">
