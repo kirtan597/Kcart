@@ -6,7 +6,17 @@
 [build.environment]
   NODE_VERSION = "20"
 
-# API Routes - Redirect to Netlify Functions
+# API Routes - Redirect to Netlify Functions (Order matters!)
+[[redirects]]
+  from = "/user"
+  to = "/.netlify/functions/user"
+  status = 200
+
+[[redirects]]
+  from = "/api/user/*"
+  to = "/.netlify/functions/user"
+  status = 200
+
 [[redirects]]
   from = "/api/product/simple"
   to = "/.netlify/functions/simple-products"
@@ -23,21 +33,11 @@
   status = 200
 
 [[redirects]]
-  from = "/api/user/*"
-  to = "/.netlify/functions/user"
-  status = 200
-
-[[redirects]]
-  from = "/user"
-  to = "/.netlify/functions/user"
-  status = 200
-
-[[redirects]]
   from = "/api/order/*"
   to = "/.netlify/functions/orders"
   status = 200
 
-# SPA Fallback
+# SPA Fallback (Must be last!)
 [[redirects]]
   from = "/*"
   to = "/index.html"

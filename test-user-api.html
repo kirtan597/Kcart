@@ -53,27 +53,43 @@
             const password = document.getElementById('loginPassword').value;
             const resultDiv = document.getElementById('loginResult');
             
-            try {
-                console.log('Testing login with URL:', baseUrl + '/user');
-                const response = await fetch(baseUrl + '/user', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ email, password })
-                });
-                
-                const data = await response.json();
-                console.log('Login response:', response.status, data);
-                
-                if (response.ok) {
-                    resultDiv.innerHTML = `<div class="success">✅ Login successful! Token: ${data.token}</div>`;
-                } else {
-                    resultDiv.innerHTML = `<div class="error">❌ Login failed: ${data.message || 'Unknown error'}</div>`;
+            // Try multiple endpoints
+            const endpoints = [
+                baseUrl + '/user',
+                '/.netlify/functions/user',
+                '/user'
+            ];
+            
+            let success = false;
+            
+            for (const endpoint of endpoints) {
+                try {
+                    console.log('Testing login with URL:', endpoint);
+                    const response = await fetch(endpoint, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ email, password })
+                    });
+                    
+                    const data = await response.json();
+                    console.log('Login response:', response.status, data);
+                    
+                    if (response.ok && data.success) {
+                        resultDiv.innerHTML = `<div class="success">✅ Login successful with ${endpoint}! Token: ${data.token}</div>`;
+                        success = true;
+                        break;
+                    } else {
+                        console.log(`Endpoint ${endpoint} failed:`, data.message);
+                    }
+                } catch (error) {
+                    console.error(`Endpoint ${endpoint} error:`, error);
                 }
-            } catch (error) {
-                console.error('Login error:', error);
-                resultDiv.innerHTML = `<div class="error">❌ Network error: ${error.message}</div>`;
+            }
+            
+            if (!success) {
+                resultDiv.innerHTML = `<div class="error">❌ All endpoints failed. Check console for details.</div>`;
             }
         }
         

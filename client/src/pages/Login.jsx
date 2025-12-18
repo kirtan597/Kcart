@@ -26,17 +26,42 @@ const Login = () => {
 
     setIsLoading(true);
     try {
-      // Try the Netlify function first
+      // Try multiple endpoints for better reliability
       let response;
-      try {
-        response = await axios.post(backendUrl + "/user", {
-          name: isSignUp ? name : undefined,
-          email,
-          password,
-        });
-      } catch (apiError) {
-        // If API fails, use local fallback authentication
-        console.log('API failed, using fallback authentication');
+      let apiWorked = false;
+      
+      // List of endpoints to try
+      const endpoints = [
+        backendUrl + "/user",
+        "/.netlify/functions/user",
+        "/api/user/auth"
+      ];
+      
+      for (const endpoint of endpoints) {
+        try {
+          console.log(`Trying endpoint: ${endpoint}`);
+          response = await axios.post(endpoint, {
+            name: isSignUp ? name : undefined,
+            email,
+            password,
+          }, {
+            timeout: 5000 // 5 second timeout per endpoint
+          });
+          
+          if (response.data.success) {
+            apiWorked = true;
+            console.log(`Success with endpoint: ${endpoint}`);
+            break;
+          }
+        } catch (endpointError) {
+          console.log(`Endpoint ${endpoint} failed:`, endpointError.message);
+          continue; // Try next endpoint
+        }
+      }
+      
+      // If no API endpoint worked, use fallback authentication
+      if (!apiWorked) {
+        console.log('All API endpoints failed, using fallback authentication');
         
         // Demo users for fallback
         const demoUsers = [

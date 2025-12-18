@@ -41,6 +41,20 @@ export const handler = async (event, context) => {
   const body = event.body ? JSON.parse(event.body) : {};
   
   try {
+    // GET /user - Health check
+    if (httpMethod === 'GET') {
+      return {
+        statusCode: 200,
+        headers,
+        body: JSON.stringify({
+          success: true,
+          message: 'User API is working',
+          timestamp: new Date().toISOString(),
+          availableUsers: demoUsers.map(u => ({ email: u.email, isAdmin: u.isAdmin || false }))
+        })
+      };
+    }
+
     // POST /user - Handle user operations based on body content
     if (httpMethod === 'POST') {
       console.log('POST request body:', body);
