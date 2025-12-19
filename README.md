@@ -1,350 +1,198 @@
 <div align="center">
 
-# 🛒 **Kcart** - Next-Gen E-commerce Platform
+# 👋 Hi, I'm Kirtan Panchal
 
-<img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=22&duration=3000&pause=1000&color=000000&center=true&vCenter=true&width=600&lines=Full-Stack+E-commerce+Solution;React+%7C+Node.js+%7C+MongoDB;AI-Powered+Analytics+Dashboard;20%2B+Products+%7C+Live+Demo+Ready" alt="Typing SVG" />
+<img src="https://readme-typing-svg.demolab.com/?lines=🎓+B.Tech+Computer+Science+Student;💻+Full+Stack+Web+Developer;🚀+AI+%26+ML+Enthusiast;🎨+UI/UX+Design+Lover;🌟+Open+Source+Contributor;🔥+Problem+Solver+%26+Innovator&font=Fira%20Code&center=true&width=600&height=50&color=00D9FF&vCenter=true&pause=1000&size=22" />
 
-[![Live Demo](https://img.shields.io/badge/🚀%20LIVE%20DEMO-kcartt.netlify.app-success?style=for-the-badge&logo=netlify&logoColor=white)](https://kcartt.netlify.app)
-[![GitHub](https://img.shields.io/badge/📂%20SOURCE-GitHub%20Repository-black?style=for-the-badge&logo=github)](https://github.com/kirtan597/Kcart)
-[![Deployment](https://img.shields.io/badge/⚡%20DEPLOYMENT-Auto%20Deploy-blue?style=for-the-badge&logo=netlify)](https://app.netlify.com/sites/kcartt/deploys)
+<img src="https://user-images.githubusercontent.com/74038190/225813708-98b745f2-7d22-48cf-9150-083f1b00d6c9.gif" width="500"/>
 
-<img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="700">
+<div align="center">
+<img src="https://komarev.com/ghpvc/?username=kirtan597&label=Profile%20Views&color=00d9ff&style=for-the-badge" alt="Profile Views" />
+<img src="https://img.shields.io/github/followers/kirtan597?label=Followers&style=for-the-badge&color=00d9ff&logo=github" alt="GitHub Followers" />
+<img src="https://img.shields.io/github/stars/kirtan597?label=Stars&style=for-the-badge&color=00d9ff&logo=github" alt="GitHub Stars" />
+</div>
 
 </div>
 
-## 🌐 **Live Deployment**
+<img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
+
+## 🚀 About Me
+
+<img align="right" alt="Coding" width="400" src="https://user-images.githubusercontent.com/74038190/229223263-cf2e4b07-2615-4f87-9c38-e37600f8381a.gif">
+
+- 🎓 B.Tech in Computer Science Engineering
+- 💻 Full Stack Developer passionate about creating impactful applications
+- 🌱 Currently mastering MERN Stack, AI/ML, and Cloud Technologies
+- 🤖 Exploring AI integration in web applications
+- 👨‍💻 Love competitive programming and open source contributions
+- 🎨 UI/UX enthusiast with an eye for modern design
+- 🚀 Always learning and building innovative tech solutions
+- 🌐 Portfolio: https://portfolio-2-0-green.vercel.app/
+
+<img src="https://user-images.githubusercontent.com/74038190/212284158-e840e285-664b-44d7-b79b-e264b5e54825.gif" width="100%">
+
+## 🛠️ Tech Arsenal
 
 <div align="center">
 
 <img src="https://user-images.githubusercontent.com/74038190/212257454-16e3712e-945a-4ca2-b238-408ad0bf87e6.gif" width="100">
-
-### **Production Environment**
-[![Netlify Status](https://api.netlify.com/api/v1/badges/a1b2c3d4-e5f6-7890-abcd-ef1234567890/deploy-status)](https://app.netlify.com/sites/kcartt/deploys)
-[![Website](https://img.shields.io/website?down_color=red&down_message=offline&up_color=green&up_message=online&url=https%3A%2F%2Fkcartt.netlify.app)](https://kcartt.netlify.app)
-[![Uptime](https://img.shields.io/uptimerobot/ratio/m793494864-dcfc71e5c84c2d926c4f509b?style=flat-square)](https://kcartt.netlify.app)
-
-**🔗 Live URL**: [`kcartt.netlify.app`](https://kcartt.netlify.app)  
-**🚀 CDN**: Netlify Edge Network  
-**⚡ Backend**: Serverless Functions  
-**🗄️ Database**: MongoDB Atlas  
-
-</div>
-
-## 🎯 **Quick Access**
-
-<div align="center">
-
-| 🎭 **Role** | 📧 **Email** | 🔐 **Password** | 🔗 **Direct Access** |
-|-------------|--------------|-----------------|----------------------|
-| 👤 **Customer** | `user@gmail.com` | `12345678` | [![Login](https://img.shields.io/badge/Login-Customer-green?style=flat-square)](https://kcartt.netlify.app/login) |
-| 👨‍💼 **Admin** | `admin@kcart.com` | `admin123` | [![Login](https://img.shields.io/badge/Login-Admin-blue?style=flat-square)](https://kcartt.netlify.app/login) |
-
-[![🛒 Shop Products](https://img.shields.io/badge/🛒%20Shop-20%20Products-success?style=for-the-badge)](https://kcartt.netlify.app/collection)
-[![📊 Analytics](https://img.shields.io/badge/📊%20Dashboard-Live%20Data-blue?style=for-the-badge)](https://kcartt.netlify.app/dashboard)
-[![💳 Checkout](https://img.shields.io/badge/💳%20Demo%20Order-Payment%20Flow-orange?style=for-the-badge)](https://kcartt.netlify.app/place-order)
-
-</div>
-
-## ✨ **Features**
-
-<div align="center">
-
+<img src="https://user-images.githubusercontent.com/74038190/212257472-08e52665-c503-4bd9-aa20-f5a4dae769b5.gif" width="100">
+<img src="https://user-images.githubusercontent.com/74038190/212257468-1e9a91f1-b626-4baa-b15d-5c385dfa7ed2.gif" width="100">
 <img src="https://user-images.githubusercontent.com/74038190/212257465-7ce8d493-cac5-494e-982a-5a9deb852c4b.gif" width="100">
-
-### **🎯 Core Functionality**
-
-<table>
-<tr>
-<td align="center" width="25%">
-<img src="https://user-images.githubusercontent.com/74038190/212257454-16e3712e-945a-4ca2-b238-408ad0bf87e6.gif" width="60"><br>
-<strong>🛒 E-commerce</strong><br>
-<sub>Product Catalog & Shopping Cart</sub>
-</td>
-<td align="center" width="25%">
-<img src="https://user-images.githubusercontent.com/74038190/212257460-738ff738-247f-4445-a718-cdd0ca76e2db.gif" width="60"><br>
-<strong>🔐 Authentication</strong><br>
-<sub>Secure User & Admin Access</sub>
-</td>
-<td align="center" width="25%">
-<img src="https://user-images.githubusercontent.com/74038190/212257467-871d32b7-e401-42e8-a166-fcfd7baa4c6b.gif" width="60"><br>
-<strong>📊 Analytics</strong><br>
-<sub>Real-time Dashboard Insights</sub>
-</td>
-<td align="center" width="25%">
-<img src="https://user-images.githubusercontent.com/74038190/212257472-08e52665-c503-4bd9-aa20-f5a4dae769b5.gif" width="60"><br>
-<strong>💳 Payments</strong><br>
-<sub>Multiple Payment Gateways</sub>
-</td>
-</tr>
-</table>
-
-</div>
-
-### **🎨 User Experience**
-- Minimalist design with smooth animations
-- Responsive layout for all devices
-- Advanced product filtering and search
-- Real-time cart management
-- Seamless checkout process
-
-### **📊 Admin Dashboard**
-- Live sales analytics and charts
-- User session monitoring
-- Order management system
-- Product inventory control
-- AI-powered insights
-
----
-
-## 🛠️ **Tech Stack**
-
-<div align="center">
-
+<img src="https://user-images.githubusercontent.com/74038190/212257460-738ff738-247f-4445-a718-cdd0ca76e2db.gif" width="100">
 <img src="https://user-images.githubusercontent.com/74038190/212257467-871d32b7-e401-42e8-a166-fcfd7baa4c6b.gif" width="100">
 
-<table>
-<tr>
-<td align="center" width="25%">
-<img src="https://skillicons.dev/icons?i=react" width="48" height="48" alt="React" />
-<br><strong>React 18</strong>
-</td>
-<td align="center" width="25%">
-<img src="https://skillicons.dev/icons?i=vite" width="48" height="48" alt="Vite" />
-<br><strong>Vite 5</strong>
-</td>
-<td align="center" width="25%">
-<img src="https://skillicons.dev/icons?i=tailwind" width="48" height="48" alt="Tailwind" />
-<br><strong>Tailwind CSS</strong>
-</td>
-<td align="center" width="25%">
-<img src="https://skillicons.dev/icons?i=nodejs" width="48" height="48" alt="Node.js" />
-<br><strong>Node.js 18</strong>
-</td>
-</tr>
-<tr>
-<td align="center" width="25%">
-<img src="https://skillicons.dev/icons?i=express" width="48" height="48" alt="Express" />
-<br><strong>Express</strong>
-</td>
-<td align="center" width="25%">
-<img src="https://skillicons.dev/icons?i=mongodb" width="48" height="48" alt="MongoDB" />
-<br><strong>MongoDB</strong>
-</td>
-<td align="center" width="25%">
-<img src="https://skillicons.dev/icons?i=netlify" width="48" height="48" alt="Netlify" />
-<br><strong>Netlify</strong>
-</td>
-<td align="center" width="25%">
-<img src="https://skillicons.dev/icons?i=cloudflare" width="48" height="48" alt="CDN" />
-<br><strong>CDN</strong>
-</td>
-</tr>
-</table>
+### 💻 Programming Languages
+<img src="https://skillicons.dev/icons?i=c,cpp,js,ts,python,java,php" />
 
-![React](https://img.shields.io/badge/React-18.x-61DAFB?style=flat-square&logo=react&logoColor=white)
-![Vite](https://img.shields.io/badge/Vite-5.x-646CFF?style=flat-square&logo=vite&logoColor=white)
-![Tailwind](https://img.shields.io/badge/Tailwind-3.x-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white)
-![Node.js](https://img.shields.io/badge/Node.js-18.x-339933?style=flat-square&logo=node.js&logoColor=white)
-![MongoDB](https://img.shields.io/badge/MongoDB-6.x-47A248?style=flat-square&logo=mongodb&logoColor=white)
-![Netlify](https://img.shields.io/badge/Netlify-Serverless-00C7B7?style=flat-square&logo=netlify&logoColor=white)
+### 🌐 Frontend Development
+<img src="https://skillicons.dev/icons?i=react,nextjs,angular,vue,html,css,sass,tailwind" />
+
+### ⚙️ Backend Development
+<img src="https://skillicons.dev/icons?i=nodejs,express,django,flask,spring,laravel" />
+
+### 🗄️ Databases & Cloud
+<img src="https://skillicons.dev/icons?i=mongodb,mysql,postgresql,redis,firebase,aws,gcp,netlify" />
+
+### 🔧 Tools & Technologies
+<img src="https://skillicons.dev/icons?i=git,github,docker,kubernetes,figma,vscode,postman" />
 
 </div>
 
----
-
-## 🚀 **Deployment Architecture**
+## 📊 GitHub Analytics
 
 <div align="center">
 
-<img src="https://user-images.githubusercontent.com/74038190/212284087-bbe7e430-757e-4901-90bf-4cd2ce3e1852.gif" width="100">
-
-### **🌐 Production Infrastructure**
-
-```mermaid
-graph TB
-    A[👨‍💻 Developer] -->|git push| B[📂 GitHub Repository]
-    B -->|Auto Deploy| C[🌐 Netlify CDN]
-    C --> D[📱 React Frontend]
-    C --> E[⚡ Serverless Functions]
-    E --> F[🗄️ MongoDB Atlas]
-    E --> G[📸 Cloudinary CDN]
-    
-    style C fill:#00C7B7
-    style D fill:#61DAFB
-    style E fill:#FF6B6B
-    style F fill:#47A248
-    style G fill:#3448C5
-```
-
-**🔗 Live URL**: [`kcartt.netlify.app`](https://kcartt.netlify.app)  
-**⚡ Edge Locations**: Global CDN  
-**🔄 Deploy Time**: ~2 minutes  
-**📊 Uptime**: 99.9%  
+<img width="49%" src="https://github-readme-stats.vercel.app/api?username=kirtan597&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0D1117&title_color=00D9FF&icon_color=00D9FF&text_color=FFFFFF&count_private=true&include_all_commits=true" />
+<img width="49%" src="https://github-readme-streak-stats.herokuapp.com/?user=kirtan597&theme=tokyonight&hide_border=true&background=0D1117&stroke=00D9FF&ring=00D9FF&fire=FF6B6B&currStreakLabel=00D9FF" />
 
 </div>
 
----
-
-## 📡 **API Documentation**
-
 <div align="center">
 
-<img src="https://user-images.githubusercontent.com/74038190/212257460-738ff738-247f-4445-a718-cdd0ca76e2db.gif" width="100">
-
-### **🌐 Live API**: [`kcartt.netlify.app/api`](https://kcartt.netlify.app/api)
-
-[![API Status](https://img.shields.io/badge/API-Online-success?style=for-the-badge&logo=fastapi)](https://kcartt.netlify.app/api/product/list)
-[![Response Time](https://img.shields.io/badge/Response-<200ms-green?style=for-the-badge)](https://kcartt.netlify.app/api)
-[![Uptime](https://img.shields.io/badge/Uptime-99.9%25-brightgreen?style=for-the-badge)](https://kcartt.netlify.app)
-
-### **Available Endpoints**
-- 🔐 Authentication (Login, Register, Admin)
-- 🛍️ Products (List, Single, Add, Remove)
-- 🛒 Cart (Add, Update, Get)
-- 📦 Orders (Place, List, Status)
+<img width="49%" src="https://github-readme-stats.vercel.app/api/top-langs/?username=kirtan597&layout=compact&theme=tokyonight&hide_border=true&bg_color=0D1117&title_color=00D9FF&text_color=FFFFFF&langs_count=10" />
+<img width="49%" src="https://github-profile-summary-cards.vercel.app/api/cards/productive-time?username=kirtan597&theme=tokyonight&utcOffset=5.5" />
 
 </div>
 
----
-
-## ⚡ **Performance Metrics**
-
 <div align="center">
 
-<img src="https://user-images.githubusercontent.com/74038190/212257472-08e52665-c503-4bd9-aa20-f5a4dae769b5.gif" width="100">
-
-[![PageSpeed](https://img.shields.io/badge/PageSpeed-95%2B-success?style=for-the-badge&logo=lighthouse)](https://pagespeed.web.dev/analysis?url=https%3A%2F%2Fkcartt.netlify.app)
-[![Load Time](https://img.shields.io/badge/Load%20Time-<2s-brightgreen?style=for-the-badge)](https://kcartt.netlify.app)
-[![SEO Score](https://img.shields.io/badge/SEO-98%2F100-green?style=for-the-badge)](https://kcartt.netlify.app)
-
-### **📊 Core Web Vitals**
-
-| Metric | Score | Status |
-|--------|-------|--------|
-| 🎨 **First Contentful Paint** | < 1.5s | ✅ Excellent |
-| 🖼️ **Largest Contentful Paint** | < 2.5s | ✅ Excellent |
-| 📏 **Cumulative Layout Shift** | < 0.1 | ✅ Excellent |
-| ⚡ **Time to Interactive** | < 3s | ✅ Excellent |
-| 🖱️ **First Input Delay** | < 100ms | ✅ Excellent |
+<img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=kirtan597&theme=tokyonight" width="100%" />
 
 </div>
 
----
-
-## 🧪 **Live Testing**
+## 🏆 GitHub Trophies
 
 <div align="center">
 
-### 🔍 **Test the Live Application**
-
-[![Test Authentication](https://img.shields.io/badge/🔐%20Test%20Login-Demo%20Credentials-green?style=for-the-badge)](https://kcartt.netlify.app/login)
-[![Test Shopping](https://img.shields.io/badge/🛒%20Test%20Shopping-Add%20to%20Cart-blue?style=for-the-badge)](https://kcartt.netlify.app/collection)
-[![Test Dashboard](https://img.shields.io/badge/📊%20Test%20Analytics-Admin%20Panel-purple?style=for-the-badge)](https://kcartt.netlify.app/dashboard)
+<img src="https://github-profile-trophy.vercel.app/?username=kirtan597&theme=tokyonight&no-frame=true&no-bg=true&margin-w=4&row=2&column=4" />
 
 </div>
 
-### 🎯 **Testing Scenarios**
-
-<table>
-<tr>
-<th>🧪 Test Case</th>
-<th>🔗 Live Link</th>
-<th>📋 Instructions</th>
-<th>✅ Expected Result</th>
-</tr>
-<tr>
-<td><strong>User Registration</strong></td>
-<td><a href="https://kcartt.netlify.app/login">Test Now</a></td>
-<td>Create new account</td>
-<td>Account created, auto-login</td>
-</tr>
-<tr>
-<td><strong>User Login</strong></td>
-<td><a href="https://kcartt.netlify.app/login">Test Now</a></td>
-<td>Use demo credentials</td>
-<td>Successful login</td>
-</tr>
-<tr>
-<td><strong>Admin Login</strong></td>
-<td><a href="https://kcartt.netlify.app/login">Test Now</a></td>
-<td>Use admin credentials</td>
-<td>Admin dashboard access</td>
-</tr>
-<tr>
-<td><strong>Product Browsing</strong></td>
-<td><a href="https://kcartt.netlify.app/collection">Test Now</a></td>
-<td>Browse and filter products</td>
-<td>20 products displayed</td>
-</tr>
-<tr>
-<td><strong>Add to Cart</strong></td>
-<td><a href="https://kcartt.netlify.app/collection">Test Now</a></td>
-<td>Select product and size</td>
-<td>Cart updates</td>
-</tr>
-<tr>
-<td><strong>Checkout</strong></td>
-<td><a href="https://kcartt.netlify.app/cart">Test Now</a></td>
-<td>Proceed to checkout</td>
-<td>Payment options shown</td>
-</tr>
-<tr>
-<td><strong>Admin Dashboard</strong></td>
-<td><a href="https://kcartt.netlify.app/dashboard">Test Now</a></td>
-<td>View analytics</td>
-<td>Charts and data displayed</td>
-</tr>
-</table>
-
----
-
-## 🤝 **Contributing**
-
-Contributions are welcome! Feel free to:
-- Fork the repository
-- Create a feature branch
-- Submit a pull request
-
----
-
-## 📄 **License**
-
-This project is licensed under the **MIT License**.
-
----
+## 📈 Contribution Graph
 
 <div align="center">
 
-<img src="https://user-images.githubusercontent.com/74038190/212284158-e840e285-664b-44d7-b79b-e264b5e54825.gif" width="400">
+<img src="https://github-readme-activity-graph.vercel.app/graph?username=kirtan597&custom_title=Kirtan's%20GitHub%20Activity%20Graph&bg_color=0D1117&color=00D9FF&line=00D9FF&point=FFFFFF&area_color=00D9FF&area=true&hide_border=true" width="100%" />
 
-## 🌟 **Connect & Support**
+</div>
 
-[![Live Demo](https://img.shields.io/badge/🚀%20LIVE%20DEMO-kcartt.netlify.app-success?style=for-the-badge&logo=netlify)](https://kcartt.netlify.app)
-[![GitHub](https://img.shields.io/badge/⭐%20STAR%20REPO-Support%20Project-yellow?style=for-the-badge&logo=github)](https://github.com/kirtan597/Kcart/stargazers)
+## 🐍 Snake Eating My Contributions
 
-### **📊 Project Stats**
-![Stars](https://img.shields.io/github/stars/kirtan597/Kcart?style=social)
-![Forks](https://img.shields.io/github/forks/kirtan597/Kcart?style=social)
-![Issues](https://img.shields.io/github/issues/kirtan597/Kcart?style=social)
-![Contributors](https://img.shields.io/github/contributors/kirtan597/Kcart?style=social)
+<div align="center">
 
-### **🎯 Quick Demo Access**
-[![Customer Demo](https://img.shields.io/badge/👤%20Customer-user@gmail.com-green?style=flat-square)](https://kcartt.netlify.app/login)
-[![Admin Demo](https://img.shields.io/badge/👨‍💼%20Admin-admin@kcart.com-blue?style=flat-square)](https://kcartt.netlify.app/login)
-[![Shop Products](https://img.shields.io/badge/🛒%20Shop-20%20Products-orange?style=flat-square)](https://kcartt.netlify.app/collection)
+<img src="https://raw.githubusercontent.com/platane/snk/output/github-contribution-grid-snake-dark.svg" alt="Snake animation" />
 
----
+</div>
+
+## 🎯 Current Focus
+
+<div align="center">
 
 <img src="https://user-images.githubusercontent.com/74038190/212284115-f47cd8ff-2ffb-4b04-b5bf-4d1c14c0247f.gif" width="100">
 
-### **👨‍💻 Created by Kirtan Panchal**
-
-[![GitHub](https://img.shields.io/badge/GitHub-kirtan597-black?style=flat-square&logo=github)](https://github.com/kirtan597)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat-square&logo=linkedin)](https://linkedin.com/in/kirtan597)
-[![Email](https://img.shields.io/badge/Email-Contact-red?style=flat-square&logo=gmail)](mailto:kirtan.2082006@gmail.com)
-
-**Full-Stack Developer | E-commerce Specialist | React Expert**
-
-<img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=16&duration=2000&pause=1000&color=666666&center=true&vCenter=true&width=400&lines=Thanks+for+visiting+Kcart!;Live+Demo%3A+kcartt.netlify.app;Built+with+React+%26+Node.js" alt="Footer Typing SVG" />
+```javascript
+const kirtan = {
+    currentlyLearning: ["Next.js", "TypeScript", "Machine Learning", "DevOps"],
+    workingOn: ["Full Stack Web Applications", "AI Integration Projects"],
+    collaborating: ["Open Source Projects", "Hackathons", "Tech Communities"],
+    askMeAbout: ["Web Development", "React", "Node.js", "UI/UX Design"],
+    funFact: "I debug with console.log() and I'm proud of it! 😄"
+};
+```
 
 </div>
+
+## 🌟 Featured Projects
+
+<div align="center">
+
+### 🛒 Kcart - E-commerce Platform
+[![Live Demo](https://img.shields.io/badge/🌐%20Live%20Demo-kcartt.netlify.app-success?style=for-the-badge&logo=netlify)](https://kcartt.netlify.app)
+[![GitHub](https://img.shields.io/badge/📁%20GitHub-Repository-black?style=for-the-badge&logo=github)](https://github.com/kirtan597/Kcart)
+
+**Tech Stack:** React.js • Node.js • MongoDB • JWT Authentication • Netlify • Serverless Functions
+
+**Features:** 
+- 🛒 20+ Products with Advanced Filtering
+- 🔐 Secure Authentication (User & Admin)
+- 📊 AI-Powered Analytics Dashboard
+- 💳 Multiple Payment Gateways (Google Pay, Paytm, PhonePe)
+- 📱 Fully Responsive Design
+- ⚡ Real-time Cart Management
+- 🚀 Auto-deployment with 99.9% Uptime
+
+**Demo Credentials:**
+- 👤 Customer: `user@gmail.com / 12345678`
+- 👨‍💼 Admin: `admin@kcart.com / admin123`
+
+[![🛒 Shop Now](https://img.shields.io/badge/🛒%20Shop%20Now-20%20Products-success?style=flat-square)](https://kcartt.netlify.app/collection)
+[![📊 Dashboard](https://img.shields.io/badge/📊%20Analytics-Live%20Data-blue?style=flat-square)](https://kcartt.netlify.app/dashboard)
+[![💳 Checkout](https://img.shields.io/badge/💳%20Demo%20Order-Payment%20Flow-orange?style=flat-square)](https://kcartt.netlify.app/place-order)
+
+---
+
+### 🎬 KPXHub - Entertainment Platform
+[![Live Demo](https://img.shields.io/badge/🌐%20Live%20Demo-kpxhub.netlify.app-success?style=for-the-badge&logo=netlify)](https://kpxhub.netlify.app/)
+[![GitHub](https://img.shields.io/badge/📁%20GitHub-Repository-black?style=for-the-badge&logo=github)](https://github.com/kirtan597/KPXHub)
+
+**Tech Stack:** React.js • JavaScript • CSS • Figma Design
+
+**Features:** Movies & Music Sections • Infinite Scroll • Modal Views • Search & Filter
+
+</div>
+
+
+
+## 📞 Connect With Me
+
+<div align="center">
+
+<img src="https://user-images.githubusercontent.com/74038190/235294019-40007353-6219-4ec5-b661-b3c35136dd0b.gif" width="300">
+
+### ⭐ Let's Build Something Amazing Together!
+
+[![Portfolio](https://img.shields.io/badge/🌐%20Portfolio-Visit%20Now-success?style=for-the-badge)](https://portfolio-2-0-green.vercel.app/)
+[![GitHub](https://img.shields.io/badge/📂%20GitHub-Follow%20Me-black?style=for-the-badge&logo=github)](https://github.com/kirtan597)
+[![LinkedIn](https://img.shields.io/badge/💼%20LinkedIn-Connect-blue?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/kirtan-panchal-309760320)
+[![Email](https://img.shields.io/badge/📧%20Email-Contact%20Me-red?style=for-the-badge&logo=gmail)](mailto:kirtanpanchal597@gmail.com)
+
+</div>
+
+<div align="center">
+
+## ⭐ Show Your Support
+
+If you like my work, please consider giving it a ⭐!
+
+[![Repositories](https://img.shields.io/badge/📁%20View%20All%20Repositories-Explore%20More-orange?style=for-the-badge&logo=github)](https://github.com/kirtan597?tab=repositories)
+
+<img src="https://user-images.githubusercontent.com/74038190/212284115-f47cd8ff-2ffb-4b04-b5bf-4d1c14c0247f.gif" width="100">
+
+### Made with ❤️ by Kirtankumar Panchal
+
+© 2025 Kirtan Panchal. All rights reserved.
+
+</div>
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=150&section=footer&text=Thanks%20for%20visiting!&fontSize=42&fontColor=fff&animation=twinkling&fontAlignY=65"/>
