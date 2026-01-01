@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { assets } from "../assets/assets";
 import {
   FaInstagram,
@@ -20,7 +21,7 @@ const Footer = () => {
   const linkClass = "text-gray-400 hover:text-white transition-colors duration-300 underline";
 
   return (
-    <footer 
+    <footer
       className="bg-black text-white relative min-h-[400px] w-full bg-cover bg-center bg-no-repeat"
       style={{
         backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)), url(${assets.footer_bg})`,
@@ -38,13 +39,13 @@ const Footer = () => {
               Kcart — curating excellence in every product. We're here to
               elevate your lifestyle with exceptional quality and care.
             </p>
-            
+
             {/* Social Media Links */}
             <div className="mb-4">
               <h4 className="text-sm font-semibold text-white mb-2">Connect With Us</h4>
               <div className="flex space-x-3">
-                <a 
-                  href="https://www.instagram.com/kirtannn_18/" 
+                <a
+                  href="https://www.instagram.com/kirtannn_18/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-400 hover:text-white p-2 border-2 border-gray-600 hover:border-white transition-all duration-300"
@@ -52,8 +53,8 @@ const Footer = () => {
                 >
                   <FaInstagram className="w-4 h-4" />
                 </a>
-                <a 
-                  href="https://github.com/kirtan597" 
+                <a
+                  href="https://github.com/kirtan597"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-400 hover:text-white p-2 border-2 border-gray-600 hover:border-white transition-all duration-300"
@@ -61,8 +62,8 @@ const Footer = () => {
                 >
                   <FaGithub className="w-4 h-4" />
                 </a>
-                <a 
-                  href="https://www.linkedin.com/in/kirtan-panchal-309760320/" 
+                <a
+                  href="https://www.linkedin.com/in/kirtan-panchal-309760320/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-400 hover:text-white p-2 border-2 border-gray-600 hover:border-white transition-all duration-300"
@@ -76,15 +77,15 @@ const Footer = () => {
             {/* Contact Information */}
             <div className="space-y-2">
               <h4 className="text-sm font-semibold text-white mb-2">Contact</h4>
-              <a 
-                href="mailto:kirtan.2082006@gmail.com" 
+              <a
+                href="mailto:kirtan.2082006@gmail.com"
                 className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-sm"
               >
                 <FaEnvelope className="w-4 h-4" />
                 <span>kirtan.2082006@gmail.com</span>
               </a>
-              <a 
-                href="tel:+918780092234" 
+              <a
+                href="tel:+918780092234"
                 className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-sm"
               >
                 <FaPhone className="w-4 h-4" />
@@ -121,9 +122,9 @@ const Footer = () => {
                 { text: "Size Guide", url: "/NotFound" }
               ].map((item, index) => (
                 <li key={index}>
-                  <a href={item.url} className={`${linkClass} flex items-center before:content-['→'] before:mr-2 before:opacity-0 hover:before:opacity-100 before:transition-all before:duration-300`}>
+                  <Link to={item.url} className={`${linkClass} flex items-center before:content-['→'] before:mr-2 before:opacity-0 hover:before:opacity-100 before:transition-all before:duration-300`}>
                     {item.text}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -141,9 +142,9 @@ const Footer = () => {
                 { text: "Sustainability", url: "/NotFound" }
               ].map((item, index) => (
                 <li key={index}>
-                  <a href={item.url} className={linkClass}>
+                  <Link to={item.url} className={linkClass}>
                     {item.text}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -190,9 +191,9 @@ const Footer = () => {
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             {["Privacy Policy", "Terms of Service", "Cookie Policy"].map((item) => (
-              <a 
-                key={item} 
-                href="#" 
+              <a
+                key={item}
+                href="#"
                 className="text-xs text-gray-400 hover:text-white transition-colors duration-300"
               >
                 {item}

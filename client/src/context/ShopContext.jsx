@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
 import userTrackingService from "../services/userTrackingService";
-import { fallbackProducts } from "../data/fallbackProducts";
+import { mockProducts } from "../data/mockProducts";
 
 export const ShopContext = createContext();
 
@@ -14,9 +14,10 @@ const ShopContextProvider = (props) => {
   // Use environment variable or fallback to Netlify Functions
   const backendUrl = import.meta.env.VITE_BACKEND_URL || `${window.location.origin}/.netlify/functions`;
 
-  const [products, setProducts] = useState(fallbackProducts); // Start with fallback products
+  const [products, setProducts] = useState(mockProducts);
   const [cartItems, setCartItems] = useState({});
   const [token, setToken] = useState("");
+  const [isLoading, setIsLoading] = useState(true); // Add auth loading state
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [showSearchBar, setShowSearchBar] = useState(false);
@@ -101,30 +102,11 @@ const ShopContextProvider = (props) => {
   // -------------------- PRODUCT & USER DATA --------------------
   const getProductsData = async () => {
     setIsLoadingProducts(true);
-    
-    try {
-      // Set a timeout for the API call
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
-      
-      const response = await axios.get(backendUrl + "/api/product/list", {
-        signal: controller.signal,
-        timeout: 10000
-      });
-      
-      clearTimeout(timeoutId);
-      
-      if (response.data.success && response.data.products && response.data.products.length > 0) {
-        setProducts(response.data.products);
-      } else {
-        setProducts(fallbackProducts);
-      }
-    } catch (error) {
-      // Silently use fallback products if API fails
-      setProducts(fallbackProducts);
-    } finally {
+    // Simulate network delay if desired, or just set immediately
+    setTimeout(() => {
+      setProducts(mockProducts);
       setIsLoadingProducts(false);
-    }
+    }, 500);
   };
 
   const getUserCart = async (token) => {
@@ -150,39 +132,44 @@ const ShopContextProvider = (props) => {
       // Override any notification functions that might show demo product messages
       const originalAlert = window.alert;
       const originalConfirm = window.confirm;
-      
-      window.alert = function(message) {
+
+      window.alert = function (message) {
         // Block any demo product related alerts
-        if (typeof message === 'string' && 
-            (message.includes('demo products') || 
-             message.includes('Demo products') || 
-             message.includes('25') ||
-             message.includes('Using'))) {
+        if (typeof message === 'string' &&
+          (message.includes('demo products') ||
+            message.includes('Demo products') ||
+            message.includes('25') ||
+            message.includes('Using'))) {
           return; // Block the notification
         }
         return originalAlert.call(this, message);
       };
-      
-      window.confirm = function(message) {
+
+      window.confirm = function (message) {
         // Block any demo product related confirms
-        if (typeof message === 'string' && 
-            (message.includes('demo products') || 
-             message.includes('Demo products') || 
-             message.includes('25') ||
-             message.includes('Using'))) {
+        if (typeof message === 'string' &&
+          (message.includes('demo products') ||
+            message.includes('Demo products') ||
+            message.includes('25') ||
+            message.includes('Using'))) {
           return true; // Block the notification
         }
         return originalConfirm.call(this, message);
       };
     }
 
-    getProductsData();
+    // Initialize Auth
+    const initAuth = async () => {
+      const localToken = localStorage.getItem("token");
+      if (localToken) {
+        setToken(localToken);
+        await getUserCart(localToken);
+      }
+      setIsLoading(false); // Auth check complete
+    };
 
-    const localToken = localStorage.getItem("token");
-    if (localToken) {
-      setToken(localToken);
-      getUserCart(localToken);
-    }
+    initAuth();
+    getProductsData();
   }, []);
 
   // -------------------- SEARCH --------------------
@@ -203,15 +190,15 @@ const ShopContextProvider = (props) => {
   const logout = () => {
     // Record logout in tracking service
     userTrackingService.recordLogout();
-    
+
     // Clear authentication state
     setToken("");
     localStorage.removeItem("token");
     setCartItems({});
-    
+
     // Navigate to login page
     navigate("/login");
-    
+
     toast.success("Logged out successfully");
   };
 
@@ -239,6 +226,7 @@ const ShopContextProvider = (props) => {
     setShowSearchBar,
     isLoadingProducts,
     getProductsData, // Expose for manual refresh
+    isLoading, // Expose loading state
   };
 
   return (

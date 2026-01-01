@@ -13,7 +13,7 @@ export default function Hero() {
   const { navigate } = useContext(ShopContext);
 
   const handleExploreClick = () => {
-    navigate('/dashboard');
+    navigate('/collection');
   };
 
   // Product images - duplicated for infinite loop
@@ -40,9 +40,9 @@ export default function Hero() {
 
       {/* Gradient Overlay for Text Visibility */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60 pointer-events-none z-10" />
-      
+
       {/* Vignette Effect */}
-      <div className="absolute inset-0 pointer-events-none z-10" 
+      <div className="absolute inset-0 pointer-events-none z-10"
         style={{
           boxShadow: 'inset 0 0 200px rgba(0,0,0,0.8)'
         }}
@@ -57,9 +57,9 @@ export default function Hero() {
           transition={{ duration: 1, delay: 0.3 }}
           className="absolute top-8 left-8 md:top-12 md:left-16"
         >
-          <h1 
+          <h1
             className="text-white tracking-widest"
-            style={{ 
+            style={{
               fontFamily: "'Playfair Display', serif",
               fontSize: 'clamp(48px, 5vw, 72px)',
               fontWeight: 300,
@@ -85,7 +85,7 @@ export default function Hero() {
             className="text-center"
           >
             {/* Main Headline with Typewriter Effect */}
-            <TypewriterText 
+            <TypewriterText
               text="Timeless Elegance Awaits"
               className="text-white mb-6 tracking-wide"
               style={{
@@ -110,7 +110,7 @@ export default function Hero() {
                 className="absolute -top-4 left-1/2 -translate-x-1/2 w-24 h-px bg-white/60"
                 style={{ transformOrigin: 'center' }}
               />
-              <p 
+              <p
                 className="text-gray-300 tracking-wider"
                 style={{
                   fontSize: 'clamp(18px, 2vw, 24px)',
@@ -126,7 +126,7 @@ export default function Hero() {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 3 }}
-              whileHover={{ 
+              whileHover={{
                 scale: 1.05,
                 backgroundColor: 'rgba(255,255,255,1)',
                 color: '#000000'
@@ -166,12 +166,12 @@ export default function Hero() {
 }
 
 // Infinite Slider Component
-function InfiniteSlider({ 
-  images, 
-  isPaused, 
-  setIsPaused, 
-  hoveredIndex, 
-  setHoveredIndex 
+function InfiniteSlider({
+  images,
+  isPaused,
+  setIsPaused,
+  hoveredIndex,
+  setHoveredIndex
 }) {
   const [offset, setOffset] = useState(0);
   const animationRef = useRef();
@@ -227,7 +227,7 @@ function InfiniteSlider({
               alt={`Luxury product ${(index % 4) + 1}`}
               className="w-full h-full object-contain"
               initial={{ filter: 'grayscale(0%) contrast(100%)' }}
-              animate={{ 
+              animate={{
                 filter: 'grayscale(100%) contrast(120%)',
               }}
               transition={{ duration: 0.3, delay: index * 0.05 }}
@@ -272,9 +272,9 @@ function InfiniteSlider({
               alt={`Luxury product ${(index % 4) + 1}`}
               className="w-full h-full object-contain"
               initial={{ filter: 'grayscale(0%) contrast(100%)' }}
-              animate={{ 
-                filter: hoveredIndex === index 
-                  ? 'grayscale(100%) contrast(150%)' 
+              animate={{
+                filter: hoveredIndex === index
+                  ? 'grayscale(100%) contrast(150%)'
                   : 'grayscale(100%) contrast(120%)',
               }}
               transition={{ duration: 0.3 }}
@@ -283,7 +283,7 @@ function InfiniteSlider({
                 mixBlendMode: 'normal'
               }}
             />
-            
+
             {/* Duotone Overlay Shift */}
             <motion.div
               className="absolute inset-0 bg-gradient-to-br from-black/40 to-gray-900/40 pointer-events-none"
@@ -300,10 +300,10 @@ function InfiniteSlider({
 }
 
 // Typewriter Effect Component
-function TypewriterText({ 
-  text, 
-  className, 
-  style 
+function TypewriterText({
+  text,
+  className,
+  style
 }) {
   const [displayText, setDisplayText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);

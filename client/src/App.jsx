@@ -24,6 +24,7 @@ import { Verify } from "./pages/Verify";
 import { ForgotPassword } from "./pages/ForgotPassword";
 import SearchResults from "./pages/SearchResults";
 import ScrollToTop from "./components/ScrollToTop";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const App = () => {
   // Initialize demo data for dashboard (only if needed)
@@ -82,26 +83,26 @@ const App = () => {
 
       {/* Routing */}
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/collection" element={<Collection />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/cart" element={<Cart />} />
+        <Route path="/" element={<ProtectedRoute><Home /></ProtectedRoute>} />
+        <Route path="/collection" element={<ProtectedRoute><Collection /></ProtectedRoute>} />
+        <Route path="/contact" element={<ProtectedRoute><Contact /></ProtectedRoute>} />
+        <Route path="/cart" element={<ProtectedRoute><Cart /></ProtectedRoute>} />
         <Route path="/login" element={<Login />} />
-        <Route path="/orders" element={<Orders />} />
-        <Route path="/profile" element={<MyProfile />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/product/:productId" element={<Product />} />
-        <Route path="/place-order" element={<PlaceOrder />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/verify" element={<Verify />} />
+        <Route path="/orders" element={<ProtectedRoute><Orders /></ProtectedRoute>} />
+        <Route path="/profile" element={<ProtectedRoute><MyProfile /></ProtectedRoute>} />
+        <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+        <Route path="/product/:productId" element={<ProtectedRoute><Product /></ProtectedRoute>} />
+        <Route path="/place-order" element={<ProtectedRoute><PlaceOrder /></ProtectedRoute>} />
+        <Route path="/about" element={<ProtectedRoute><About /></ProtectedRoute>} />
+        <Route path="/verify" element={<ProtectedRoute><Verify /></ProtectedRoute>} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/search" element={<SearchResults />} />
-        <Route path="*" element={<NotFound />} />
+        <Route path="/search" element={<ProtectedRoute><SearchResults /></ProtectedRoute>} />
+        <Route path="*" element={<ProtectedRoute><NotFound /></ProtectedRoute>} />
       </Routes>
 
       {/* Footer */}
       <Footer />
-      
+
       {/* Scroll to Top Button */}
       <ScrollToTop />
     </div>

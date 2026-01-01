@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { ShopContext } from "../context/ShopContext";
+import { Link } from "react-router-dom";
 import Title from "./Title";
 import ProductsItem from "./ProductsItem";
 import { Container, Grid, Box, Typography, Button, CircularProgress } from '@mui/material';
@@ -58,15 +59,14 @@ const LatestCollection = () => {
 
         {/* View More */}
         <div className="mt-16 text-center">
-          <a
-            href="/collection"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            to="/collection"
+            className="inline-block"
           >
-            <button className="border-2 border-gray-900 bg-transparent hover:bg-gray-900 hover:text-white transition-all duration-300 px-8 py-3 text-sm tracking-widest font-medium text-gray-900 rounded-lg shadow-sm hover:shadow-md">
+            <button className="border-2 border-gray-900 bg-transparent hover:bg-gray-900 hover:text-white transition-all duration-300 px-8 py-3 text-sm tracking-widest font-medium text-gray-900 rounded-lg shadow-sm hover:shadow-md cursor-pointer">
               VIEW FULL COLLECTION
             </button>
-          </a>
+          </Link>
         </div>
       </div>
     </section>
