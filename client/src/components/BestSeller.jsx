@@ -18,15 +18,15 @@ const BestSeller = () => {
   const currentProducts = bestSellers.slice(start, start + productsPerPage);
 
   return (
-    <div className="max-w-7xl mx-auto px-0 bg-white py-12 rounded-xl">
-      <div className="text-center mb-12">
+    <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 bg-white py-8 sm:py-12 rounded-xl">
+      <div className="text-center mb-8 sm:mb-12">
         <Title text1="BEST" text2="SELLERS" />
-        <p className="mt-4 max-w-2xl mx-auto text-sm md:text-base text-gray-600 font-light tracking-wide">
+        <p className="mt-3 max-w-2xl mx-auto text-xs sm:text-sm md:text-base text-gray-600 font-light tracking-wide px-2">
           Exquisite selections adored by our most discerning clientele. Each piece embodies unparalleled craftsmanship.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-5 md:gap-6">
         {currentProducts.map(({ _id, image, name, price }) => (
           <ProductsItem
             key={_id}

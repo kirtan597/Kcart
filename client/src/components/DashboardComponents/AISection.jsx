@@ -1,20 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { 
-  Brain, 
-  Sparkles, 
-  MessageSquare, 
-  Image, 
-  TrendingUp, 
-  Zap,
-  Bot,
-  Wand2,
-  Eye,
-  Heart,
-  Star,
-  RefreshCw,
-  Send,
-  Loader2
-} from 'lucide-react';
+import React, { useState } from 'react';
+import { Brain, Sparkles, TrendingUp, Wand2, Eye, Heart, Star, Loader2 } from 'lucide-react';
 import bytezService from '../../services/bytezService';
 
 const AISection = () => {
@@ -29,135 +14,41 @@ const AISection = () => {
     seoKeyword: ''
   });
 
-  // Test AI capabilities on component mount
-  useEffect(() => {
-    testAIConnection();
-  }, []);
-
-  const testAIConnection = async () => {
-    try {
-      const models = await bytezService.listModels();
-      console.log('Available AI models:', models);
-    } catch (error) {
-      console.error('AI connection test failed:', error);
-    }
-  };
-
   const handleGenerateDescription = async () => {
     if (!inputs.productName.trim()) return;
     
     setLoading(true);
-    try {
-      const features = inputs.productFeatures.split(',').map(f => f.trim()).filter(f => f);
-      const result = await bytezService.generateProductDescription(inputs.productName, features);
-      
-      setResults(prev => ({
-        ...prev,
-        productDescription: result.output || 'Generated description will appear here'
-      }));
-    } catch (error) {
-      console.error('Description generation failed:', error);
-      setResults(prev => ({
-        ...prev,
-        productDescription: 'AI description generation temporarily unavailable. Using fallback: ' + 
-          `Discover the amazing ${inputs.productName} - crafted with premium quality and innovative design. ` +
-          `Features include ${inputs.productFeatures || 'advanced functionality'}. Perfect for modern lifestyle needs.`
-      }));
-    } finally {
-      setLoading(false);
-    }
+    const features = inputs.productFeatures.split(',').map(f => f.trim()).filter(f => f);
+    const result = bytezService.generateProductDescription(inputs.productName, features);
+    setResults(prev => ({ ...prev, productDescription: result.output }));
+    setLoading(false);
   };
 
   const handleAnalyzeSentiment = async () => {
     if (!inputs.reviewText.trim()) return;
     
     setLoading(true);
-    try {
-      const result = await bytezService.analyzeReviewSentiment(inputs.reviewText);
-      
-      setResults(prev => ({
-        ...prev,
-        sentiment: result.output || {
-          ecommerceSentiment: {
-            rating: 4,
-            recommendation: 'Positive customer feedback',
-            confidence: 0.85
-          }
-        }
-      }));
-    } catch (error) {
-      console.error('Sentiment analysis failed:', error);
-      // Fallback sentiment analysis
-      const sentiment = inputs.reviewText.toLowerCase();
-      const isPositive = sentiment.includes('good') || sentiment.includes('great') || 
-                        sentiment.includes('amazing') || sentiment.includes('love') ||
-                        sentiment.includes('excellent') || sentiment.includes('perfect');
-      const isNegative = sentiment.includes('bad') || sentiment.includes('terrible') || 
-                        sentiment.includes('hate') || sentiment.includes('awful') ||
-                        sentiment.includes('worst') || sentiment.includes('horrible');
-      
-      setResults(prev => ({
-        ...prev,
-        sentiment: {
-          ecommerceSentiment: {
-            rating: isPositive ? 5 : isNegative ? 1 : 3,
-            recommendation: isPositive ? 'Feature this review prominently' : 
-                           isNegative ? 'Consider reaching out to customer' : 'Standard review display',
-            confidence: 0.75
-          }
-        }
-      }));
-    } finally {
-      setLoading(false);
-    }
+    const result = bytezService.analyzeReviewSentiment(inputs.reviewText);
+    setResults(prev => ({ ...prev, sentiment: result.output }));
+    setLoading(false);
   };
 
   const handleGenerateMarketing = async () => {
     if (!inputs.marketingCategory.trim()) return;
     
     setLoading(true);
-    try {
-      const result = await bytezService.generateMarketingContent(inputs.marketingCategory, 'professional');
-      
-      setResults(prev => ({
-        ...prev,
-        marketing: result.output || 'Generated marketing content will appear here'
-      }));
-    } catch (error) {
-      console.error('Marketing generation failed:', error);
-      setResults(prev => ({
-        ...prev,
-        marketing: `🚀 Discover Premium ${inputs.marketingCategory}\n\n` +
-          `✨ Curated Collection of High-Quality ${inputs.marketingCategory}\n` +
-          `🎯 Perfect for Every Occasion\n` +
-          `💎 Unmatched Quality & Style\n` +
-          `🛍️ Shop Now - Limited Time Offers Available!`
-      }));
-    } finally {
-      setLoading(false);
-    }
+    const result = bytezService.generateMarketingContent(inputs.marketingCategory, 'professional');
+    setResults(prev => ({ ...prev, marketing: result.output }));
+    setLoading(false);
   };
 
   const handleGenerateSEO = async () => {
     if (!inputs.seoKeyword.trim()) return;
     
     setLoading(true);
-    try {
-      const result = await bytezService.generateSEOContent(inputs.seoKeyword, 'meta description');
-      
-      setResults(prev => ({
-        ...prev,
-        seo: result.output || 'Generated SEO content will appear here'
-      }));
-    } catch (error) {
-      console.error('SEO generation failed:', error);
-      setResults(prev => ({
-        ...prev,
-        seo: `Shop premium ${inputs.seoKeyword} online. Discover high-quality products, competitive prices, and fast shipping. Your trusted destination for ${inputs.seoKeyword} with excellent customer service.`
-      }));
-    } finally {
-      setLoading(false);
-    }
+    const result = bytezService.generateSEOContent(inputs.seoKeyword, 'meta description');
+    setResults(prev => ({ ...prev, seo: result.output }));
+    setLoading(false);
   };
 
   const tabs = [

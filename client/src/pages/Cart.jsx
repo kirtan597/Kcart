@@ -38,7 +38,7 @@ const Cart = () => {
   }, [cartItems, products]);
 
   return (
-    <div className="border-t pt-14">
+    <div className="border-t pt-8 sm:pt-14 px-3 sm:px-6 lg:px-8">
       <div className="text-2xl mb-3">
         <Title text1={"YOUR"} text2={"CART"} />
       </div>
@@ -50,7 +50,6 @@ const Cart = () => {
           );
 
           if (!productData) {
-            // Log warning and skip rendering this item
             console.warn("Product not found for ID:", item._id);
             return null;
           }
@@ -58,50 +57,44 @@ const Cart = () => {
           return (
             <div
               key={index}
-              className="py-4 border-t text-gray-700 grid grid-cols-[4fr_0.5fr_0.5fr] sm:grid-cols-[4fr_2fr_0.5fr] items-center gap-4"
+              className="py-4 border-t text-gray-700 flex items-center gap-3 sm:gap-4"
             >
-              <div className="flex items-start gap-6">
+              {/* Product image + info */}
+              <div className="flex items-start gap-3 sm:gap-6 flex-1 min-w-0">
                 <img
                   src={productData.image?.[0] || "/placeholder.jpg"}
                   alt={productData.name || "Product"}
-                  className="w-16 sm:w-20"
+                  className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded flex-shrink-0"
                 />
-                <div>
-                  <p className="text-sm sm:text-lg font-medium">
+                <div className="min-w-0">
+                  <p className="text-sm sm:text-base font-medium line-clamp-2">
                     {productData.name}
                   </p>
-                  <div className="flex items-center gap-5 mt-2">
-                    <p>
-                      {currency}
-                      {productData.price}
-                    </p>
-                    <p className="px-2 sm:px-3 sm:py-1 border bg-slate-50">
-                      {item.size}
-                    </p>
+                  <div className="flex items-center gap-2 sm:gap-4 mt-1.5 text-sm text-gray-600">
+                    <p>{currency}{productData.price}</p>
+                    <p className="px-2 py-0.5 border bg-slate-50 text-xs sm:text-sm">{item.size}</p>
                   </div>
                 </div>
               </div>
 
+              {/* Quantity */}
               <input
                 type="number"
                 min={1}
                 defaultValue={item.quantity}
-                className="border max-w-10 sm:max-w-20 px-1 sm:px-2 py-1"
+                className="border w-12 sm:w-20 px-1 sm:px-2 py-1 text-sm text-center flex-shrink-0"
                 onChange={(e) =>
                   e.target.value === "" || e.target.value === "0"
                     ? null
-                    : updateQuantity(
-                        item._id,
-                        item.size,
-                        Number(e.target.value)
-                      )
+                    : updateQuantity(item._id, item.size, Number(e.target.value))
                 }
               />
 
+              {/* Delete */}
               <img
                 src={assets.bin_icon}
-                alt="Bin Icon"
-                className="w-4 mr-4 cursor-pointer"
+                alt="Remove"
+                className="w-4 h-4 cursor-pointer flex-shrink-0"
                 onClick={() => updateQuantity(item._id, item.size, 0)}
               />
             </div>
@@ -109,7 +102,7 @@ const Cart = () => {
         })}
       </div>
 
-      <div className="flex justify-end my-20">
+      <div className="flex justify-end my-10 sm:my-20">
         <div className="w-full sm:w-[450px]">
           <CartTotal />
           <div className="w-full text-end">

@@ -27,15 +27,15 @@ const Footer = () => {
         backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)), url(${assets.footer_bg})`,
       }}
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 max-w-7xl relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+      <div className="container mx-auto px-3 sm:px-6 lg:px-8 py-8 sm:py-12 max-w-7xl relative z-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 sm:gap-8">
           {/* Brand Info */}
           <div className="lg:col-span-2">
             {/* Brand Name */}
-            <div className="mb-4">
-              <h2 className="text-4xl font-bold text-white">Kcart</h2>
+            <div className="mb-3 sm:mb-4">
+              <h2 className="text-3xl sm:text-4xl font-bold text-white">Kcart</h2>
             </div>
-            <p className="text-gray-400 mb-4 leading-relaxed text-sm mt-4">
+            <p className="text-gray-400 mb-3 sm:mb-4 leading-relaxed text-xs sm:text-sm mt-3 sm:mt-4">
               Kcart — curating excellence in every product. We're here to
               elevate your lifestyle with exceptional quality and care.
             </p>
@@ -185,7 +185,7 @@ const Footer = () => {
         </div>
 
         {/* Footer Bottom */}
-        <div className="mt-12 pt-6 border-t-2 border-gray-600 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="mt-8 sm:mt-12 pt-4 sm:pt-6 border-t-2 border-gray-600 flex flex-col md:flex-row justify-between items-center gap-3 sm:gap-4">
           <p className="text-xs text-gray-400">
             &copy; {currentYear} Kcart. All rights reserved.
           </p>

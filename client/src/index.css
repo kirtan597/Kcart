@@ -3,38 +3,66 @@
 /* Global font - Inter for body text */
 * {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
 }
 
-/* Heading font - Poppins */
+/* Heading font */
 h1, h2, h3, h4, h5, h6, .heading-font {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Playfair Display', serif;
 }
 
-/* Elegant font for special elements - Playfair Display */
+/* Elegant font for special elements */
 .elegant-font {
   font-family: 'Playfair Display', serif;
 }
 
 /* Price styling */
 .price-text {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-weight: 600;
   letter-spacing: -0.02em;
 }
 
+/* Hide scrollbar */
 ::-webkit-scrollbar {
-  display: hidden;        
+  display: none;
 }
 body {
-  -ms-overflow-style: none;  
-  scrollbar-width: none;     
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  overflow-x: hidden;
 }
 
+/* Minimum touch target size (44px) for all interactive elements */
+button, a, input[type="checkbox"], input[type="radio"], select {
+  min-height: 44px;
+}
+
+/* Exception: small inline elements */
+nav a, .nav-link {
+  min-height: unset;
+}
+
+/* Safe area insets for notched phones */
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Smooth momentum scrolling on iOS */
+.scroll-smooth-ios {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Prevent text size adjustment on orientation change */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
 
 a.active hr {
   @apply block;
 }
-
 
 @media (max-width: 640px) {
   a.active {

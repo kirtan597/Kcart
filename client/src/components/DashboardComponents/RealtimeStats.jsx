@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { Activity, Users, ShoppingBag, Eye } from 'lucide-react';
 
 const RealtimeStats = () => {
@@ -53,45 +53,22 @@ const RealtimeStats = () => {
 
       {/* Stats Grid */}
       <div className="grid grid-cols-2 gap-4 mb-6">
-        <motion.div 
-          key={stats.activeUsers}
-          initial={{ scale: 1.05 }}
-          animate={{ scale: 1 }}
-          className="text-center p-3 bg-gray-50 rounded-lg"
-        >
+        <div className="text-center p-3 bg-gray-50 rounded-lg">
           <div className="text-2xl font-bold text-black">{stats.activeUsers}</div>
           <div className="text-xs text-gray-500">Active Users</div>
-        </motion.div>
-        
-        <motion.div 
-          key={stats.currentOrders}
-          initial={{ scale: 1.05 }}
-          animate={{ scale: 1 }}
-          className="text-center p-3 bg-gray-50 rounded-lg"
-        >
+        </div>
+        <div className="text-center p-3 bg-gray-50 rounded-lg">
           <div className="text-2xl font-bold text-black">{stats.currentOrders}</div>
           <div className="text-xs text-gray-500">Live Orders</div>
-        </motion.div>
-        
-        <motion.div 
-          key={Math.floor(stats.pageViews)}
-          initial={{ scale: 1.05 }}
-          animate={{ scale: 1 }}
-          className="text-center p-3 bg-gray-50 rounded-lg"
-        >
+        </div>
+        <div className="text-center p-3 bg-gray-50 rounded-lg">
           <div className="text-2xl font-bold text-black">{stats.pageViews}</div>
           <div className="text-xs text-gray-500">Page Views</div>
-        </motion.div>
-        
-        <motion.div 
-          key={stats.conversionRate.toFixed(1)}
-          initial={{ scale: 1.05 }}
-          animate={{ scale: 1 }}
-          className="text-center p-3 bg-gray-50 rounded-lg"
-        >
+        </div>
+        <div className="text-center p-3 bg-gray-50 rounded-lg">
           <div className="text-2xl font-bold text-black">{stats.conversionRate.toFixed(1)}%</div>
           <div className="text-xs text-gray-500">Conversion</div>
-        </motion.div>
+        </div>
       </div>
 
       {/* Activity Feed */}

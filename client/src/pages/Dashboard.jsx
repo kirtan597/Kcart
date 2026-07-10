@@ -20,7 +20,6 @@ import RealtimeStats from '../components/DashboardComponents/RealtimeStats';
 import SalesChart from '../components/DashboardComponents/SalesChart';
 import ThemeToggle from '../components/DashboardComponents/ThemeToggle';
 import UserSessions from '../components/DashboardComponents/UserSessions';
-import AISection from '../components/DashboardComponents/AISection';
 import ProtectedRoute from '../components/ProtectedRoute';
 import dashboardService from '../services/dashboardService';
 import userTrackingService from '../services/userTrackingService';
@@ -354,11 +353,6 @@ const DashboardContent = () => {
               ))}
             </div>
           </div>
-        </div>
-
-        {/* AI Assistant Section */}
-        <div className="mb-8">
-          <AISection />
         </div>
 
         {/* User Sessions Section */}

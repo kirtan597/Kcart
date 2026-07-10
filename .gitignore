@@ -1,2 +1,25 @@
-# Local Netlify folder
+# Netlify (no longer used)
 .netlify
+netlify/
+netlify.toml
+deploy-netlify.bat
+
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+build/
+
+# Environment variables
+.env
+.env.local
+.env.production
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db

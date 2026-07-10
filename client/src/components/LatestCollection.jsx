@@ -31,21 +31,21 @@ const LatestCollection = () => {
   }
 
   return (
-    <section className="bg-gradient-to-b from-white to-gray-50 py-20">
-      <div className="max-w-7xl mx-auto px-0">
+    <section className="bg-gradient-to-b from-white to-gray-50 py-10 sm:py-16 md:py-20">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-16">
-          <div className="mb-6">
+        <div className="text-center mb-8 sm:mb-12 md:mb-16">
+          <div className="mb-4 sm:mb-6">
             <Title text1="LATEST" text2="COLLECTIONS" />
           </div>
-          <p className="max-w-2xl mx-auto text-sm font-light tracking-wide text-gray-600 leading-relaxed">
+          <p className="max-w-2xl mx-auto text-xs sm:text-sm font-light tracking-wide text-gray-600 leading-relaxed px-2">
             Discover our exclusive curation of premium pieces that redefine modern elegance.
             Each item is meticulously selected to embody timeless sophistication.
           </p>
         </div>
 
         {/* Product Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-5 md:gap-8">
           {latestProducts.map((item) => (
             <ProductsItem
               key={item._id}

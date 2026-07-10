@@ -42,16 +42,16 @@ const OurPolicy = () => {
   ];
 
   return (
-    <div className="bg-white py-16 sm:py-24">
-      <div className="max-w-7xl mx-auto px-0">
-        <div className="text-center mb-16">
-          <h2 className="text-2xl sm:text-3xl font-semibold tracking-wider mb-4 heading-font text-gray-900">OUR COMMITMENT TO YOU</h2>
-          <p className="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base">
+    <div className="bg-white py-10 sm:py-16 md:py-24">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+        <div className="text-center mb-8 sm:mb-12 md:mb-16">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold tracking-wider mb-3 sm:mb-4 heading-font text-gray-900">OUR COMMITMENT TO YOU</h2>
+          <p className="text-gray-600 max-w-2xl mx-auto text-xs sm:text-sm md:text-base px-2">
             We stand behind every product we sell with policies designed for your complete satisfaction and peace of mind.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 lg:gap-12">
           {policies.map((policy, index) => (
             <div
               key={index}

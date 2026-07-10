@@ -65,14 +65,14 @@ const Navbar = () => {
   return (
     <>
       {/* Navbar */}
-      <nav className="flex items-center justify-between py-4 px-4 md:px-8 bg-white shadow-sm sticky top-0 z-50 border-b border-gray-200">
+      <nav className="flex items-center justify-between py-3 px-4 sm:py-4 sm:px-6 md:px-8 bg-white shadow-sm sticky top-0 z-50 border-b border-gray-200">
         {/* Logo */}
         <Link to="/" className="flex items-center">
           <h1 className="text-2xl font-bold text-gray-800 hover:text-gray-600 transition-colors">Kcart</h1>
         </Link>
 
         {/* Desktop Menu */}
-        <ul className="hidden sm:flex gap-8 text-gray-700 text-[15px]">
+        <ul className="hidden md:flex gap-8 text-gray-700 text-[15px]">
           {navItems.map(({ label, path }) => (
             <NavLink
               key={path}
@@ -153,7 +153,7 @@ const Navbar = () => {
           {/* Mobile Menu */}
           <button
             onClick={() => setMenuOpen(true)}
-            className="sm:hidden p-2 rounded-full hover:bg-gray-100 transition"
+            className="md:hidden p-2 rounded-full hover:bg-gray-100 transition"
           >
             <img src={assets.menu_icon} alt="Menu" className="w-5 opacity-90 hover:opacity-100" />
           </button>
@@ -162,16 +162,16 @@ const Navbar = () => {
 
       {/* Search Bar */}
       {showSearchBar && (
-        <div className="bg-white px-4 md:px-8 py-3 border-b border-gray-100 shadow-sm">
+        <div className="bg-white px-3 sm:px-6 md:px-8 py-3 border-b border-gray-100 shadow-sm">
           <form onSubmit={handleSearch} ref={searchInputRef} className="relative max-w-2xl mx-auto">
             <input
               type="text"
               placeholder="Search products..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full py-2 px-4 pr-10 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full py-2.5 px-4 pr-12 border border-gray-300 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
-            <button type="submit" className="absolute top-1/2 right-3 transform -translate-y-1/2">
+            <button type="submit" className="absolute top-1/2 right-3 transform -translate-y-1/2 p-1">
               <img src={assets.search_icon} alt="Search" className="w-5 opacity-70" />
             </button>
           </form>

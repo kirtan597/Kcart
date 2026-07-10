@@ -1,15 +1,15 @@
 const AppDownload = () => {
   return (
-    <div className="text-center bg-white py-16 px-4">
+    <div className="text-center bg-white py-10 sm:py-16 px-3 sm:px-6">
       <div className="max-w-4xl mx-auto">
-        <p className="text-3xl font-bold text-gray-900 mb-3 heading-font">
+        <p className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2 sm:mb-3 heading-font">
           Elevate Your Shopping Experience
         </p>
-        <p className="text-gray-700 text-lg max-w-2xl mx-auto">
+        <p className="text-gray-700 text-sm sm:text-base md:text-lg max-w-2xl mx-auto">
           Get our app for exclusive mobile-only deals, AR product previews, and faster checkout.
         </p>
 
-        <div className="mt-12 mb-10 flex flex-col lg:flex-row items-center justify-center gap-12">
+        <div className="mt-8 sm:mt-12 mb-6 sm:mb-10 flex flex-col lg:flex-row items-center justify-center gap-8 sm:gap-12">
           {/* Phone mockup with features */}
           <div className="relative w-72">
             <div className="absolute -inset-2 bg-gradient-to-tr from-blue-500 to-purple-600 rounded-3xl blur-md opacity-30"></div>

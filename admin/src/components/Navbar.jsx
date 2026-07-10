@@ -13,6 +13,7 @@ const Navbar = ({ setToken }) => {
   };
 
   const navLinks = [
+    { to: "/dashboard", icon: null, text: "Dashboard", svgPath: "M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" },
     { to: "/add", icon: assets.add_icon, text: "Add Items" },
     { to: "/list", icon: assets.order_icon, text: "List Items" },
     { to: "/orders", icon: assets.order_icon, text: "Orders" }
@@ -83,15 +84,21 @@ const Navbar = ({ setToken }) => {
                   key={link.to}
                   to={link.to}
                   onClick={() => setShowMenu(false)}
-                  className={({ isActive }) => 
+                  className={({ isActive }) =>
                     `flex items-center gap-4 px-4 py-3 rounded-lg transition-all duration-200
-                    ${isActive 
-                      ? 'bg-indigo-50 text-indigo-600 border-l-4 border-indigo-600' 
+                    ${isActive
+                      ? 'bg-indigo-50 text-indigo-600 border-l-4 border-indigo-600'
                       : 'text-gray-600 hover:bg-gray-50 hover:text-gray-800'}`
                   }
                 >
                   <div className={`p-2 rounded-lg ${window.location.pathname === link.to ? 'bg-indigo-100' : 'bg-gray-100'}`}>
-                    <img src={link.icon} className="w-5 h-5" alt={link.text} />
+                    {link.svgPath ? (
+                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={link.svgPath} />
+                      </svg>
+                    ) : (
+                      <img src={link.icon} className="w-5 h-5" alt={link.text} />
+                    )}
                   </div>
                   <span className="font-medium">{link.text}</span>
                 </NavLink>
@@ -132,15 +139,21 @@ const Navbar = ({ setToken }) => {
             <NavLink
               key={link.to}
               to={link.to}
-              className={({ isActive }) => 
+              className={({ isActive }) =>
                 `flex items-center gap-4 px-4 py-3 rounded-lg transition-all duration-200
-                ${isActive 
-                  ? 'bg-indigo-50 text-indigo-600 border-l-4 border-indigo-600' 
+                ${isActive
+                  ? 'bg-indigo-50 text-indigo-600 border-l-4 border-indigo-600'
                   : 'text-gray-600 hover:bg-gray-50 hover:text-gray-800'}`
               }
             >
               <div className={`p-2 rounded-lg ${window.location.pathname === link.to ? 'bg-indigo-100' : 'bg-gray-100'}`}>
-                <img src={link.icon} className="w-5 h-5" alt={link.text} />
+                {link.svgPath ? (
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={link.svgPath} />
+                  </svg>
+                ) : (
+                  <img src={link.icon} className="w-5 h-5" alt={link.text} />
+                )}
               </div>
               <span className="font-medium">{link.text}</span>
             </NavLink>

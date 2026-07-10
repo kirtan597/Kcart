@@ -150,9 +150,9 @@ const PlaceOrder = () => {
     }
   };
   return (
-    <div className="flex flex-col sm:flex-row justify-between gap-4 pt-5 sm:pt-14 min-h-[80vh] border-t">
+    <div className="flex flex-col lg:flex-row justify-between gap-6 pt-6 sm:pt-14 min-h-[80vh] border-t px-3 sm:px-6 lg:px-8">
       {/* Left Side */}
-      <div className="flex flex-col gap-4 w-full sm:max-w-[480px]">
+      <div className="flex flex-col gap-4 w-full lg:max-w-[480px]">
         <div className="text-xl sm:text-2xl my-3">
           <Title text1={"DELIVERY"} text2={"INFORMATION"} />
         </div>
@@ -236,8 +236,8 @@ const PlaceOrder = () => {
         />
       </div>
       {/* Right Side */}
-      <div className="mt-8">
-        <div className="mt-8 min-w-80">
+      <div className="w-full lg:w-auto">
+        <div className="mt-4 lg:mt-8 lg:min-w-80">
           <CartTotal />
         </div>
         <div className="mt-12">
@@ -408,9 +408,9 @@ const PlaceOrder = () => {
 
             </div>
           </div>
-          <div className="w-full text-end mt-8">
+          <div className="w-full flex justify-end mt-8">
             <button
-              className="bg-black text-white font-bold px-16 py-4 rounded-lg hover:bg-gray-800 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-[1.02] cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full sm:w-auto bg-black text-white font-bold px-8 sm:px-16 py-4 rounded-lg hover:bg-gray-800 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-[1.02] cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
               onClick={onSubmitHandler}
               disabled={loading}
             >

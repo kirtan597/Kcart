@@ -15,9 +15,9 @@ const Contact = () => {
   });
 
   // EmailJS Configuration
-  const EMAILJS_SERVICE_ID = 'service_xury4ej';
-  const EMAILJS_TEMPLATE_ID = 'template_e9duwa7';
-  const EMAILJS_PUBLIC_KEY = '9AdVticVIQoO-ywTB';
+  const EMAILJS_SERVICE_ID = 'service_clf9nv4';
+  const EMAILJS_TEMPLATE_ID = 'template_det18rm';
+  const EMAILJS_PUBLIC_KEY = 'ttoxl3puDAc8AFJ1C';
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -46,29 +46,23 @@ const Contact = () => {
     setIsLoading(true);
 
     try {
-      // Send email using EmailJS
-      const result = await emailjs.sendForm(
+      await emailjs.send(
         EMAILJS_SERVICE_ID,
         EMAILJS_TEMPLATE_ID,
-        form.current,
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          reply_to: formData.email,
+          phone: formData.phone || 'Not provided',
+          subject: formData.subject || 'General Inquiry',
+          message: formData.message,
+        },
         EMAILJS_PUBLIC_KEY
       );
 
-      if (result.status === 200) {
-        toast.success("Message sent successfully! We'll get back to you soon.");
-        
-        // Reset form
-        setFormData({
-          name: '',
-          email: '',
-          phone: '',
-          subject: '',
-          message: ''
-        });
-        
-        // Reset form element
-        form.current.reset();
-      }
+      toast.success("Message sent successfully! We'll get back to you soon.");
+      setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
+      form.current.reset();
     } catch (error) {
       console.error('EmailJS Error:', error);
       toast.error("Failed to send message. Please try again or contact us directly.");

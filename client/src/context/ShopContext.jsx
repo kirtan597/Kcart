@@ -5,14 +5,15 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import userTrackingService from "../services/userTrackingService";
 import { mockProducts } from "../data/mockProducts";
+import { recordPage } from "../components/Assistant/assistantService";
 
 export const ShopContext = createContext();
 
 const ShopContextProvider = (props) => {
   const currency = "₹";
   const delivery_fee = 50;
-  // Use environment variable or fallback to Netlify Functions
-  const backendUrl = import.meta.env.VITE_BACKEND_URL || `${window.location.origin}/.netlify/functions`;
+  // Backend URL from environment variable (set VITE_BACKEND_URL in production)
+  const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
 
   const [products, setProducts] = useState(mockProducts);
   const [cartItems, setCartItems] = useState({});
@@ -118,8 +119,6 @@ const ShopContextProvider = (props) => {
       );
       if (response.data.success) {
         setCartItems(response.data.cartData);
-      } else {
-        // Silently handle cart get failure
       }
     } catch (error) {
       // Silently handle cart get error

@@ -74,7 +74,7 @@ const Product = () => {
   const { name, category, price, image: images, description, sizes, subCategory } = productData;
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative">
+    <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-8 sm:py-12 relative">
       {/* Added to cart message */}
       {showAddedMessage && (
         <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 flex items-center animate-bounce">
@@ -85,24 +85,24 @@ const Product = () => {
         </div>
       )}
 
-      <div className="flex flex-col lg:flex-row gap-12">
-        <div className="flex-1 flex flex-col-reverse gap-6 lg:flex-row">
-          <div className="flex lg:flex-col gap-3 overflow-x-auto lg:w-24 scrollbar-hide">
+      <div className="flex flex-col gap-6 lg:flex-row lg:gap-12">
+        <div className="flex-1 flex flex-col-reverse gap-4 sm:gap-6 sm:flex-row">
+          <div className="flex sm:flex-col gap-2 sm:gap-3 overflow-x-auto sm:overflow-x-visible sm:w-20 md:w-24 scrollbar-hide">
             {images.map((img, i) => (
-              <div key={i} onClick={() => setImage(img)} className={`w-20 h-20 lg:w-full lg:h-24 border-2 rounded-md overflow-hidden cursor-pointer transition-all ${image === img ? "border-orange-500" : "border-transparent"}`}>
+              <div key={i} onClick={() => setImage(img)} className={`w-16 h-16 sm:w-full sm:h-20 md:h-24 border-2 rounded-md overflow-hidden cursor-pointer flex-shrink-0 transition-all ${image === img ? "border-orange-500" : "border-transparent"}`}>
                 <img src={img} alt={name} className="w-full h-full object-cover" />
               </div>
             ))}
           </div>
           <div className="flex-1 bg-gray-50 rounded-xl overflow-hidden">
-            <img ref={productImageRef} src={image} alt={name} className="w-full max-h-[600px] object-contain aspect-square" />
+            <img ref={productImageRef} src={image} alt={name} className="w-full max-h-[400px] sm:max-h-[500px] md:max-h-[600px] object-contain aspect-square" />
           </div>
         </div>
 
         <div className="flex-1 lg:max-w-md xl:max-w-lg">
-          <div className="sticky top-24 bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-            <div className="flex justify-between items-start gap-4">
-              <h1 className="text-3xl font-bold text-gray-900 heading-font leading-tight">{name}</h1>
+          <div className="lg:sticky lg:top-24 bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-gray-100">
+            <div className="flex justify-between items-start gap-3">
+              <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 heading-font leading-tight">{name}</h1>
               <span className="text-xs font-medium px-3 py-1.5 bg-gradient-to-r from-gray-100 to-gray-200 text-gray-700 rounded-full whitespace-nowrap">{category}</span>
             </div>
             <div className="flex items-center mt-4">
@@ -112,8 +112,8 @@ const Product = () => {
               </div>
               <span className="ml-2 text-sm text-gray-600 font-medium">(122 reviews)</span>
             </div>
-            <div className="mt-6 p-4 bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg border border-gray-200">
-              <p className="text-4xl font-bold text-gray-900 price-text">{currency}{price.toLocaleString()}</p>
+            <div className="mt-4 sm:mt-6 p-3 sm:p-4 bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg border border-gray-200">
+              <p className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 price-text">{currency}{price.toLocaleString()}</p>
               <p className="text-sm text-gray-500 mt-1">Inclusive of all taxes</p>
             </div>
             <p className="mt-6 text-gray-700 leading-relaxed text-base">{description}</p>

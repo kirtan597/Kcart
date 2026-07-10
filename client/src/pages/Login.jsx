@@ -41,32 +41,25 @@ const Login = () => {
     try {
       // First, try API endpoints (but don't fail if they don't work)
       const endpoints = [
-        backendUrl + "/user",
-        "/.netlify/functions/user",
-        "/api/user/auth"
+        backendUrl + "/api/user/login",
+        backendUrl + "/api/user/register"
       ];
       
-      for (const endpoint of endpoints) {
-        try {
-          console.log(`Trying API endpoint: ${endpoint}`);
-          const apiResponse = await axios.post(endpoint, {
-            name: isSignUp ? name : undefined,
-            email,
-            password,
-          }, {
-            timeout: 3000 // Shorter timeout to fail faster
-          });
-          
-          if (apiResponse.data && apiResponse.data.success) {
-            console.log(`API success with endpoint: ${endpoint}`);
-            response = apiResponse;
-            authSuccess = true;
-            break;
-          }
-        } catch (endpointError) {
-          console.log(`API endpoint ${endpoint} failed:`, endpointError.message);
-          // Continue to next endpoint or fallback
+      const endpoint = isSignUp ? backendUrl + "/api/user/register" : backendUrl + "/api/user/login";
+      
+      try {
+        const apiResponse = await axios.post(endpoint, {
+          name: isSignUp ? name : undefined,
+          email,
+          password,
+        }, { timeout: 5000 });
+        
+        if (apiResponse.data && apiResponse.data.success) {
+          response = apiResponse;
+          authSuccess = true;
         }
+      } catch (endpointError) {
+        console.log('API endpoint failed:', endpointError.message);
       }
       
       // If API didn't work, use fallback authentication

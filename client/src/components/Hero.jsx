@@ -28,7 +28,7 @@ export default function Hero() {
   const infiniteImages = [...images, ...images, ...images];
 
   return (
-    <div className="relative w-full h-screen overflow-hidden bg-black">
+    <div className="relative w-full overflow-hidden bg-black" style={{ height: '100svh' }}>
       {/* Infinite Scrolling Background Slider */}
       <InfiniteSlider
         images={infiniteImages}
@@ -55,13 +55,13 @@ export default function Hero() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.3 }}
-          className="absolute top-8 left-8 md:top-12 md:left-16"
+          className="absolute top-4 left-4 sm:top-8 sm:left-8 md:top-12 md:left-16"
         >
           <h1
             className="text-white tracking-widest"
             style={{
               fontFamily: "'Playfair Display', serif",
-              fontSize: 'clamp(48px, 5vw, 72px)',
+              fontSize: 'clamp(32px, 5vw, 72px)',
               fontWeight: 300,
               textShadow: '0 0 1px rgba(255,255,255,0.5)'
             }}
@@ -71,26 +71,20 @@ export default function Hero() {
         </motion.div>
 
         {/* Center Content */}
-        <div className="flex-1 flex flex-col items-center justify-center px-4 md:px-8">
+        <div className="flex-1 flex flex-col items-center justify-center px-4 sm:px-8">
           {/* Floating Animation Container */}
           <motion.div
-            animate={{
-              y: [0, -8, 0],
-            }}
-            transition={{
-              duration: 4,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-            className="text-center"
+            animate={{ y: [0, -8, 0] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            className="text-center w-full max-w-2xl"
           >
             {/* Main Headline with Typewriter Effect */}
             <TypewriterText
               text="Timeless Elegance Awaits"
-              className="text-white mb-6 tracking-wide"
+              className="text-white mb-4 sm:mb-6 tracking-wide"
               style={{
                 fontFamily: "'Helvetica Neue', 'Arial', sans-serif",
-                fontSize: 'clamp(32px, 4vw, 48px)',
+                fontSize: 'clamp(22px, 5vw, 48px)',
                 fontWeight: 200,
                 letterSpacing: '0.05em'
               }}
@@ -111,9 +105,9 @@ export default function Hero() {
                 style={{ transformOrigin: 'center' }}
               />
               <p
-                className="text-gray-300 tracking-wider"
+                className="text-gray-300 tracking-wider px-4"
                 style={{
-                  fontSize: 'clamp(18px, 2vw, 24px)',
+                  fontSize: 'clamp(13px, 3vw, 24px)',
                   fontWeight: 300
                 }}
               >
@@ -133,7 +127,7 @@ export default function Hero() {
               }}
               whileTap={{ scale: 0.98 }}
               onClick={handleExploreClick}
-              className="relative px-12 py-4 bg-transparent border border-white text-white tracking-widest transition-all duration-300 overflow-hidden group cursor-pointer"
+              className="relative px-8 sm:px-12 py-3 sm:py-4 bg-transparent border border-white text-white tracking-widest transition-all duration-300 overflow-hidden group cursor-pointer"
               style={{
                 fontFamily: "'Helvetica Neue', sans-serif",
                 fontSize: '14px',
@@ -175,6 +169,13 @@ function InfiniteSlider({
 }) {
   const [offset, setOffset] = useState(0);
   const animationRef = useRef();
+  const [imgWidth, setImgWidth] = useState(window.innerWidth < 640 ? 280 : 500);
+
+  useEffect(() => {
+    const handleResize = () => setImgWidth(window.innerWidth < 640 ? 280 : 500);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     let lastTime = Date.now();
@@ -189,7 +190,7 @@ function InfiniteSlider({
         setOffset((prev) => {
           const newOffset = prev + speed * delta;
           // Reset when we've scrolled through one full set of 4 images
-          const resetPoint = (images.length / 3) * 500; // 4 images * 500px width
+          const resetPoint = (images.length / 3) * imgWidth;
           return newOffset >= resetPoint ? newOffset - resetPoint : newOffset;
         });
       } else {
@@ -205,7 +206,7 @@ function InfiniteSlider({
         cancelAnimationFrame(animationRef.current);
       }
     };
-  }, [isPaused, images.length]);
+  }, [isPaused, images.length, imgWidth]);
 
   return (
     <div className="absolute inset-0">
@@ -220,7 +221,7 @@ function InfiniteSlider({
           <div
             key={`bg-${index}`}
             className="relative flex-shrink-0"
-            style={{ width: '500px', height: '100%' }}
+            style={{ width: `${imgWidth}px`, height: '100%' }}
           >
             <motion.img
               src={image}
@@ -250,7 +251,7 @@ function InfiniteSlider({
           <motion.div
             key={`fg-${index}`}
             className="relative flex-shrink-0 cursor-pointer"
-            style={{ width: '500px', height: '100%' }}
+            style={{ width: `${imgWidth}px`, height: '100%' }}
             onMouseEnter={() => {
               setIsPaused(true);
               setHoveredIndex(index);

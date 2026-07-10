@@ -13,7 +13,7 @@ const Home = () => {
         <LatestCollection />
         <BrandCarousel />
       </div>
-      <div className="bg-white py-12">
+      <div className="bg-white py-8 sm:py-12">
         <BestSeller />
       </div>
       <div className="bg-white">

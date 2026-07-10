@@ -1,7 +1,8 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import Lenis from "lenis";
 import { initializeDemoData } from "./utils/demoDataInitializer";
+import { recordPage } from "./components/Assistant/assistantService";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Collection from "./pages/Collection";
@@ -25,8 +26,27 @@ import { ForgotPassword } from "./pages/ForgotPassword";
 import SearchResults from "./pages/SearchResults";
 import ScrollToTop from "./components/ScrollToTop";
 import ProtectedRoute from "./components/ProtectedRoute";
+import SmartAssistant from "./components/Assistant/index";
+
+const PAGE_NAMES = {
+  '/':           'Home',
+  '/collection': 'Products',
+  '/orders':     'Orders',
+  '/dashboard':  'Dashboard',
+  '/cart':       'Cart',
+  '/profile':    'My Profile',
+  '/about':      'About',
+  '/contact':    'Contact',
+};
 
 const App = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    const name = PAGE_NAMES[location.pathname];
+    if (name) recordPage(name, location.pathname);
+  }, [location.pathname]);
+
   // Initialize demo data for dashboard (only if needed)
   useEffect(() => {
     // Only initialize demo data if no existing data
@@ -73,7 +93,7 @@ const App = () => {
   }, []);
 
   return (
-    <div className="px-2 sm:px-4 md:px-6 max-w-[100vw] mx-auto overflow-x-hidden">
+    <div className="max-w-[100vw] overflow-x-hidden">
       {/* Notifications */}
       <ToastContainer />
 
@@ -105,6 +125,9 @@ const App = () => {
 
       {/* Scroll to Top Button */}
       <ScrollToTop />
+
+      {/* Smart Help Assistant */}
+      <SmartAssistant />
     </div>
   );
 };
